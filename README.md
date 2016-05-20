@@ -1,4 +1,4 @@
-# AirFreeClient
+# AirFree Client
 <img src="http://o7gy5l0ax.bkt.clouddn.com/telegram_144px_1145402_easyicon.net.png" width = "96" height = "96" alt="icon"/>
 
 ## Summary
