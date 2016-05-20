@@ -1,0 +1,122 @@
+<resources>
+    <string name="app_name">AirFree</string>
+
+    <string name="app_id">57332039</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+    <string name="title_activity_empty">EmptyActivity</string>
+    <string name="title_activity_transf">TransfActivity</string>
+    <string name="title_activity_remote">RemoteActivity</string>
+    <string name="title_activity_seting">SetingActivity</string>
+    <string name="title_activity_link">LinkActivity</string>
+    <string name="title_activity_mouse">MouseActivity</string>
+    <string name="title_activity_power">PowerActivity</string>
+    <string name="title_activity_shot">ShotActivity</string>
+    <string name="title_activity_volume">VolumeActivity</string>
+    <string name="title_activity_bright">BrightActivity</string>
+    <string name="str_remember"><![CDATA[记住 IP & PORT]]></string>
+    <string name="is_remember">is_remember</string>
+    <string name="is_ip">ip</string>
+    <string name="is_port">port</string>
+    <string name="title_activity_console">ConsoleActivity</string>
+    <string name="title_activity_device">DeviceActivity</string>
+    <string name="title_activity_picture">PictureActivity</string>
+    <string name="title_activity_picture_i">PictureIActivity</string>
+    <string name="title_activity_music">MusicActivity</string>
+    <string name="title_activity_computer">ComputerActivity</string>
+    <string name="title_activity_app">AppActivity</string>
+    <string name="title_activity_video">VideoActivity</string>
+    <string name="title_activity_document">DocumentActivity</string>
+    <string name="title_activity_welcome">WelcomeActivity</string>
+    <string name="title_activity_list">ListActivity</string>
+    <string name="title_activity_voice">VoiceActivity</string>
+    <string name="pref_key_iat_show">iat_show</string>
+    <string name="text_begin">请开始说话…</string>
+    <string name="pref_title_iat_show">显示听写界面</string>
+
+    <string-array name="stream_entries">
+        <item>通话</item>
+        <item>系统</item>
+        <item>铃声</item>
+        <item>音乐</item>
+        <item>闹铃</item>
+        <item>通知</item>
+    </string-array>
+    <string-array name="stream_values">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
+    </string-array>
+    <string-array name="ise_language_entries">
+        <item>英语</item>
+        <item>汉语</item>
+    </string-array>
+    <string-array name="ise_language_values">
+        <item>en_us</item>
+        <item>zh_cn</item>
+    </string-array>
+    <string-array name="language_entries">
+        <item>普通话</item>
+        <item>粤语</item>
+        <item>河南话</item>
+        <item>英语</item>
+    </string-array>
+    <string-array name="language_values">
+        <item>mandarin</item>
+        <item>cantonese</item>
+        <item>henanese</item>
+        <item>en_us</item>
+    </string-array>
+    <string-array name="category_entries">
+        <item>单字</item>
+        <item>词语</item>
+        <item>句子</item>
+    </string-array>
+    <string-array name="category_values">
+        <item>read_syllable</item>
+        <item>read_word</item>
+        <item>read_sentence</item>
+    </string-array>
+    <string-array name="result_level_entries">
+        <item>plain</item>
+        <item>complete</item>
+    </string-array>
+    <string-array name="punc_entries">
+        <item>有标点</item>
+        <item>无标点</item>
+    </string-array>
+    <string-array name="punc_values">
+        <item>1</item>
+        <item>0</item>
+    </string-array>
+    <string name="title_activity_common_problem">CommonProblemActivity</string>
+    <string-array name="remote_entries">
+        <item>打开命令提示符</item>
+        <item>打开任务管理器</item>
+        <item>打开资源管理器</item>
+        <item>打开设备管理器</item>
+        <item>打开磁盘管理器</item>
+        <item>打开注册表编辑器</item>
+        <item>打开计算器</item>
+        <item>打开记事本</item>
+        <item>打开画图板</item>
+        <item>打开写字板</item>
+        <item>打开浏览器</item>
+    </string-array>
+    <string-array name="gesture_entries">
+        <item>打开命令提示符(c)</item>
+        <item>打开任务管理器(t)</item>
+        <item>打开资源管理器(e/z)</item>
+        <item>打开设备管理器(s)</item>
+        <item>打开磁盘管理器(d)</item>
+        <item>打开注册表编辑器(r)</item>
+        <item>打开计算器(j)</item>
+        <item>打开记事本(n)</item>
+        <item>打开画图板(h/p)</item>
+        <item>打开写字板(w/x)</item>
+        <item>打开浏览器(b/l)</item>
+    </string-array>
+</resources>

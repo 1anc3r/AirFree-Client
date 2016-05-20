@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/blue_light">
+
+    <LinearLayout
+        android:id="@+id/ll_titile"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/blue_dark"
+        android:clipToPadding="true"
+        android:elevation="3dp"
+        android:fitsSystemWindows="true">
+
+        <Button
+            android:id="@+id/btn_back"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_marginLeft="8dp"
+            android:background="@drawable/ic_arrow_back_white_24dp"
+            android:gravity="center_vertical|left" />
+
+        <TextView
+            android:id="@+id/tv_show"
+            android:layout_width="fill_parent"
+            android:layout_height="48dp"
+            android:layout_marginLeft="-24dp"
+            android:gravity="center"
+            android:text="手势控制"
+            android:textColor="@color/base_color_text_white"
+            android:textSize="@dimen/text_size_large" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/ll_touch"
+        android:layout_width="fill_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/rl_button"
+        android:layout_below="@+id/ll_titile"
+        android:orientation="vertical">
+
+        <android.gesture.GestureOverlayView
+            android:id="@+id/gov_touch"
+            android:layout_width="fill_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:eventsInterceptionEnabled="true"
+            android:gestureStrokeType="multiple" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:scaleType="fitXY"
+            android:src="@drawable/ic_main_cloud_middle" />
+    </LinearLayout>
+
+
+    <RelativeLayout
+        android:id="@+id/rl_button"
+        android:layout_width="fill_parent"
+        android:layout_height="150dp"
+        android:layout_alignParentBottom="true"
+        android:background="@color/common_bg">
+
+        <LinearLayout
+            android:id="@+id/btn_gesture_problem"
+            android:layout_width="wrap_content"
+            android:layout_centerInParent="true"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <ImageView
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:scaleType="fitXY"
+                android:src="@drawable/ic_common_problem" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingBottom="15dp"
+                android:paddingTop="5dp"
+                android:text="手势说明" />
+
+        </LinearLayout>
+
+    </RelativeLayout>
+
+</RelativeLayout>

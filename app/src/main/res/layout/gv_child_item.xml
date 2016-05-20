@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/fl_group"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:descendantFocusability="blocksDescendants">
+
+    <me.lancer.airfree.model.ImageViewBean
+        android:id="@+id/iv_child"
+        android:layout_width="fill_parent"
+        android:layout_height="100dip"
+        android:scaleType="centerCrop" />
+
+    <CheckBox
+        android:id="@+id/cb_child"
+        style="@style/CheckboxTheme"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="right"
+        android:scaleX="0.5"
+        android:scaleY="0.5" />
+
+</FrameLayout>

@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content" >
+
+    <FrameLayout
+        android:id="@+id/fl_group"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content" >
+
+        <me.lancer.airfree.model.ImageViewBean
+            android:id="@+id/iv_group"
+            android:src="@drawable/ic_pictures_no"
+            android:scaleType="centerCrop"
+            android:layout_width="fill_parent"
+            android:layout_height="150dp" />
+
+        <CheckBox
+            android:id="@+id/cb_group"
+            style="@style/CheckboxTheme"
+            android:visibility="gone"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right"
+            android:scaleX="0.5"
+            android:scaleY="0.5" />
+    </FrameLayout>
+
+    <LinearLayout
+        android:layout_below="@+id/fl_group"
+        android:background="#AF212121"
+        android:paddingLeft="5dp"
+        android:gravity="center"
+        android:paddingRight="5dp"
+        android:orientation="horizontal"
+        android:layout_width="fill_parent"
+        android:layout_marginTop="-24dp"
+        android:layout_height="24dp">
+
+        <TextView
+            android:id="@+id/tv_group_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="#AFFCFCFC"
+            android:gravity="center"
+            android:layout_gravity="center_vertical"
+            android:ellipsize="end"
+            android:singleLine="true"
+            android:text="Camera"
+            android:textSize="15sp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"/>
+
+        <TextView
+            android:id="@+id/tv_group_count"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="#AFFCFCFC"
+            android:gravity="center"
+            android:layout_gravity="center_vertical"
+            android:ellipsize="end"
+            android:singleLine="true"
+            android:text="(0)"
+            android:textSize="15sp"/>
+
+    </LinearLayout>
+
+</RelativeLayout>
