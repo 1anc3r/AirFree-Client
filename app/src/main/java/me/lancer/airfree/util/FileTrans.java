@@ -89,5 +89,6 @@ public class FileTrans {
         os.close();
         ds.close();
         is.close();
+        client.close();
     }
 }
