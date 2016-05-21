@@ -11,7 +11,6 @@ import java.io.*;
 public class FileTrans {
     static final int BUFFER_SIZE = 1048576;
 
-    // Reads in all data that can be stuffed into a buffer
     private static int readChunk(InputStream input, ByteArrayOutputStream bytes, byte[] buffer) throws
             IOException {
         int read = input.read(buffer, 0, BUFFER_SIZE);
@@ -30,7 +29,7 @@ public class FileTrans {
             bytes.write(data);
     }
 
-    public static void doRead(int port, String outname, Handler handler) throws
+    public static void doRead(int port, String outname) throws
             IOException {
         ServerSocket server = new ServerSocket(port);
         Socket client = server.accept();
@@ -38,7 +37,6 @@ public class FileTrans {
         // Read the file header to know how much to read
         DataInputStream ds = new DataInputStream(client.getInputStream());
         int size = ds.readInt();
-        int length = ds.readInt();
 
         FileOutputStream os = new FileOutputStream(outname);
         InputStream is = client.getInputStream();
@@ -47,7 +45,6 @@ public class FileTrans {
         ByteArrayOutputStream bs = new ByteArrayOutputStream();
         while (size >= BUFFER_SIZE) {
             size -= readChunk(is, bs, buffer);
-            handler.sendEmptyMessage((length-size)/length);
             // This prevents the stack from growing too large on
             // Android devices. Apparently, they can't fit a whole
             // 9.9Mb file into the stack.
