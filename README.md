@@ -25,8 +25,8 @@ Her name is not initially called AirFree, I call her AirFree because AirFree and
 ### Remote Control
 <img src="http://o7gy5l0ax.bkt.clouddn.com/Screenshot_2016-05-20-17-21-59.png" width = "432" height = "768" alt="Remote Control"/>
 
-### About Us
-<img src="http://o7gy5l0ax.bkt.clouddn.com/Screenshot_2016-05-20-17-22-06.png" width = "432" height = "768" alt="About Us"/>
+### Setting
+<img src="http://o7gy5l0ax.bkt.clouddn.com/Screenshot_2016-05-21-12-25-33.png" width = "432" height = "768" alt="About Us"/>
 
 ## About Me
 A student of Xi'an University of Posts and Telecommunications in mainland China. Currently learning Android development.
