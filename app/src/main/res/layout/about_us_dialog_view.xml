@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:background="@color/common_bg"
@@ -8,19 +9,21 @@
     android:paddingBottom="24dp"
     android:paddingTop="24dp">
 
-    <ImageView
-        android:layout_width="48dp"
-        android:layout_height="48dp"
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        app:civ_border_width="1dp"
+        app:civ_border_color="@color/common_bg"
         android:layout_gravity="center_horizontal"
         android:layout_marginBottom="15dp"
-        android:src="@drawable/ic_xiyoumobile" />
+        android:src="@drawable/ic_head"/>
 
     <TextView
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_margin="5dp"
         android:gravity="center_horizontal"
-        android:text="应用开发:西邮移动应用开发实验室"
+        android:text="Author : 1anc3r"
         android:textSize="@dimen/text_size_small" />
 
     <TextView
@@ -28,7 +31,23 @@
         android:layout_height="wrap_content"
         android:layout_margin="5dp"
         android:gravity="center_horizontal"
-        android:text="联系方式:huangfangzhi0@gmail.com"
+        android:text="Phone : 15829206974"
+        android:textSize="@dimen/text_size_small" />
+
+    <TextView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        android:gravity="center_horizontal"
+        android:text="Email : huangfangzhi0@gmail.com"
+        android:textSize="@dimen/text_size_small" />
+
+    <TextView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        android:gravity="center_horizontal"
+        android:text="Copyright (C) 2016 1anc3r All Right"
         android:textSize="@dimen/text_size_small" />
 
     <LinearLayout
@@ -60,7 +79,7 @@
             android:layout_marginBottom="5dp"
             android:autoLink="all"
             android:gravity="center"
-            android:text="访问我们的主页"
+            android:text="访问我的主页"
             android:textColor="@color/blue_dark"
             android:textSize="@dimen/text_size_small" />
 

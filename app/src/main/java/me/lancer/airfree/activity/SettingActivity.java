@@ -60,7 +60,7 @@ public class SettingActivity extends BaseActivity implements View.OnClickListene
                 public void onClick(View v) {
                     Intent intent = new Intent();
                     intent.setAction("android.intent.action.VIEW");
-                    Uri content_url = Uri.parse("http://www.xiyoumobile.com");
+                    Uri content_url = Uri.parse("http://www.1anc3r.me");
                     intent.setData(content_url);
                     startActivity(intent);
                 }
