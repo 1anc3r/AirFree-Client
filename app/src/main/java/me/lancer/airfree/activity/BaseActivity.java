@@ -144,24 +144,14 @@ public class BaseActivity extends Activity {
 
     class ReadTask extends AsyncTask<Object, Void, String> {
         private String ip, port, filename;
-        private ImageView iv;
         private ProgressDialog mProgressDialog;
-        private Handler mHandler = new Handler(){
-            @Override
-            public void handleMessage(Message msg) {
-                super.handleMessage(msg);
-                mProgressDialog.setProgress(msg.what);
-            }
-        };
+        private ImageView iv;
 
         protected ReadTask(String ip, String port, String filename) {
             super();
             this.ip = ip;
             this.port = port;
             this.filename = filename;
-            this.mProgressDialog = new ProgressDialog(BaseActivity.this);
-            mProgressDialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
-            mProgressDialog.setTitle(null);
         }
 
         protected ReadTask(String ip, String port, String filename, ImageView iv) {
@@ -170,13 +160,10 @@ public class BaseActivity extends Activity {
             this.port = port;
             this.filename = filename;
             this.iv = iv;
-            this.mProgressDialog = new ProgressDialog(BaseActivity.this);
-            mProgressDialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
-            mProgressDialog.setTitle(null);
         }
 
         protected void onPreExecute() {
-            mProgressDialog.show();
+            mProgressDialog = ProgressDialog.show(BaseActivity.this, null, "正在接收...");
             Log.e("IP ＆ PORT", "开始接收");
         }
 
@@ -200,7 +187,7 @@ public class BaseActivity extends Activity {
             String success = null;
             try {
                 int port_ = Integer.parseInt(port);
-                FileTrans.doRead(port_, filename, mHandler);
+                FileTrans.doRead(port_, filename);
             } catch (Exception e) {
                 success = e.toString();
             }
