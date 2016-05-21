@@ -30,6 +30,8 @@ Her name is not initially called AirFree, I call her AirFree because AirFree and
 ### Setting
 <img src="http://o7gy5l0ax.bkt.clouddn.com/Screenshot_2016-05-21-12-25-33.png" width = "432" height = "768" alt="About Us"/>
 
+Demo Download: [AirFree-Client](http://o7gy5l0ax.bkt.clouddn.com/me.lancer.airfree.apk)
+
 ## About Me
 A student of Xi'an University of Posts and Telecommunications in mainland China. Currently learning Android development.
 My blog address is [www.1anc3r.me](www.1anc3r.me). Welcome to offer me an internship. If you have any idea about this project, feel free to contact me. :smiley:
