@@ -30,7 +30,7 @@ Her name is not initially called AirFree, I call her AirFree because AirFree and
 ### Setting
 <img src="http://o7gy5l0ax.bkt.clouddn.com/Screenshot_2016-05-21-12-25-33.png" width = "432" height = "768" alt="About Us"/>
 
-Demo Download: [AirFree-Client](http://o7gy5l0ax.bkt.clouddn.com/me.lancer.airfree.apk)
+Demo Download: [AirFree-Client](http://o7gy5l0ax.bkt.clouddn.com/me.lancer.airfree.apk);
                [AirFree-Server-exe](http://pan.baidu.com/s/1o8tQNCQ)
 
 ## About Me
