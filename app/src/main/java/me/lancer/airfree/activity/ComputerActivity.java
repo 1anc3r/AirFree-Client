@@ -39,8 +39,8 @@ public class ComputerActivity extends BaseActivity implements View.OnClickListen
 
     ApplicationUtil app;
     private int allpos;
-    private LetterBean parentfile = new LetterBean("My Computer", "My Computer");
-    private String parentpath = "My Computer";
+    private LetterBean parentfile = new LetterBean("this PC", "this PC");
+    private String parentpath = "this PC";
     private String temppath = "";
     private String recvMessageClient = "";
     private SharedPreferences pref;
@@ -228,7 +228,7 @@ public class ComputerActivity extends BaseActivity implements View.OnClickListen
 
         @Override
         public void run() {
-            if (parentpath.equals("My Computer")) {
+            if (parentpath.equals("this PC")) {
                 setResult(RESULT_OK, null);
                 finish();
             } else {
