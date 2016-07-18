@@ -31,7 +31,7 @@ Her name is not initially called AirFree, I call her AirFree because AirFree and
 <img src="http://o7gy5l0ax.bkt.clouddn.com/Screenshot_2016-05-21-12-25-33.png" width = "432" height = "768" alt="About Us"/>
 
 Demo Download: [AirFree-Client.apk](http://o7gy5l0ax.bkt.clouddn.com/app-debug.apk);
-               [AirFree-Server-exe](http://pan.baidu.com/s/1o8tQNCQ)
+               [AirFree-Server-exe](http://pan.baidu.com/s/1c1AQwCw)
 
 ## About Me
 A student of Xi'an University of Posts and Telecommunications in mainland China. Currently learning Android development.
