@@ -8,6 +8,7 @@ import android.os.StrictMode;
 import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -24,12 +25,14 @@ import java.net.Socket;
 
 import me.lancer.airfree.util.ApplicationUtil;
 import me.lancer.distance.R;
+import tyrantgit.explosionfield.ExplosionField;
 
 public class LinkActivity extends BaseActivity {
 
     private EditText etIP;
     private CheckBox cbRemember;
     private Button btnLink, btnScan;
+    private ExplosionField efIcon;
 
     ApplicationUtil app;
     private SharedPreferences pref;
@@ -76,6 +79,39 @@ public class LinkActivity extends BaseActivity {
             String ip = pref.getString(getString(R.string.is_ip), "");
             etIP.setText(ip);
             cbRemember.setChecked(true);
+        }
+        efIcon = ExplosionField.attach2Window(this);
+        listen(findViewById(R.id.ll_icon));
+    }
+
+    private void listen(View root) {
+        if (root instanceof ViewGroup) {
+            ViewGroup parent = (ViewGroup) root;
+            for (int i = 0; i < parent.getChildCount(); i++) {
+                listen(parent.getChildAt(i));
+            }
+        } else {
+            root.setClickable(true);
+            root.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    efIcon.explode(v);
+                    v.setOnClickListener(null);
+                }
+            });
+        }
+    }
+
+    private void reset(View root) {
+        if (root instanceof ViewGroup) {
+            ViewGroup parent = (ViewGroup) root;
+            for (int i = 0; i < parent.getChildCount(); i++) {
+                reset(parent.getChildAt(i));
+            }
+        } else {
+            root.setScaleX(1);
+            root.setScaleY(1);
+            root.setAlpha(1);
         }
     }
 

@@ -57,7 +57,7 @@ public class RemoteActivity extends BaseActivity implements View.OnClickListener
     LinearLayout btnBright;
     LinearLayout btnGesture;
     LinearLayout btnOpen;
-    LinearLayout btnSearch;
+    LinearLayout btnTalk;
     private SeekBar sbVolume, sbBright;
     private SpeechRecognizer mIat;
     private RecognizerDialog mIatDialog;
@@ -94,8 +94,8 @@ public class RemoteActivity extends BaseActivity implements View.OnClickListener
         btnBright.setOnClickListener(this);
         btnOpen = (LinearLayout) findViewById(R.id.btn_open);
         btnOpen.setOnClickListener(this);
-        btnSearch = (LinearLayout) findViewById(R.id.btn_search);
-        btnSearch.setOnClickListener(this);
+        btnTalk = (LinearLayout) findViewById(R.id.btn_talk);
+        btnTalk.setOnClickListener(this);
         mIat = SpeechRecognizer.createRecognizer(RemoteActivity.this, mInitListener);
         mIatDialog = new RecognizerDialog(RemoteActivity.this, mInitListener);
         mSharedPreferences = getSharedPreferences(IatSettings.PREFER_NAME, MODE_PRIVATE);
@@ -198,30 +198,34 @@ public class RemoteActivity extends BaseActivity implements View.OnClickListener
                             }
                         })
                         .show();
-            } else if (v == btnSearch) {
-                LayoutInflater inflater = LayoutInflater.from(this);
-                LinearLayout layout = (LinearLayout) inflater.inflate(R.layout.searchbar_dialog_view, null);
-                final Dialog dialog = new AlertDialog.Builder(RemoteActivity.this).create();
-                etSearch = (EditText) layout.findViewById(R.id.et_search);
-                etSearch.setFocusableInTouchMode(true);
-                etSearch.setFocusable(true);
-                etSearch.requestFocus();
-                etSearch.setOnEditorActionListener(new TextView.OnEditorActionListener() {
-
-                    @Override
-                    public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
-                        if (actionId == EditorInfo.IME_ACTION_SEARCH) {
-                            sendMessage("remote", "s?wd=" + etSearch.getText());
-                            dialog.dismiss();
-                            return true;
-                        }
-                        return false;
-                    }
-                });
-                dialog.show();
-                dialog.getWindow().setContentView(layout);
-                dialog.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE | WindowManager.LayoutParams.FLAG_ALT_FOCUSABLE_IM);
-                dialog.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE);
+            } else if (v == btnTalk) {
+//                LayoutInflater inflater = LayoutInflater.from(this);
+//                LinearLayout layout = (LinearLayout) inflater.inflate(R.layout.searchbar_dialog_view, null);
+//                final Dialog dialog = new AlertDialog.Builder(RemoteActivity.this).create();
+//                etSearch = (EditText) layout.findViewById(R.id.et_search);
+//                etSearch.setFocusableInTouchMode(true);
+//                etSearch.setFocusable(true);
+//                etSearch.requestFocus();
+//                etSearch.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+//
+//                    @Override
+//                    public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+//                        if (actionId == EditorInfo.IME_ACTION_SEARCH) {
+//                            sendMessage("remote", "s?wd=" + etSearch.getText());
+//                            dialog.dismiss();
+//                            return true;
+//                        }
+//                        return false;
+//                    }
+//                });
+//                dialog.show();
+//                dialog.getWindow().setContentView(layout);
+//                dialog.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE | WindowManager.LayoutParams.FLAG_ALT_FOCUSABLE_IM);
+//                dialog.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE);
+                Intent intent = new Intent();
+                intent.setClass(RemoteActivity.this, TalkActivity.class);
+                startActivity(intent);
+                this.getParent().overridePendingTransition(R.anim.slide_up_in, R.anim.slide_down_out);
             }
         } else {
             Toast.makeText(this, "没有连接!", Toast.LENGTH_SHORT).show();
@@ -281,7 +285,6 @@ public class RemoteActivity extends BaseActivity implements View.OnClickListener
         public void onResult(RecognizerResult results, boolean isLast) {
             Log.e("IP & PORT", isLast + " " + results.toString());
             if (!isLast) {
-                Log.e("IP & PORT", "in");
                 printResult(results);
             }
         }

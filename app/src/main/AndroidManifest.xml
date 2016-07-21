@@ -93,6 +93,10 @@
             android:name="me.lancer.airfree.activity.GestureActivity"
             android:label="@string/title_activity_common_problem" >
         </activity>
+        <activity
+            android:name="me.lancer.airfree.activity.TalkActivity"
+            android:label="@string/title_activity_talk" >
+        </activity>
     </application>
 
 </manifest>

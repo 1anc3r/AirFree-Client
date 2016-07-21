@@ -253,7 +253,7 @@
                     </LinearLayout>
 
                     <LinearLayout
-                        android:id="@+id/btn_search"
+                        android:id="@+id/btn_talk"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
@@ -264,14 +264,14 @@
                             android:layout_width="50dp"
                             android:layout_height="50dp"
                             android:scaleType="fitXY"
-                            android:src="@drawable/ic_browser" />
+                            android:src="@drawable/ic_talk" />
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:paddingBottom="15dp"
                             android:paddingTop="5dp"
-                            android:text="搜索引擎" />
+                            android:text="聊天工具" />
 
                     </LinearLayout>
 

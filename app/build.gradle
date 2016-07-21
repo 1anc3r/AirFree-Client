@@ -39,6 +39,7 @@ dependencies {
     compile 'com.nineoldandroids:library:2.4.0'
     compile 'com.lguipeng.bubbleview:library:1.0.0'
     compile 'de.hdodenhof:circleimageview:2.0.0'
+    compile 'tyrantgit:explosionfield:1.0.1'
     compile project(':libzxing')
     compile files('libs/gson-2.3.1.jar')
     compile files('libs/Sunflower.jar')
