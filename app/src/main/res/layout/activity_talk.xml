@@ -4,7 +4,7 @@
     android:layout_height="match_parent"
     android:background="@color/blue_dark"
     android:clipToPadding="true"
-    android:fitsSystemWindows="true"   >
+    android:fitsSystemWindows="true">
 
     <LinearLayout
         android:id="@+id/ll_titile"
@@ -29,7 +29,7 @@
             android:layout_height="48dp"
             android:layout_marginLeft="-24dp"
             android:gravity="center"
-            android:text="聊天工具"
+            android:text="在线聊天"
             android:textColor="@color/base_color_text_white"
             android:textSize="@dimen/text_size_large" />
 
@@ -47,12 +47,14 @@
             android:id="@+id/lv_talk"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="1"></ListView>
+            android:layout_weight="1"
+            android:stackFromBottom="true"
+            android:transcriptMode="alwaysScroll"></ListView>
 
         <View
             android:layout_width="fill_parent"
-            android:background="#B9B9B9"
-            android:layout_height="1dp"/>
+            android:layout_height="1dp"
+            android:background="#B9B9B9" />
 
         <LinearLayout
             android:layout_width="fill_parent"
@@ -62,9 +64,9 @@
 
             <LinearLayout
                 android:layout_width="wrap_content"
-                android:layout_weight="1"
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"
+                android:layout_weight="1"
                 android:background="@drawable/input_bg"
                 android:orientation="vertical">
 
