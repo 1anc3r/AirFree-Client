@@ -28,12 +28,12 @@ import me.lancer.distance.R;
 
 public class TalkActivity extends BaseActivity implements View.OnClickListener {
 
+    ApplicationUtil app;
     private Button btnBack;
     private Button btnSend;
     private EditText etContent;
     private ListView lvTalk;
 
-    ApplicationUtil app;
     private TalkAdapter adapter;
     private List<TalkBean> list = new ArrayList<>();
 
@@ -49,10 +49,6 @@ public class TalkActivity extends BaseActivity implements View.OnClickListener {
                 } else {
                     list.add(new TalkBean("Q", args[0], args[1]));
                 }
-                for(TalkBean item : list){
-                    Log.e("IP & PORT", item.getType()+" "+item.getId()+" "+item.getContent());
-                }
-                lvTalk.smoothScrollToPosition(list.size()-1);
                 lvTalk.requestLayout();
                 adapter.notifyDataSetChanged();
             }
@@ -77,6 +73,7 @@ public class TalkActivity extends BaseActivity implements View.OnClickListener {
         lvTalk.setDividerHeight(0);
         adapter = new TalkAdapter(this, list);
         lvTalk.setAdapter(adapter);
+        lvTalk.smoothScrollToPosition(adapter.getCount() - 1);
         new readServer();
     }
 
@@ -116,7 +113,6 @@ public class TalkActivity extends BaseActivity implements View.OnClickListener {
             try {
                 while (true) {
                     String content = reader.readLine();
-                    Log.e("IP & PORT", content);
                     Message msg = new Message();
                     msg.obj = content;
                     mHandler.sendMessage(msg);
