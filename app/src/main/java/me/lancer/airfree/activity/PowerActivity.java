@@ -10,6 +10,9 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
 
+import org.json.JSONObject;
+import org.json.JSONTokener;
+
 import me.lancer.airfree.util.ApplicationUtil;
 import me.lancer.distance.R;
 
@@ -26,8 +29,9 @@ public class PowerActivity extends BaseActivity implements View.OnClickListener 
 
     private Thread mThreadClient = null;
     private String recvMessageClient = "";
+    private boolean iStop = false;
 
-    private Handler mHandler = new Handler() {
+    private Handler pHandler = new Handler() {
 
         @Override
         public void handleMessage(Message msg) {
@@ -49,6 +53,12 @@ public class PowerActivity extends BaseActivity implements View.OnClickListener 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_power);
         init();
+    }
+
+    @Override
+    protected void onDestroy() {
+        iStop=true;
+        super.onDestroy();
     }
 
     private void init() {
@@ -75,6 +85,7 @@ public class PowerActivity extends BaseActivity implements View.OnClickListener 
     @Override
     public void onClick(View v) {
         if (v == btnBack) {
+            iStop=true;
             setResult(RESULT_OK, null);
             finish();
         } else if (v == btnShutdown) {
@@ -84,13 +95,14 @@ public class PowerActivity extends BaseActivity implements View.OnClickListener 
         } else if (v == btnCancell) {
             sendMessage("power", POWEREVENTF_CANCELL + "");
         }
-        mThreadClient = new Thread(mRunnable);
+        mThreadClient = new Thread(pRunnable);
         mThreadClient.start();
     }
 
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         if (keyCode == KeyEvent.KEYCODE_BACK && event.getRepeatCount() == 0) {
+            iStop=true;
             finish();
             overridePendingTransition(R.anim.slide_up_in, R.anim.slide_down_out);
             return false;
@@ -98,26 +110,35 @@ public class PowerActivity extends BaseActivity implements View.OnClickListener 
         return false;
     }
 
-    private Runnable mRunnable = new Runnable() {
+    private Runnable pRunnable = new Runnable() {
 
         @Override
         public void run() {
-            char[] buffer = new char[256];
-            int count = 0;
-            if (app.getmBufferedReaderClient() != null) {
-                try {
-                    if ((count = app.getmBufferedReaderClient().read(buffer)) > 0) {
-                        recvMessageClient = getInfoBuff(buffer, count);
+            if (!iStop) {
+                char[] buffer = new char[256];
+                int count = 0;
+                if (app.getmBufferedReaderClient() != null) {
+                    try {
+                        if ((count = app.getmBufferedReaderClient().read(buffer)) > 0) {
+                            recvMessageClient = getInfoBuff(buffer, count);
+                            Log.e("IP & PORT", "接收成功:" + recvMessageClient);
+                            JSONTokener jt = new JSONTokener(recvMessageClient);
+                            JSONObject jb = (JSONObject) jt.nextValue();
+                            String command = jb.getString("command");
+                            String paramet = jb.getString("parameter");
+                            if (command.contains("power")) {
+                                Message msg = pHandler.obtainMessage();
+                                msg.what = 1;
+                                pHandler.sendMessage(msg);
+                            }
+                        }
+                    } catch (Exception e) {
+                        Log.e("IP & PORT", "接收异常:" + e.getMessage());
+                        recvMessageClient = "接收异常:" + e.getMessage();
                         Message msg = new Message();
                         msg.what = 1;
-                        mHandler.sendMessage(msg);
+                        pHandler.sendMessage(msg);
                     }
-                } catch (Exception e) {
-                    Log.e("IP & PORT", "接收异常:" + e.getMessage());
-                    recvMessageClient = "接收异常:" + e.getMessage();
-                    Message msg = new Message();
-                    msg.what = 1;
-                    mHandler.sendMessage(msg);
                 }
             }
         }

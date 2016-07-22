@@ -43,10 +43,10 @@ public class MusicActivity extends BaseActivity implements View.OnClickListener 
     private MusicAdapter adapter;
     private List<MusicBean> mp3List = new ArrayList<>();
     private List<String> posList = new ArrayList<>();
-    private Boolean isall = false;
     private SharedPreferences pref;
+    private Boolean isAll = false;
 
-    private Handler lHandler = new Handler() {
+    private Handler mHandler = new Handler() {
 
         @Override
         public void handleMessage(Message msg) {
@@ -61,7 +61,7 @@ public class MusicActivity extends BaseActivity implements View.OnClickListener 
         }
     };
 
-    private Handler mHandler = new Handler() {
+    private Handler posHandler = new Handler() {
 
         public void handleMessage(Message msg) {
             super.handleMessage(msg);
@@ -92,7 +92,7 @@ public class MusicActivity extends BaseActivity implements View.OnClickListener 
         btnBack = (Button) findViewById(R.id.btn_back);
         btnBack.setOnClickListener(this);
         lvMusic = (ListView) findViewById(R.id.lv_music);
-        adapter = new MusicAdapter(MusicActivity.this, mp3List, posList, mHandler);
+        adapter = new MusicAdapter(MusicActivity.this, mp3List, posList, posHandler);
         lvMusic.setAdapter(adapter);
         llBottom = (LinearLayout) findViewById(R.id.ll_bottom);
         btnDelete = (LinearLayout) findViewById(R.id.btn_del);
@@ -189,16 +189,16 @@ public class MusicActivity extends BaseActivity implements View.OnClickListener 
 
         @Override
         public void run() {
-            if (isall == false) {
+            if (isAll == false) {
                 posList.clear();
                 for (int i = 0; i < mp3List.size(); i++) {
                     posList.add("" + i);
                 }
-                isall = true;
+                isAll = true;
                 llBottom.setVisibility(View.VISIBLE);
             } else {
                 posList.clear();
-                isall = false;
+                isAll = false;
                 llBottom.setVisibility(View.GONE);
             }
             Log.e("IP & PORT", "" + posList);
@@ -233,7 +233,7 @@ public class MusicActivity extends BaseActivity implements View.OnClickListener 
                     mp3List.add(item);
                 }
                 mCursor.close();
-                lHandler.sendEmptyMessage(SCAN_OK);
+                mHandler.sendEmptyMessage(SCAN_OK);
 
             }
         }).start();

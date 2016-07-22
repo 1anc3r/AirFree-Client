@@ -16,6 +16,9 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import org.json.JSONObject;
+import org.json.JSONTokener;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -41,15 +44,18 @@ public class ComputerActivity extends BaseActivity implements View.OnClickListen
     private LetterBean parentfile = new LetterBean("this PC", "this PC");
     private String parentpath = "this PC";
     private String temppath = "";
+    private Thread mThreadClient = null;
     private String recvMessageClient = "";
     private SharedPreferences pref;
-    private int allpos;
+    private boolean iStop = false;
+    private int allPos;
 
-    private Handler lHandler = new Handler() {
+    private Handler cHandler = new Handler() {
 
         @Override
         public void handleMessage(Message msg) {
             super.handleMessage(msg);
+            Log.e("IP & PORT", "what:" + msg.what + " obj:" + msg.obj.toString());
             if (msg.what == 1) {
                 String str = (String) msg.obj;
                 if (!str.equals("[]")) {
@@ -63,10 +69,10 @@ public class ComputerActivity extends BaseActivity implements View.OnClickListen
                         fileList.add(new LetterBean(item, name, parentpath, parentfile));
                     }
                 } else {
-                    if (posList.contains("" + allpos)) {
-                        posList.remove("" + allpos);
+                    if (posList.contains("" + allPos)) {
+                        posList.remove("" + allPos);
                     } else {
-                        posList.add("" + allpos);
+                        posList.add("" + allPos);
                     }
                 }
                 lvFile.requestLayout();
@@ -75,7 +81,7 @@ public class ComputerActivity extends BaseActivity implements View.OnClickListen
         }
     };
 
-    private Handler mHandler = new Handler() {
+    private Handler posHandler = new Handler() {
 
         @Override
         public void handleMessage(Message msg) {
@@ -102,13 +108,19 @@ public class ComputerActivity extends BaseActivity implements View.OnClickListen
         init();
     }
 
+    @Override
+    protected void onDestroy() {
+        iStop = true;
+        super.onDestroy();
+    }
+
     private void init() {
         app = (ApplicationUtil) ComputerActivity.this.getApplication();
         btnBack = (Button) findViewById(R.id.btn_back);
         btnBack.setOnClickListener(this);
         tvPath = (TextView) findViewById(R.id.tv_path);
         lvFile = (ListView) findViewById(R.id.lv_file);
-        adapter = new LetterAdapter(ComputerActivity.this, fileList, posList, mHandler);
+        adapter = new LetterAdapter(ComputerActivity.this, fileList, posList, posHandler);
         lvFile.setAdapter(adapter);
         lvFile.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
@@ -147,10 +159,10 @@ public class ComputerActivity extends BaseActivity implements View.OnClickListen
                     parentfile = fileList.get(position);
                     parentpath = temppath;
                     sendMessage("computer", temppath);
-                    lHandler.post(mRunnable);
+                    cHandler.post(cRunnable);
                 }
                 tvPath.setText(parentpath);
-                allpos = position;
+                allPos = position;
             }
         });
         tvPath.setText(parentpath);
@@ -160,12 +172,15 @@ public class ComputerActivity extends BaseActivity implements View.OnClickListen
         btnOpen = (LinearLayout) findViewById(R.id.btn_open);
         btnOpen.setOnClickListener(this);
         sendMessage("computer", parentpath);
-        lHandler.post(mRunnable);
+//        cHandler.post(cRunnable);
+        mThreadClient = new Thread(cRunnable);
+        mThreadClient.start();
     }
 
     @Override
     public void onClick(View v) {
         if (v == btnBack) {
+            iStop = true;
             setResult(RESULT_OK, null);
             finish();
         } else if (v == btnShare) {
@@ -188,28 +203,37 @@ public class ComputerActivity extends BaseActivity implements View.OnClickListen
         }
     }
 
-    private Runnable mRunnable = new Runnable() {
+    private Runnable cRunnable = new Runnable() {
 
         @Override
         public void run() {
-            char[] buffer = new char[1024];
-            int count = 0;
-            if (app.getmBufferedReaderClient() != null) {
-                try {
-                    if ((count = app.getmBufferedReaderClient().read(buffer)) > 0) {
-                        recvMessageClient = getInfoBuff(buffer, count);
+            if (!iStop) {
+                char[] buffer = new char[1024];
+                int count = 0;
+                if (app.getmBufferedReaderClient() != null) {
+                    try {
+                        if ((count = app.getmBufferedReaderClient().read(buffer)) > 0) {
+                            recvMessageClient = getInfoBuff(buffer, count);
+                            Log.e("IP & PORT", "接收成功(C):" + recvMessageClient);
+                            JSONTokener jt = new JSONTokener(recvMessageClient);
+                            JSONObject jb = (JSONObject) jt.nextValue();
+                            String command = jb.getString("command");
+                            String paramet = jb.getString("parameter");
+                            if (command.contains("computer")) {
+                                Message msg = cHandler.obtainMessage();
+                                msg.what = 1;
+                                msg.obj = paramet;
+                                cHandler.sendMessage(msg);
+                            }
+                        }
+                    } catch (Exception e) {
+                        Log.e("IP & PORT", "接收异常:" + e.getMessage());
+                        recvMessageClient = "接收异常:" + e.getMessage();
                         Message msg = new Message();
-                        msg.what = 1;
-                        msg.obj = recvMessageClient;
-                        lHandler.sendMessage(msg);
+                        msg.what = 0;
+                        msg.obj = "";
+                        cHandler.sendMessage(msg);
                     }
-                } catch (Exception e) {
-                    Log.e("IP & PORT", "接收异常:" + e.getMessage());
-                    recvMessageClient = "接收异常:" + e.getMessage();
-                    Message msg = new Message();
-                    msg.what = 0;
-                    msg.obj = "";
-                    lHandler.sendMessage(msg);
                 }
             }
         }
@@ -229,6 +253,7 @@ public class ComputerActivity extends BaseActivity implements View.OnClickListen
         @Override
         public void run() {
             if (parentpath.equals("this PC")) {
+                iStop = true;
                 setResult(RESULT_OK, null);
                 finish();
             } else {
@@ -237,7 +262,7 @@ public class ComputerActivity extends BaseActivity implements View.OnClickListen
                 parentfile = parentfile.getFileParent();
                 tvPath.setText(parentpath);
                 sendMessage("computer", parentpath);
-                lHandler.post(mRunnable);
+                cHandler.post(cRunnable);
             }
         }
     };

@@ -76,12 +76,19 @@ public class MouseActivity extends BaseActivity implements View.OnTouchListener,
     private String mEngineType = SpeechConstant.TYPE_CLOUD;
     private HashMap<String, String> mIatResults = new LinkedHashMap<>();
     private SharedPreferences mSharedPreferences;
+    private boolean iStop = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_mouse);
         init();
+    }
+
+    @Override
+    protected void onDestroy() {
+        iStop=true;
+        super.onDestroy();
     }
 
     private void init() {
@@ -299,6 +306,7 @@ public class MouseActivity extends BaseActivity implements View.OnTouchListener,
     @Override
     public void onClick(View v) {
         if (v == btnBack) {
+            iStop=true;
             setResult(RESULT_OK, null);
             finish();
         } else if (v == btnVoice) {
@@ -314,6 +322,7 @@ public class MouseActivity extends BaseActivity implements View.OnTouchListener,
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         if (keyCode == KeyEvent.KEYCODE_BACK && event.getRepeatCount() == 0) {
+            iStop=true;
             finish();
             overridePendingTransition(R.anim.slide_up_in, R.anim.slide_down_out);
             return false;

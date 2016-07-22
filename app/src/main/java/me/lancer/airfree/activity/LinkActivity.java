@@ -106,7 +106,6 @@ public class LinkActivity extends BaseActivity {
             if (!app.isConnecting() && app.getmPrintWriterClient() == null && app.getmBufferedReaderClient() == null) {
                 String txtIP = etIP.getText().toString();
                 int i = app.init(txtIP, "59671");
-                Log.e("IP & PORT", app.getmSocketClient().toString());
                 if (i == 1) {
                     app.setIsConnecting(true);
                     Intent intent = new Intent(LinkActivity.this, MainActivity.class);

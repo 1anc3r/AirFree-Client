@@ -45,8 +45,23 @@ public class VideoActivity extends BaseActivity implements View.OnClickListener 
     private List<String> posList = new ArrayList<>();
     private Boolean isall = false;
     private SharedPreferences pref;
+    
+    private Handler vHandler = new Handler() {
 
-    public Handler mHandler = new Handler() {
+        @Override
+        public void handleMessage(Message msg) {
+            super.handleMessage(msg);
+            switch (msg.what) {
+                case SCAN_OK:
+                    mProgressDialog.dismiss();
+                    adapter = new VideoAdapter(VideoActivity.this, videoList, posList, mGroupGridView, posHandler);
+                    mGroupGridView.setAdapter(adapter);
+                    break;
+            }
+        }
+    };
+    
+    public Handler posHandler = new Handler() {
 
         @Override
         public void handleMessage(Message msg) {
@@ -61,21 +76,6 @@ public class VideoActivity extends BaseActivity implements View.OnClickListener 
                 llBottom.setVisibility(View.GONE);
             } else {
                 llBottom.setVisibility(View.VISIBLE);
-            }
-        }
-    };
-
-    private Handler lHandler = new Handler() {
-
-        @Override
-        public void handleMessage(Message msg) {
-            super.handleMessage(msg);
-            switch (msg.what) {
-                case SCAN_OK:
-                    mProgressDialog.dismiss();
-                    adapter = new VideoAdapter(VideoActivity.this, videoList, posList, mGroupGridView, mHandler);
-                    mGroupGridView.setAdapter(adapter);
-                    break;
             }
         }
     };
@@ -137,7 +137,7 @@ public class VideoActivity extends BaseActivity implements View.OnClickListener 
                     videoList.add(item);
                 }
                 vCursor.close();
-                lHandler.sendEmptyMessage(SCAN_OK);
+                vHandler.sendEmptyMessage(SCAN_OK);
             }
         }).start();
     }

@@ -120,17 +120,17 @@ public class BaseActivity extends Activity {
 
         protected void onPreExecute() {
             mProgressDialog.show();
-            Log.e("IP ＆ PORT", "开始发送!");
+            Log.e("IP & PORT", "开始发送!");
         }
 
         protected void onPostExecute(String failed) {
             mProgressDialog.dismiss();
             if (failed == null) {
                 ShowToast("发送成功:" + filename);
-                Log.e("IP ＆ PORT", "发送成功!");
+                Log.e("IP & PORT", "发送成功!");
             } else {
                 ShowToast("发送失败:" + filename);
-                Log.e("IP ＆ PORT", "发送失败:" + failed);
+                Log.e("IP & PORT", "发送失败:" + failed);
             }
         }
 
@@ -168,7 +168,7 @@ public class BaseActivity extends Activity {
 
         protected void onPreExecute() {
             mProgressDialog = ProgressDialog.show(BaseActivity.this, null, "正在接收...");
-            Log.e("IP ＆ PORT", "开始接收");
+            Log.e("IP & PORT", "开始接收");
         }
 
         protected void onPostExecute(String failed) {
@@ -179,11 +179,11 @@ public class BaseActivity extends Activity {
                     iv.setImageBitmap(bitmap);
                 } else {
                     ShowToast("接收成功: " + filename);
-                    Log.e("IP ＆ PORT", "接收成功");
+                    Log.e("IP & PORT", "接收成功");
                 }
             } else {
                 ShowToast("接收失败: " + filename);
-                Log.e("IP ＆ PORT", "接收失败" + failed);
+                Log.e("IP & PORT", "接收失败" + failed);
             }
         }
 

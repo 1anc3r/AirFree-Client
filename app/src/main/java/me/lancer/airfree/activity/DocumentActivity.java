@@ -43,8 +43,8 @@ public class DocumentActivity extends BaseActivity implements View.OnClickListen
     private List<FileBean> docList = new ArrayList<>();
     private List<String> posList = new ArrayList<>();
     private SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-    private Boolean isall = false;
     private SharedPreferences pref;
+    private Boolean isAll = false;
 
     private Handler lHandler = new Handler() {
 
@@ -190,16 +190,16 @@ public class DocumentActivity extends BaseActivity implements View.OnClickListen
 
         @Override
         public void run() {
-            if (isall == false) {
+            if (isAll == false) {
                 posList.clear();
                 for (int i = 0; i < docList.size(); i++) {
                     posList.add("" + i);
                 }
-                isall = true;
+                isAll = true;
                 llBottom.setVisibility(View.VISIBLE);
             } else {
                 posList.clear();
-                isall = false;
+                isAll = false;
                 llBottom.setVisibility(View.GONE);
             }
             lvDoc.requestLayout();

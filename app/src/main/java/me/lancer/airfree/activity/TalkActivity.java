@@ -31,6 +31,7 @@ import me.lancer.distance.R;
 public class TalkActivity extends BaseActivity implements View.OnClickListener {
 
     ApplicationUtil app;
+
     private Button btnBack;
     private Button btnSend;
     private EditText etContent;
@@ -38,8 +39,11 @@ public class TalkActivity extends BaseActivity implements View.OnClickListener {
 
     private TalkAdapter adapter;
     private List<TalkBean> list = new ArrayList<>();
+    private Thread mThreadClient = null;
+    private String recvMessageClient = "";
+    private boolean iStop = false;
 
-    private Handler mHandler = new Handler() {
+    private Handler tHandler = new Handler() {
 
         @Override
         public void handleMessage(Message msg) {
@@ -64,6 +68,14 @@ public class TalkActivity extends BaseActivity implements View.OnClickListener {
         init();
     }
 
+    @Override
+    protected void onDestroy() {
+        Log.e("IP & PORT", "onDestroy");
+        iStop = true;
+        mThreadClient.interrupt();
+        super.onDestroy();
+    }
+
     private void init() {
         app = (ApplicationUtil) this.getApplication();
         btnBack = (Button) findViewById(R.id.btn_back);
@@ -76,12 +88,15 @@ public class TalkActivity extends BaseActivity implements View.OnClickListener {
         adapter = new TalkAdapter(this, list);
         lvTalk.setAdapter(adapter);
         lvTalk.smoothScrollToPosition(adapter.getCount() - 1);
-        new readServer();
+//        tHandler.post(tRunnable);
+        mThreadClient = new Thread(tRunnable);
+        mThreadClient.start();
     }
 
     @Override
     public void onClick(View v) {
         if (v == btnBack) {
+            iStop = true;
             setResult(RESULT_OK, null);
             finish();
         } else if (v == btnSend) {
@@ -90,6 +105,7 @@ public class TalkActivity extends BaseActivity implements View.OnClickListener {
                 ShowToast("发送消息不能为空!");
             } else {
                 sendMessage("talk", getIPAddress() + ":" + etContent.getText() + "");
+                etContent.setText("");
             }
         }
     }
@@ -97,6 +113,8 @@ public class TalkActivity extends BaseActivity implements View.OnClickListener {
     @Override
     public boolean onKeyDown(int keyCode, @NonNull KeyEvent event) {
         if (keyCode == KeyEvent.KEYCODE_BACK && event.getRepeatCount() == 0) {
+            iStop = true;
+            mThreadClient.interrupt();
             finish();
             overridePendingTransition(R.anim.slide_up_in, R.anim.slide_down_out);
             return false;
@@ -104,39 +122,35 @@ public class TalkActivity extends BaseActivity implements View.OnClickListener {
         return false;
     }
 
-    class readServer extends Thread {
-        private BufferedReader reader;
+    private Runnable tRunnable = new Runnable() {
 
-        public readServer() {
-            try {
-                reader = app.getmBufferedReaderClient();
-                start();
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        }
-
+        @Override
         public void run() {
             try {
-                while (true) {
-                    String recvMessageClient = reader.readLine();
-                    Log.e("IP & PORT", "接收成功:" + recvMessageClient);
-                    JSONTokener jt = new JSONTokener(recvMessageClient);
-                    JSONObject jb = (JSONObject) jt.nextValue();
-                    String command = jb.getString("command");
-                    String paramet = jb.getString("parameter");
-                    if (command.contains("talk")){
-                        Message msg = new Message();
-                        msg.what = 1;
-                        msg.obj = paramet;
-                        mHandler.sendMessage(msg);
+                if (app.getmBufferedReaderClient() != null) {
+                    while (true) {
+                        if (iStop) {
+                            break;
+                        }
+                        recvMessageClient = app.getmBufferedReaderClient().readLine();
+                        Log.e("IP & PORT", "接收成功(T):" + recvMessageClient);
+                        JSONTokener jt = new JSONTokener(recvMessageClient);
+                        JSONObject jb = (JSONObject) jt.nextValue();
+                        String command = jb.getString("command");
+                        String paramet = jb.getString("parameter");
+                        if (command.contains("talk")) {
+                            Message msg = tHandler.obtainMessage();
+                            msg.what = 1;
+                            msg.obj = paramet;
+                            tHandler.sendMessage(msg);
+                        }
                     }
                 }
             } catch (Exception e) {
                 e.printStackTrace();
             }
         }
-    }
+    };
 
     public String getIPAddress() {
         String ipaddress = "";

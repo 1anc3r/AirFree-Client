@@ -53,8 +53,8 @@ public class DeviceActivity extends BaseActivity implements View.OnClickListener
     private String parentpath;
     private File parentfile;
     private SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-    private Boolean isall = false;
     private SharedPreferences pref;
+    private Boolean isAll = false;
 
     private Handler lHandler = new Handler() {
 
@@ -360,16 +360,16 @@ public class DeviceActivity extends BaseActivity implements View.OnClickListener
 
         @Override
         public void run() {
-            if (isall == false) {
+            if (isAll == false) {
                 posList.clear();
                 for (int i = 0; i < fileList.size(); i++) {
                     posList.add("" + i);
                 }
-                isall = true;
+                isAll = true;
                 llBottom.setVisibility(View.VISIBLE);
             } else {
                 posList.clear();
-                isall = false;
+                isAll = false;
                 if (method.equals("in") || method.equals("out") || method.equals("download")) {
                     llBottom.setVisibility(View.GONE);
                 }

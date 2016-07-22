@@ -35,10 +35,10 @@ public class ImageIActivity extends BaseActivity implements View.OnClickListener
     private PictureChildAdapter adapter;
     private List<String> posList = new ArrayList<>();
     private List<String> picList = new ArrayList<>();
-    private Boolean isall = false;
     private SharedPreferences pref;
+    private Boolean isAll = false;
 
-    public Handler mHandler = new Handler() {
+    public Handler iHandler = new Handler() {
 
         @Override
         public void handleMessage(Message msg) {
@@ -75,7 +75,7 @@ public class ImageIActivity extends BaseActivity implements View.OnClickListener
         mGridView = (GridView) findViewById(R.id.gv_child);
         picList = getIntent().getStringArrayListExtra("data");
         Collections.reverse(picList);
-        adapter = new PictureChildAdapter(this, picList, posList, mGridView, mHandler);
+        adapter = new PictureChildAdapter(this, picList, posList, mGridView, iHandler);
         mGridView.setAdapter(adapter);
         btnDelete = (LinearLayout) findViewById(R.id.btn_del);
         btnDelete.setOnClickListener(this);
@@ -169,16 +169,16 @@ public class ImageIActivity extends BaseActivity implements View.OnClickListener
 
         @Override
         public void run() {
-            if (!isall) {
+            if (!isAll) {
                 posList.clear();
                 for (int i = 0; i < picList.size(); i++) {
                     posList.add("" + i);
                 }
-                isall = true;
+                isAll = true;
                 llBottom.setVisibility(View.VISIBLE);
             } else {
                 posList.clear();
-                isall = false;
+                isAll = false;
                 llBottom.setVisibility(View.GONE);
             }
             adapter.notifyDataSetChanged();
