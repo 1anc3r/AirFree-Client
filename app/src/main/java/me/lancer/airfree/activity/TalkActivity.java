@@ -12,6 +12,8 @@ import android.widget.EditText;
 import android.widget.ListView;
 
 import org.apache.http.conn.util.InetAddressUtils;
+import org.json.JSONObject;
+import org.json.JSONTokener;
 
 import java.io.BufferedReader;
 import java.net.InetAddress;
@@ -83,7 +85,12 @@ public class TalkActivity extends BaseActivity implements View.OnClickListener {
             setResult(RESULT_OK, null);
             finish();
         } else if (v == btnSend) {
-            sendMessage("talk", getIPAddress() + ":" + etContent.getText() + "");
+            if (etContent.getText().toString().equals("")) {
+                Log.e("IP ＆ PORT", "null");
+                ShowToast("发送消息不能为空!");
+            } else {
+                sendMessage("talk", getIPAddress() + ":" + etContent.getText() + "");
+            }
         }
     }
 
@@ -112,10 +119,18 @@ public class TalkActivity extends BaseActivity implements View.OnClickListener {
         public void run() {
             try {
                 while (true) {
-                    String content = reader.readLine();
-                    Message msg = new Message();
-                    msg.obj = content;
-                    mHandler.sendMessage(msg);
+                    String recvMessageClient = reader.readLine();
+                    Log.e("IP & PORT", "接收成功:" + recvMessageClient);
+                    JSONTokener jt = new JSONTokener(recvMessageClient);
+                    JSONObject jb = (JSONObject) jt.nextValue();
+                    String command = jb.getString("command");
+                    String paramet = jb.getString("parameter");
+                    if (command.contains("talk")){
+                        Message msg = new Message();
+                        msg.what = 1;
+                        msg.obj = paramet;
+                        mHandler.sendMessage(msg);
+                    }
                 }
             } catch (Exception e) {
                 e.printStackTrace();
