@@ -12,8 +12,8 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:gravity="left|center"
         android:descendantFocusability="blocksDescendants"
+        android:gravity="left|center"
         android:orientation="horizontal">
 
         <ImageView

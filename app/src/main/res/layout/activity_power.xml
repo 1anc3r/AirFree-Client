@@ -34,11 +34,11 @@
     </LinearLayout>
 
     <LinearLayout
-        android:layout_marginBottom="149dp"
         android:id="@+id/ll_show"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
         android:layout_below="@+id/ll_titile"
+        android:layout_marginBottom="149dp"
         android:background="@color/blue_light"
         android:orientation="vertical">
 
@@ -56,12 +56,12 @@
     </LinearLayout>
 
     <LinearLayout
-        android:layout_marginTop="-151dp"
         android:layout_width="fill_parent"
         android:layout_height="150dp"
-        android:layout_below="@+id/ll_show"
-        android:background="@color/common_bg"
         android:layout_alignParentBottom="true"
+        android:layout_below="@+id/ll_show"
+        android:layout_marginTop="-151dp"
+        android:background="@color/common_bg"
         android:gravity="center">
 
         <LinearLayout

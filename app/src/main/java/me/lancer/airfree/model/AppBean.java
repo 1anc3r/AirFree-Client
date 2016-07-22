@@ -16,12 +16,12 @@ public class AppBean {
 
     private Drawable appIcon = null;
 
-    public AppBean(){
+    public AppBean() {
 
     }
 
     public AppBean(int versionCode, String appName, String packageName,
-                   String versionName, Drawable appIcon){
+                   String versionName, Drawable appIcon) {
         this.versionCode = versionCode;
         this.appName = appName;
         this.packageName = packageName;

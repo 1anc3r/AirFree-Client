@@ -37,23 +37,23 @@ import me.lancer.airfree.util.ApplicationUtil;
 
 public class DeviceActivity extends BaseActivity implements View.OnClickListener {
 
+    ApplicationUtil app;
     private TextView tvPath, tvShow;
+    private ListView lvFile;
+    private Button btnBack, btnPaste, btnCancell;
+    private LinearLayout llBottom, btnDelete, btnCopy, btnMove, btnShare, btnAll;
+
+    private final static int SCAN_OK = 1;
+
+    private FileAdapter adapter;
     private List<FileBean> fileList = new ArrayList<>();
     private List<String> posList = new ArrayList<>();
     private List<String> srcList = new ArrayList<>();
-    private FileAdapter adapter;
-    private ListView lvFile;
-    private LinearLayout llBottom;
-    private LinearLayout btnDelete, btnCopy, btnMove, btnShare, btnAll;
-    private Button btnBack, btnPaste, btnCancell;
-
-    ApplicationUtil app;
-    private SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
     private String method;
     private String parentpath;
     private File parentfile;
+    private SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
     private Boolean isall = false;
-    private final static int SCAN_OK = 1;
     private SharedPreferences pref;
 
     private Handler lHandler = new Handler() {

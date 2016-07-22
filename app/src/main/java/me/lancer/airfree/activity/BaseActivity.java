@@ -10,6 +10,8 @@ import android.os.Handler;
 import android.os.Message;
 import android.text.TextUtils;
 import android.util.Log;
+import android.view.View;
+import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.ImageView;
@@ -19,11 +21,13 @@ import org.json.JSONObject;
 
 import me.lancer.airfree.util.ApplicationUtil;
 import me.lancer.airfree.util.FileTrans;
+import tyrantgit.explosionfield.ExplosionField;
 
 public class BaseActivity extends Activity {
 
-    Toast mToast;
     ApplicationUtil app;
+
+    Toast mToast;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

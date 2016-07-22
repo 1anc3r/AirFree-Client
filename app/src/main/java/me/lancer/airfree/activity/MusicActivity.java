@@ -32,18 +32,18 @@ import me.lancer.distance.R;
 
 public class MusicActivity extends BaseActivity implements View.OnClickListener {
 
+    ApplicationUtil app;
     private Button btnBack;
     private ListView lvMusic;
+    private ProgressDialog mProgressDialog;
+    private LinearLayout llBottom, btnDelete, btnCopy, btnMove, btnShare, btnAll;
+
+    private final static int SCAN_OK = 1;
+
     private MusicAdapter adapter;
     private List<MusicBean> mp3List = new ArrayList<>();
     private List<String> posList = new ArrayList<>();
-    private LinearLayout llBottom;
-    private LinearLayout btnDelete, btnCopy, btnMove, btnShare, btnAll;
-
-    ApplicationUtil app;
     private Boolean isall = false;
-    private final static int SCAN_OK = 1;
-    private ProgressDialog mProgressDialog;
     private SharedPreferences pref;
 
     private Handler lHandler = new Handler() {
@@ -166,7 +166,7 @@ public class MusicActivity extends BaseActivity implements View.OnClickListener 
             for (int i = 0; i < posList.size(); i++) {
                 String deletePath = mp3List.get(Integer.parseInt(posList.get(i))).getPath();
                 File deleteFile = new File(deletePath);
-                Log.e("IP & PORT", "正在删除:"+deletePath);
+                Log.e("IP & PORT", "正在删除:" + deletePath);
                 if (deleteFile.exists() && deleteFile.isFile() && deleteFile.canWrite()) {
                     deleteFile.delete();
                     Log.e("IP & PORT", "删除成功!");
@@ -258,7 +258,7 @@ public class MusicActivity extends BaseActivity implements View.OnClickListener 
         public int compare(Object obj1, Object obj2) {
             String str1 = ((MusicBean) obj1).getTitle();
             String str2 = ((MusicBean) obj2).getTitle();
-            if (str1.compareTo(str2)<0)
+            if (str1.compareTo(str2) < 0)
                 return -1;
             else if (str1.compareTo(str2) == 0)
                 return 0;

@@ -12,11 +12,11 @@
     <de.hdodenhof.circleimageview.CircleImageView
         android:layout_width="50dp"
         android:layout_height="50dp"
-        app:civ_border_width="1dp"
-        app:civ_border_color="@color/common_bg"
         android:layout_gravity="center_horizontal"
         android:layout_marginBottom="15dp"
-        android:src="@drawable/ic_head"/>
+        android:src="@drawable/ic_head"
+        app:civ_border_color="@color/common_bg"
+        app:civ_border_width="1dp" />
 
     <TextView
         android:layout_width="fill_parent"
@@ -57,14 +57,14 @@
         android:orientation="horizontal">
 
         <ImageView
-            android:gravity="center"
             android:layout_width="12dp"
             android:layout_height="12dp"
-            android:layout_marginTop="5dp"
+            android:layout_gravity="center"
+            android:layout_marginBottom="5dp"
             android:layout_marginLeft="5dp"
             android:layout_marginRight="2.5dp"
-            android:layout_marginBottom="5dp"
-            android:layout_gravity="center"
+            android:layout_marginTop="5dp"
+            android:gravity="center"
             android:scaleType="centerInside"
             android:src="@drawable/ic_web_link"
             android:tint="@color/blue_dark" />
@@ -73,10 +73,10 @@
             android:id="@+id/tv_web"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="5dp"
-            android:layout_marginRight="5dp"
-            android:layout_marginLeft="2.5dp"
             android:layout_marginBottom="5dp"
+            android:layout_marginLeft="2.5dp"
+            android:layout_marginRight="5dp"
+            android:layout_marginTop="5dp"
             android:autoLink="all"
             android:gravity="center"
             android:text="访问我的主页"

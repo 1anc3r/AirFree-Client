@@ -23,6 +23,7 @@
         android:theme="@style/AppTheme" >
         <activity
             android:name="me.lancer.airfree.activity.MainActivity"
+            android:screenOrientation="portrait"
             android:label="@string/app_name" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -36,65 +37,85 @@
             android:screenOrientation="portrait" />
         <activity
             android:name="me.lancer.airfree.activity.TransfActivity"
+            android:screenOrientation="portrait"
             android:label="@string/title_activity_transf" />
         <activity
             android:name="me.lancer.airfree.activity.RemoteActivity"
+            android:screenOrientation="portrait"
             android:label="@string/title_activity_remote" />
         <activity
             android:name="me.lancer.airfree.activity.SettingActivity"
+            android:screenOrientation="portrait"
             android:label="@string/title_activity_seting" />
         <activity
             android:name="me.lancer.airfree.activity.LinkActivity"
+            android:screenOrientation="portrait"
             android:label="@string/title_activity_link" />
         <activity
             android:name="me.lancer.airfree.activity.MouseActivity"
+            android:screenOrientation="portrait"
             android:label="@string/title_activity_mouse" />
         <activity
             android:name="me.lancer.airfree.activity.PowerActivity"
+            android:screenOrientation="portrait"
             android:label="@string/title_activity_power" />
         <activity
             android:name="me.lancer.airfree.activity.ShotActivity"
+            android:screenOrientation="portrait"
             android:label="@string/title_activity_shot" />
         <activity
             android:name="me.lancer.airfree.activity.VolumeActivity"
+            android:screenOrientation="portrait"
             android:label="@string/title_activity_volume" />
         <activity
             android:name="me.lancer.airfree.activity.BrightActivity"
+            android:screenOrientation="portrait"
             android:label="@string/title_activity_bright" />
         <activity
             android:name="me.lancer.airfree.activity.DeviceActivity"
+            android:screenOrientation="portrait"
             android:label="@string/title_activity_device" />
         <activity
             android:name="me.lancer.airfree.activity.ImageActivity"
+            android:screenOrientation="portrait"
             android:label="@string/title_activity_picture" />
         <activity
             android:name="me.lancer.airfree.activity.ImageIActivity"
+            android:screenOrientation="portrait"
             android:label="@string/title_activity_picture_i" />
         <activity
             android:name="me.lancer.airfree.activity.MusicActivity"
+            android:screenOrientation="portrait"
             android:label="@string/title_activity_music" />
         <activity
             android:name="me.lancer.airfree.activity.ComputerActivity"
+            android:screenOrientation="portrait"
             android:label="@string/title_activity_computer" />
         <activity
             android:name="me.lancer.airfree.activity.AppActivity"
+            android:screenOrientation="portrait"
             android:label="@string/title_activity_app" />
         <activity
             android:name="me.lancer.airfree.activity.VideoActivity"
+            android:screenOrientation="portrait"
             android:label="@string/title_activity_video" />
         <activity
             android:name="me.lancer.airfree.activity.DocumentActivity"
+            android:screenOrientation="portrait"
             android:label="@string/title_activity_document" />
         <activity
             android:name="me.lancer.airfree.activity.ProblemActivity"
+            android:screenOrientation="portrait"
             android:label="@string/title_activity_common_problem" >
         </activity>
         <activity
             android:name="me.lancer.airfree.activity.GestureActivity"
+            android:screenOrientation="portrait"
             android:label="@string/title_activity_common_problem" >
         </activity>
         <activity
             android:name="me.lancer.airfree.activity.TalkActivity"
+            android:screenOrientation="portrait"
             android:label="@string/title_activity_talk" >
         </activity>
     </application>

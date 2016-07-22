@@ -16,8 +16,8 @@ public class ProblemActivity extends BaseActivity implements View.OnClickListene
 
     private Button btnBack;
     private ListView lvProblem;
-    private ProblemAdapter adapter;
 
+    private ProblemAdapter adapter;
     private List<ProblemBean> list = new ArrayList<>();
 
     @Override
@@ -28,7 +28,7 @@ public class ProblemActivity extends BaseActivity implements View.OnClickListene
     }
 
     private void init() {
-        btnBack =(Button) findViewById(R.id.btn_back);
+        btnBack = (Button) findViewById(R.id.btn_back);
         btnBack.setOnClickListener(this);
         list.clear();
         list.add(new ProblemBean("Q", "Q：我应该如何使用客户端连接服务端？"));
@@ -40,8 +40,8 @@ public class ProblemActivity extends BaseActivity implements View.OnClickListene
                 "文档，播放音乐、视频..."));
         list.add(new ProblemBean("Q", "Q：我应该如何上传文件到服务端或从服务端下载文件？"));
         list.add(new ProblemBean("A", "A：上传文件：在内、外部存储、图片、音乐、视频、文档、" +
-                "下载中选择你希望上传的文件，点击上传。"+"\n"+"下载文件：在电脑磁盘中选择你希望下载的文件，" +
-                "点击下载。"+"\n"+"上传、下载过程中请耐心等待，本应用暂不支持断点续传。"));
+                "下载中选择你希望上传的文件，点击上传。" + "\n" + "下载文件：在电脑磁盘中选择你希望下载的文件，" +
+                "点击下载。" + "\n" + "上传、下载过程中请耐心等待，本应用暂不支持断点续传。"));
         list.add(new ProblemBean("Q", "Q：我可以如何控制服务端？"));
         list.add(new ProblemBean("A", "A：你可以在电源选项中选择关机、重启、注销，在屏幕抓取中截屏，" +
                 "控制鼠标和输入文字，调节音量和亮度，打开命令行、任务管理器、资源管理器。"));
@@ -61,7 +61,7 @@ public class ProblemActivity extends BaseActivity implements View.OnClickListene
 
     @Override
     public void onClick(View v) {
-        if (v == btnBack){
+        if (v == btnBack) {
             setResult(RESULT_OK, null);
             finish();
         }

@@ -24,13 +24,14 @@ import me.lancer.distance.R;
 
 public class ShotActivity extends BaseActivity implements View.OnClickListener {
 
+    ApplicationUtil app;
+
     private Button btnBack;
     private ImageView ivShow;
     private LinearLayout btnScreenShot;
 
     final int POWEREVENTF_SCREENSHOT = 0x0001;    //截屏
 
-    ApplicationUtil app;
     private String filename;
     private Thread mThreadClient = null;
     private String recvMessageClient = "";

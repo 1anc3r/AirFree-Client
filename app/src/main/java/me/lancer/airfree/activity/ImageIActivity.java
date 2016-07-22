@@ -26,16 +26,15 @@ import me.lancer.distance.R;
 
 public class ImageIActivity extends BaseActivity implements View.OnClickListener {
 
+    ApplicationUtil app;
     private Button btnBack;
     private TextView tvShow;
+    private GridView mGridView;
+    private LinearLayout llBottom, btnDelete, btnCopy, btnMove, btnShare, btnAll;
+
+    private PictureChildAdapter adapter;
     private List<String> posList = new ArrayList<>();
     private List<String> picList = new ArrayList<>();
-    private PictureChildAdapter adapter;
-    private GridView mGridView;
-    private LinearLayout llBottom;
-    private LinearLayout btnDelete, btnCopy, btnMove, btnShare, btnAll;
-
-    ApplicationUtil app;
     private Boolean isall = false;
     private SharedPreferences pref;
 

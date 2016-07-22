@@ -18,6 +18,7 @@ import me.lancer.distance.R;
 
 public class ApplicationUtil extends Application {
 
+    private boolean isExplosing;
     private boolean isConnecting;
     private Socket mSocketClient = null;
     private BufferedReader mBufferedReaderClient = null;
@@ -27,6 +28,7 @@ public class ApplicationUtil extends Application {
     public void onCreate() {
         super.onCreate();
         SpeechUtility.createUtility(ApplicationUtil.this, "appid=" + getString(R.string.app_id));
+        isExplosing = false;
         isConnecting = false;
         mSocketClient = null;
         mBufferedReaderClient = null;
@@ -105,5 +107,13 @@ public class ApplicationUtil extends Application {
 
     public void setmPrintWriterClient(PrintWriter mPrintWriterClient) {
         this.mPrintWriterClient = mPrintWriterClient;
+    }
+
+    public boolean isExplosing() {
+        return isExplosing;
+    }
+
+    public void setIsExplosing(boolean isExplosing) {
+        this.isExplosing = isExplosing;
     }
 }

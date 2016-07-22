@@ -28,22 +28,22 @@ import me.lancer.airfree.model.LetterBean;
 
 public class ComputerActivity extends BaseActivity implements View.OnClickListener {
 
+    ApplicationUtil app;
+
     private Button btnBack;
     private TextView tvPath;
+    private ListView lvFile;
+    private LinearLayout llBottom, btnShare, btnOpen;
+
+    private LetterAdapter adapter;
     private List<LetterBean> fileList = new ArrayList<>();
     private List<String> posList = new ArrayList<>();
-    private LetterAdapter adapter;
-    private ListView lvFile;
-    private LinearLayout llBottom;
-    private LinearLayout btnShare, btnOpen;
-
-    ApplicationUtil app;
-    private int allpos;
     private LetterBean parentfile = new LetterBean("this PC", "this PC");
     private String parentpath = "this PC";
     private String temppath = "";
     private String recvMessageClient = "";
     private SharedPreferences pref;
+    private int allpos;
 
     private Handler lHandler = new Handler() {
 

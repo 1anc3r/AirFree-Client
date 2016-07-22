@@ -1,57 +1,51 @@
 package me.lancer.airfree.model;
 
-/**
- * GridView的每个item的数据对象
- *
- * @author len
- *
- */
 public class MusicBean {
 
-	private String path;
+    private String path;
 
-	private String title;
+    private String title;
 
-	private String album;
+    private String album;
 
-	private String artist;
+    private String artist;
 
-	public MusicBean(String path, String title, String album, String artist){
-		this.path = path;
-		this.title = title;
-		this.album = album;
-		this.artist = artist;
-	}
+    public MusicBean(String path, String title, String album, String artist) {
+        this.path = path;
+        this.title = title;
+        this.album = album;
+        this.artist = artist;
+    }
 
-	public String getPath() {
-		return path;
-	}
+    public String getPath() {
+        return path;
+    }
 
-	public void setPath(String path) {
-		this.path = path;
-	}
+    public void setPath(String path) {
+        this.path = path;
+    }
 
-	public String getTitle() {
-		return title;
-	}
+    public String getTitle() {
+        return title;
+    }
 
-	public void setTitle(String title) {
-		this.title = title;
-	}
+    public void setTitle(String title) {
+        this.title = title;
+    }
 
-	public String getAlbum() {
-		return album;
-	}
+    public String getAlbum() {
+        return album;
+    }
 
-	public void setAlbum(String album) {
-		this.album = album;
-	}
+    public void setAlbum(String album) {
+        this.album = album;
+    }
 
-	public String getArtist() {
-		return artist;
-	}
+    public String getArtist() {
+        return artist;
+    }
 
-	public void setArtist(String artist) {
-		this.artist = artist;
-	}
+    public void setArtist(String artist) {
+        this.artist = artist;
+    }
 }

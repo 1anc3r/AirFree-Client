@@ -96,7 +96,7 @@ public class FileAdapter extends BaseAdapter {
                     || ftr.getFileType(tmp).equals("application/zip")) {
                 viewHolder.ivShow.setImageResource(R.drawable.ic_fm_icon_zip);
             } else if (ftr.getFileType(tmp).equals("application/msword")
-                    ||(ftr.getFileType(tmp).equals("text/plain"))){
+                    || (ftr.getFileType(tmp).equals("text/plain"))) {
                 viewHolder.ivShow.setImageResource(R.drawable.ic_fm_icon_file);
             } else {
                 viewHolder.ivShow.setImageResource(R.drawable.fm_icon_default);

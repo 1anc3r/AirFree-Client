@@ -86,47 +86,47 @@ public class LetterAdapter extends BaseAdapter {
         viewHolder.mCheckBox.bringToFront();
 
         if (fileList.get(position).getFileName().endsWith(".png")
-                ||fileList.get(position).getFileName().endsWith(".jpg")
-                ||fileList.get(position).getFileName().endsWith(".psd")
-                ||fileList.get(position).getFileName().endsWith(".bmp")
-                ||fileList.get(position).getFileName().endsWith(".gif")
-                ||fileList.get(position).getFileName().endsWith(".jpeg")
-                ||fileList.get(position).getFileName().endsWith(".ico")
-                ||fileList.get(position).getFileName().endsWith(".tif")){
+                || fileList.get(position).getFileName().endsWith(".jpg")
+                || fileList.get(position).getFileName().endsWith(".psd")
+                || fileList.get(position).getFileName().endsWith(".bmp")
+                || fileList.get(position).getFileName().endsWith(".gif")
+                || fileList.get(position).getFileName().endsWith(".jpeg")
+                || fileList.get(position).getFileName().endsWith(".ico")
+                || fileList.get(position).getFileName().endsWith(".tif")) {
             viewHolder.ivShow.setImageResource(R.drawable.ic_fm_icon_pic);
-        }else if (fileList.get(position).getFileName().endsWith(".wav")
-                ||fileList.get(position).getFileName().endsWith(".mp3")
-                ||fileList.get(position).getFileName().endsWith(".m4a")
-                ||fileList.get(position).getFileName().endsWith(".mid")
-                ||fileList.get(position).getFileName().endsWith(".wma")
-                ||fileList.get(position).getFileName().endsWith(".ogg")){
+        } else if (fileList.get(position).getFileName().endsWith(".wav")
+                || fileList.get(position).getFileName().endsWith(".mp3")
+                || fileList.get(position).getFileName().endsWith(".m4a")
+                || fileList.get(position).getFileName().endsWith(".mid")
+                || fileList.get(position).getFileName().endsWith(".wma")
+                || fileList.get(position).getFileName().endsWith(".ogg")) {
             viewHolder.ivShow.setImageResource(R.drawable.ic_fm_icon_music);
-        }else if (fileList.get(position).getFileName().endsWith(".txt")
-                ||fileList.get(position).getFileName().endsWith(".pdf")
-                ||fileList.get(position).getFileName().endsWith(".docx")
-                ||fileList.get(position).getFileName().endsWith(".doc")
-                ||fileList.get(position).getFileName().endsWith(".pptx")
-                ||fileList.get(position).getFileName().endsWith(".xlsx")
-                ||fileList.get(position).getFileName().endsWith(".ppt")){
+        } else if (fileList.get(position).getFileName().endsWith(".txt")
+                || fileList.get(position).getFileName().endsWith(".pdf")
+                || fileList.get(position).getFileName().endsWith(".docx")
+                || fileList.get(position).getFileName().endsWith(".doc")
+                || fileList.get(position).getFileName().endsWith(".pptx")
+                || fileList.get(position).getFileName().endsWith(".xlsx")
+                || fileList.get(position).getFileName().endsWith(".ppt")) {
             viewHolder.ivShow.setImageResource(R.drawable.ic_fm_icon_file);
-        }else if (fileList.get(position).getFileName().endsWith(".mp4")
-                ||fileList.get(position).getFileName().endsWith(".avi")
-                ||fileList.get(position).getFileName().endsWith(".wmv")){
+        } else if (fileList.get(position).getFileName().endsWith(".mp4")
+                || fileList.get(position).getFileName().endsWith(".avi")
+                || fileList.get(position).getFileName().endsWith(".wmv")) {
             viewHolder.ivShow.setImageResource(R.drawable.ic_fm_icon_video);
         } else if (fileList.get(position).getFileName().endsWith(".zip")
-                ||fileList.get(position).getFileName().endsWith(".7z")
-                ||fileList.get(position).getFileName().endsWith(".cab")
-                ||fileList.get(position).getFileName().endsWith(".rar")
-                ||fileList.get(position).getFileName().endsWith(".rar")
-                ||fileList.get(position).getFileName().endsWith(".cab")){
+                || fileList.get(position).getFileName().endsWith(".7z")
+                || fileList.get(position).getFileName().endsWith(".cab")
+                || fileList.get(position).getFileName().endsWith(".rar")
+                || fileList.get(position).getFileName().endsWith(".rar")
+                || fileList.get(position).getFileName().endsWith(".cab")) {
             viewHolder.ivShow.setImageResource(R.drawable.ic_fm_icon_zip);
         } else if (fileList.get(position).getFileName().endsWith(".exe")
-                ||fileList.get(position).getFileName().endsWith(".jar")
-                ||fileList.get(position).getFileName().endsWith(".dll")
-                ||fileList.get(position).getFileName().endsWith(".bat")
-                ||fileList.get(position).getFileName().endsWith(".vbs")
-                ||fileList.get(position).getFileName().endsWith(".xml")
-                ||fileList.get(position).getFileName().endsWith(".config")){
+                || fileList.get(position).getFileName().endsWith(".jar")
+                || fileList.get(position).getFileName().endsWith(".dll")
+                || fileList.get(position).getFileName().endsWith(".bat")
+                || fileList.get(position).getFileName().endsWith(".vbs")
+                || fileList.get(position).getFileName().endsWith(".xml")
+                || fileList.get(position).getFileName().endsWith(".config")) {
             viewHolder.ivShow.setImageResource(R.drawable.fm_icon_default);
         } else {
             viewHolder.ivShow.setImageResource(R.drawable.ic_fm_icon_folder);

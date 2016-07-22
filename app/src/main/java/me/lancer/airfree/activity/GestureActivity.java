@@ -21,11 +21,12 @@ import me.lancer.airfree.util.GestureUtil;
 
 public class GestureActivity extends BaseActivity implements View.OnClickListener {
 
-    private GestureLibrary mGestureLib;
+    ApplicationUtil app;
+
     private GestureOverlayView govTouch;
     private LinearLayout btnGestureProblem;
 
-    ApplicationUtil app;
+    private GestureLibrary mGestureLib;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

@@ -32,15 +32,15 @@ import me.lancer.airfree.model.VideoBean;
 
 public class VideoActivity extends BaseActivity implements View.OnClickListener {
 
+    ApplicationUtil app;
     private Button btnBack;
     private GridView mGroupGridView;
-    private VideoAdapter adapter;
-    private LinearLayout llBottom;
-    private LinearLayout btnDelete, btnCopy, btnMove, btnShare, btnAll;
-
-    ApplicationUtil app;
-    private final static int SCAN_OK = 1;
     private ProgressDialog mProgressDialog;
+    private LinearLayout llBottom, btnDelete, btnCopy, btnMove, btnShare, btnAll;
+
+    private final static int SCAN_OK = 1;
+
+    private VideoAdapter adapter;
     private List<VideoBean> videoList = new ArrayList<>();
     private List<String> posList = new ArrayList<>();
     private Boolean isall = false;
@@ -125,11 +125,11 @@ public class VideoActivity extends BaseActivity implements View.OnClickListener 
                     String title = vCursor.getString(vCursor
                             .getColumnIndex(MediaStore.Video.Media.TITLE));
                     int id = vCursor.getInt(vCursor.getColumnIndexOrThrow(MediaStore.Video.Media._ID));
-                    String arg = MediaStore.Video.Thumbnails.VIDEO_ID +"=?";
-                    String[] args = new String[]{id+""};
+                    String arg = MediaStore.Video.Thumbnails.VIDEO_ID + "=?";
+                    String[] args = new String[]{id + ""};
                     Cursor tCursor = mContentResolver.query(MediaStore.Video.Thumbnails.EXTERNAL_CONTENT_URI, null, arg, args, null);
                     String thumb = "";
-                    if(tCursor.moveToFirst()){
+                    if (tCursor.moveToFirst()) {
                         thumb = tCursor.getString(tCursor.getColumnIndexOrThrow(MediaStore.Video.Thumbnails.DATA));
                     }
                     tCursor.close();

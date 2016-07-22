@@ -1,22 +1,11 @@
 package me.lancer.airfree.model;
 
-/**
- * GridView的每个item的数据对象
- *
- * @author len
- */
 public class ImageBean {
-    /**
-     * 文件夹的第一张图片路径
-     */
+
     private String topImagePath;
-    /**
-     * 文件夹名
-     */
+
     private String folderName;
-    /**
-     * 文件夹中的图片数
-     */
+
     private int imageCounts;
 
     public String getTopImagePath() {

@@ -29,16 +29,17 @@ import tyrantgit.explosionfield.ExplosionField;
 
 public class LinkActivity extends BaseActivity {
 
+    ApplicationUtil app;
+
     private EditText etIP;
     private CheckBox cbRemember;
+    private ExplosionField boom;
     private Button btnLink, btnScan;
-    private ExplosionField efIcon;
 
-    ApplicationUtil app;
-    private SharedPreferences pref;
     private String txtIP, txtPORT = "59671";
     private Thread mThreadClient = null;
     private Socket mSocketClient = null;
+    private SharedPreferences pref;
     static BufferedReader mBufferedReaderClient = null;
     static PrintWriter mPrintWriterClient = null;
 
@@ -80,38 +81,12 @@ public class LinkActivity extends BaseActivity {
             etIP.setText(ip);
             cbRemember.setChecked(true);
         }
-        efIcon = ExplosionField.attach2Window(this);
-        listen(findViewById(R.id.ll_icon));
-    }
-
-    private void listen(View root) {
-        if (root instanceof ViewGroup) {
-            ViewGroup parent = (ViewGroup) root;
-            for (int i = 0; i < parent.getChildCount(); i++) {
-                listen(parent.getChildAt(i));
-            }
-        } else {
-            root.setClickable(true);
-            root.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    efIcon.explode(v);
-                    v.setOnClickListener(null);
-                }
-            });
-        }
-    }
-
-    private void reset(View root) {
-        if (root instanceof ViewGroup) {
-            ViewGroup parent = (ViewGroup) root;
-            for (int i = 0; i < parent.getChildCount(); i++) {
-                reset(parent.getChildAt(i));
-            }
-        } else {
-            root.setScaleX(1);
-            root.setScaleY(1);
-            root.setAlpha(1);
+        boom = ExplosionField.attach2Window(this);
+        if (app.isExplosing()) {
+            listen(findViewById(R.id.ll_icon));
+            listen(findViewById(R.id.cb_remember));
+            listen(findViewById(R.id.btn_link));
+            listen(findViewById(R.id.btn_scan));
         }
     }
 
@@ -198,6 +173,37 @@ public class LinkActivity extends BaseActivity {
             }
         }
     };
+
+    private void listen(View root) {
+        if (root instanceof ViewGroup) {
+            ViewGroup parent = (ViewGroup) root;
+            for (int i = 0; i < parent.getChildCount(); i++) {
+                listen(parent.getChildAt(i));
+            }
+        } else {
+            root.setClickable(true);
+            root.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    boom.explode(v);
+                    v.setOnClickListener(null);
+                }
+            });
+        }
+    }
+
+    private void reset(View root) {
+        if (root instanceof ViewGroup) {
+            ViewGroup parent = (ViewGroup) root;
+            for (int i = 0; i < parent.getChildCount(); i++) {
+                reset(parent.getChildAt(i));
+            }
+        } else {
+            root.setScaleX(1);
+            root.setScaleY(1);
+            root.setAlpha(1);
+        }
+    }
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {

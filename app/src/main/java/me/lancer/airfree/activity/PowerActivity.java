@@ -15,6 +15,8 @@ import me.lancer.distance.R;
 
 public class PowerActivity extends BaseActivity implements View.OnClickListener {
 
+    ApplicationUtil app;
+
     private Button btnBack;
     private LinearLayout btnShutdown, btnReset, btnCancell;
 
@@ -22,7 +24,6 @@ public class PowerActivity extends BaseActivity implements View.OnClickListener 
     final int POWEREVENTF_RESET = 0x0002;       //重启
     final int POWEREVENTF_CANCELL = 0x0003;     //注销
 
-    ApplicationUtil app;
     private Thread mThreadClient = null;
     private String recvMessageClient = "";
 
@@ -32,11 +33,11 @@ public class PowerActivity extends BaseActivity implements View.OnClickListener 
         public void handleMessage(Message msg) {
             super.handleMessage(msg);
             if (msg.what == 1) {
-                if (recvMessageClient.contains("1")){
+                if (recvMessageClient.contains("1")) {
                     ShowToast("关机成功!");
-                }else if (recvMessageClient.contains("2")){
+                } else if (recvMessageClient.contains("2")) {
                     ShowToast("重启成功!");
-                }else if (recvMessageClient.contains("3")){
+                } else if (recvMessageClient.contains("3")) {
                     ShowToast("注销成功!");
                 }
             }
@@ -53,7 +54,7 @@ public class PowerActivity extends BaseActivity implements View.OnClickListener 
     private void init() {
         app = (ApplicationUtil) this.getApplication();
         Intent intent = this.getIntent();
-        btnBack =(Button) findViewById(R.id.btn_back);
+        btnBack = (Button) findViewById(R.id.btn_back);
         btnBack.setOnClickListener(this);
         btnShutdown = (LinearLayout) findViewById(R.id.btn_shutdown);
         btnShutdown.setOnClickListener(this);
@@ -62,18 +63,18 @@ public class PowerActivity extends BaseActivity implements View.OnClickListener 
         btnCancell = (LinearLayout) findViewById(R.id.btn_cancell);
         btnCancell.setOnClickListener(this);
         int what = intent.getIntExtra("what", 0);
-        if (what == 1){
+        if (what == 1) {
             btnShutdown.performClick();
-        } else if (what == 2){
+        } else if (what == 2) {
             btnReset.performClick();
-        } else if (what == 3){
+        } else if (what == 3) {
             btnCancell.performClick();
         }
     }
 
     @Override
     public void onClick(View v) {
-        if (v == btnBack){
+        if (v == btnBack) {
             setResult(RESULT_OK, null);
             finish();
         } else if (v == btnShutdown) {
@@ -103,7 +104,7 @@ public class PowerActivity extends BaseActivity implements View.OnClickListener 
         public void run() {
             char[] buffer = new char[256];
             int count = 0;
-            if  (app.getmBufferedReaderClient() != null) {
+            if (app.getmBufferedReaderClient() != null) {
                 try {
                     if ((count = app.getmBufferedReaderClient().read(buffer)) > 0) {
                         recvMessageClient = getInfoBuff(buffer, count);

@@ -1,22 +1,18 @@
 package me.lancer.airfree.model;
 
 public class VideoBean {
-    /**
-     * 文件夹的第一张图片路径
-     */
+
     private String videoPath;
-    /**
-     * 文件夹名
-     */
+
     private String videoName;
 
     private String thumbPath;
 
-    public VideoBean(){
+    public VideoBean() {
 
     }
 
-    public VideoBean(String videoPath, String videoName, String thumbPath){
+    public VideoBean(String videoPath, String videoName, String thumbPath) {
         this.videoPath = videoPath;
         this.videoName = videoName;
         this.thumbPath = thumbPath;

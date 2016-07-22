@@ -1,7 +1,6 @@
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent" >
+    android:layout_height="match_parent">
 
     <LinearLayout
         android:id="@+id/ll_titile"
@@ -33,51 +32,50 @@
     </LinearLayout>
 
     <GridView
-        android:padding="5dp"
-        android:scrollbars="none"
         android:id="@+id/gv_all"
-        android:layout_below="@+id/ll_titile"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:listSelector="@android:color/transparent"
+        android:layout_below="@+id/ll_titile"
         android:cacheColorHint="@android:color/transparent"
-        android:stretchMode="columnWidth"
-        android:horizontalSpacing="5dp"
-        android:gravity="center"
-        android:verticalSpacing="5dp"
         android:columnWidth="150dp"
-        android:numColumns="2" >
-    </GridView>
+        android:gravity="center"
+        android:horizontalSpacing="5dp"
+        android:listSelector="@android:color/transparent"
+        android:numColumns="2"
+        android:padding="5dp"
+        android:scrollbars="none"
+        android:stretchMode="columnWidth"
+        android:verticalSpacing="5dp"></GridView>
 
     <LinearLayout
-        android:layout_alignParentBottom="true"
         android:id="@+id/ll_bottom"
-        android:elevation="3dp"
-        android:visibility="gone"
-        android:gravity="center_vertical"
-        android:background="@color/blue_dark"
         android:layout_width="fill_parent"
         android:layout_height="54dp"
-        android:orientation="horizontal">
+        android:layout_alignParentBottom="true"
+        android:background="@color/blue_dark"
+        android:elevation="3dp"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:visibility="gone">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1"/>
+            android:layout_weight="1" />
 
         <LinearLayout
             android:id="@+id/btn_del"
             android:layout_width="wrap_content"
-            android:paddingLeft="5dp"
-            android:paddingRight="5dp"
-            android:orientation="vertical"
+            android:layout_height="wrap_content"
             android:gravity="center"
-            android:layout_height="wrap_content">
+            android:orientation="vertical"
+            android:paddingLeft="5dp"
+            android:paddingRight="5dp">
 
             <ImageView
-                android:background="@drawable/ic_fm_ob_ic_del_n"
                 android:layout_width="20dp"
-                android:layout_height="20dp"/>
+                android:layout_height="20dp"
+                android:background="@drawable/ic_fm_ob_ic_del_n" />
 
             <TextView
                 android:layout_width="1dp"
@@ -88,28 +86,28 @@
                 android:layout_height="wrap_content"
                 android:text="删除"
                 android:textColor="@color/base_color_text_white"
-                android:textSize="@dimen/text_size_small"/>
+                android:textSize="@dimen/text_size_small" />
 
         </LinearLayout>
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1"/>
+            android:layout_weight="1" />
 
         <LinearLayout
             android:id="@+id/btn_copy"
-            android:paddingLeft="5dp"
-            android:paddingRight="5dp"
             android:layout_width="wrap_content"
-            android:orientation="vertical"
+            android:layout_height="wrap_content"
             android:gravity="center"
-            android:layout_height="wrap_content">
+            android:orientation="vertical"
+            android:paddingLeft="5dp"
+            android:paddingRight="5dp">
 
             <ImageView
-                android:background="@drawable/ic_fm_ob_ic_copy_n"
                 android:layout_width="20dp"
-                android:layout_height="20dp"/>
+                android:layout_height="20dp"
+                android:background="@drawable/ic_fm_ob_ic_copy_n" />
 
             <TextView
                 android:layout_width="1dp"
@@ -120,28 +118,28 @@
                 android:layout_height="wrap_content"
                 android:text="复制"
                 android:textColor="@color/base_color_text_white"
-                android:textSize="@dimen/text_size_small"/>
+                android:textSize="@dimen/text_size_small" />
 
         </LinearLayout>
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1"/>
+            android:layout_weight="1" />
 
         <LinearLayout
             android:id="@+id/btn_move"
-            android:paddingLeft="5dp"
-            android:paddingRight="5dp"
             android:layout_width="wrap_content"
-            android:orientation="vertical"
+            android:layout_height="wrap_content"
             android:gravity="center"
-            android:layout_height="wrap_content">
+            android:orientation="vertical"
+            android:paddingLeft="5dp"
+            android:paddingRight="5dp">
 
             <ImageView
-                android:background="@drawable/ic_fm_ob_ic_move_n"
                 android:layout_width="20dp"
-                android:layout_height="20dp"/>
+                android:layout_height="20dp"
+                android:background="@drawable/ic_fm_ob_ic_move_n" />
 
             <TextView
                 android:layout_width="1dp"
@@ -152,28 +150,28 @@
                 android:layout_height="wrap_content"
                 android:text="剪切"
                 android:textColor="@color/base_color_text_white"
-                android:textSize="@dimen/text_size_small"/>
+                android:textSize="@dimen/text_size_small" />
 
         </LinearLayout>
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1"/>
+            android:layout_weight="1" />
 
         <LinearLayout
             android:id="@+id/btn_share"
-            android:paddingLeft="5dp"
-            android:paddingRight="5dp"
             android:layout_width="wrap_content"
-            android:orientation="vertical"
+            android:layout_height="wrap_content"
             android:gravity="center"
-            android:layout_height="wrap_content">
+            android:orientation="vertical"
+            android:paddingLeft="5dp"
+            android:paddingRight="5dp">
 
             <ImageView
-                android:background="@drawable/ic_fm_ob_ic_share_n"
                 android:layout_width="20dp"
-                android:layout_height="20dp"/>
+                android:layout_height="20dp"
+                android:background="@drawable/ic_fm_ob_ic_share_n" />
 
             <TextView
                 android:layout_width="1dp"
@@ -184,28 +182,28 @@
                 android:layout_height="wrap_content"
                 android:text="上传"
                 android:textColor="@color/base_color_text_white"
-                android:textSize="@dimen/text_size_small"/>
+                android:textSize="@dimen/text_size_small" />
 
         </LinearLayout>
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1"/>
+            android:layout_weight="1" />
 
         <LinearLayout
             android:id="@+id/btn_all"
-            android:paddingLeft="5dp"
-            android:paddingRight="5dp"
             android:layout_width="wrap_content"
-            android:orientation="vertical"
+            android:layout_height="wrap_content"
             android:gravity="center"
-            android:layout_height="wrap_content">
+            android:orientation="vertical"
+            android:paddingLeft="5dp"
+            android:paddingRight="5dp">
 
             <ImageView
-                android:background="@drawable/ic_fm_ob_ic_all_n"
                 android:layout_width="20dp"
-                android:layout_height="20dp"/>
+                android:layout_height="20dp"
+                android:background="@drawable/ic_fm_ob_ic_all_n" />
 
             <TextView
                 android:layout_width="1dp"
@@ -216,14 +214,14 @@
                 android:layout_height="wrap_content"
                 android:text="全选"
                 android:textColor="@color/base_color_text_white"
-                android:textSize="@dimen/text_size_small"/>
+                android:textSize="@dimen/text_size_small" />
 
         </LinearLayout>
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1"/>
+            android:layout_weight="1" />
 
     </LinearLayout>
 

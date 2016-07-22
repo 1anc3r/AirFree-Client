@@ -14,10 +14,7 @@ import java.util.List;
 import me.lancer.airfree.model.ProblemBean;
 import me.lancer.distance.R;
 
-/**
- * Created by 方直 on 2016/5/15.
- */
-public class ProblemAdapter  extends BaseAdapter {
+public class ProblemAdapter extends BaseAdapter {
 
     private List<ProblemBean> problemList;
     protected LayoutInflater mInflater;
@@ -61,13 +58,13 @@ public class ProblemAdapter  extends BaseAdapter {
             viewHolder = (ViewHolder) convertView.getTag();
         }
 
-        if (item.getType().equals("Q")){
+        if (item.getType().equals("Q")) {
             viewHolder.btvLeft.setVisibility(View.VISIBLE);
             viewHolder.btvLeft.setText(item.getContent());
             viewHolder.tvLeft.setVisibility(View.VISIBLE);
             viewHolder.btvRight.setVisibility(View.GONE);
             viewHolder.tvRight.setVisibility(View.GONE);
-        } else if (item.getType().equals("A")){
+        } else if (item.getType().equals("A")) {
             viewHolder.btvRight.setVisibility(View.VISIBLE);
             viewHolder.btvRight.setText(item.getContent());
             viewHolder.tvRight.setVisibility(View.VISIBLE);

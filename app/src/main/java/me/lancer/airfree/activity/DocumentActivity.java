@@ -30,19 +30,20 @@ import me.lancer.airfree.model.FileBean;
 
 public class DocumentActivity extends BaseActivity implements View.OnClickListener {
 
+    ApplicationUtil app;
+
     private Button btnBack;
+    private ListView lvDoc;
+    private ProgressDialog mProgressDialog;
+    private LinearLayout llBottom, btnDelete, btnCopy, btnMove, btnShare, btnAll;
+
+    private final static int SCAN_OK = 1;
+
+    private DocAdapter adapter;
     private List<FileBean> docList = new ArrayList<>();
     private List<String> posList = new ArrayList<>();
-    private ListView lvDoc;
-    private DocAdapter adapter;
-    private LinearLayout llBottom;
-    private LinearLayout btnDelete, btnCopy, btnMove, btnShare, btnAll;
-
-    ApplicationUtil app;
     private SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
     private Boolean isall = false;
-    private final static int SCAN_OK = 1;
-    private ProgressDialog mProgressDialog;
     private SharedPreferences pref;
 
     private Handler lHandler = new Handler() {

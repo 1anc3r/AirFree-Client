@@ -101,36 +101,36 @@
             android:elevation="3dp" />
 
         <!--<VerticalSeekBar-->
-            <!--android:id="@+id/vsb_volume"-->
-            <!--android:layout_width="wrap_content"-->
-            <!--android:layout_height="140dp"-->
-            <!--android:layout_marginRight="50dp"-->
-            <!--android:layout_toLeftOf="@+id/btn_left" />-->
+        <!--android:id="@+id/vsb_volume"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="140dp"-->
+        <!--android:layout_marginRight="50dp"-->
+        <!--android:layout_toLeftOf="@+id/btn_left" />-->
 
         <!--<TextView-->
-            <!--android:layout_width="wrap_content"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:layout_marginRight="52dp"-->
-            <!--android:layout_toLeftOf="@+id/btn_left"-->
-            <!--android:layout_alignParentBottom="true"-->
-            <!--android:layout_marginBottom="5dp"-->
-            <!--android:text="音量" />-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_marginRight="52dp"-->
+        <!--android:layout_toLeftOf="@+id/btn_left"-->
+        <!--android:layout_alignParentBottom="true"-->
+        <!--android:layout_marginBottom="5dp"-->
+        <!--android:text="音量" />-->
 
         <!--<VerticalSeekBar-->
-            <!--android:id="@+id/vsb_bright"-->
-            <!--android:layout_width="wrap_content"-->
-            <!--android:layout_height="140dp"-->
-            <!--android:layout_marginLeft="50dp"-->
-            <!--android:layout_toRightOf="@+id/btn_right" />-->
+        <!--android:id="@+id/vsb_bright"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="140dp"-->
+        <!--android:layout_marginLeft="50dp"-->
+        <!--android:layout_toRightOf="@+id/btn_right" />-->
 
         <!--<TextView-->
-            <!--android:layout_width="wrap_content"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:layout_marginLeft="52dp"-->
-            <!--android:layout_toRightOf="@+id/btn_right"-->
-            <!--android:layout_alignParentBottom="true"-->
-            <!--android:layout_marginBottom="5dp"-->
-            <!--android:text="亮度" />-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_marginLeft="52dp"-->
+        <!--android:layout_toRightOf="@+id/btn_right"-->
+        <!--android:layout_alignParentBottom="true"-->
+        <!--android:layout_marginBottom="5dp"-->
+        <!--android:text="亮度" />-->
 
     </RelativeLayout>
 

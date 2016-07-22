@@ -2,7 +2,9 @@ package me.lancer.airfree.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
@@ -10,18 +12,31 @@ import java.util.ArrayList;
 
 import me.lancer.airfree.util.ApplicationUtil;
 import me.lancer.distance.R;
+import tyrantgit.explosionfield.ExplosionField;
 
 public class TransfActivity extends BaseActivity implements View.OnClickListener {
 
-    LinearLayout btnComputer, btnDevice, btnSdcard, btnImage, btnMusic,btnVideo, btnDocument, btnApp, btnDownload;
-
     ApplicationUtil app;
+
+    LinearLayout btnComputer, btnDevice, btnSdcard, btnImage, btnMusic,btnVideo, btnDocument, btnApp, btnDownload;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_transf);
         init();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        Log.e("IP & PORT", "onResume");
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        Log.e("IP & PORT", "onPause");
     }
 
     private void init() {

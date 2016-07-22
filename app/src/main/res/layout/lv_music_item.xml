@@ -68,9 +68,9 @@
         <CheckBox
             android:id="@+id/cb_music"
             style="@style/CheckboxTheme"
-            android:focusable="false"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:focusable="false"
             android:scaleX="0.5"
             android:scaleY="0.5" />
 

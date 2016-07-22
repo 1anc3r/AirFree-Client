@@ -6,7 +6,7 @@ public class ProblemBean {
 
     private String content;
 
-    public ProblemBean(String type, String content){
+    public ProblemBean(String type, String content) {
         this.type = type;
         this.content = content;
     }

@@ -271,7 +271,7 @@
                             android:layout_height="wrap_content"
                             android:paddingBottom="15dp"
                             android:paddingTop="5dp"
-                            android:text="聊天工具" />
+                            android:text="在线聊天" />
 
                     </LinearLayout>
 

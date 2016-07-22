@@ -46,16 +46,17 @@ import me.lancer.airfree.util.VerticalSeekBar;
 public class MouseActivity extends BaseActivity implements View.OnTouchListener,
         GestureDetector.OnGestureListener, GestureDetector.OnDoubleTapListener, OnClickListener {
 
-    private static String TAG = MouseActivity.class.getSimpleName();
+    ApplicationUtil app;
 
-    private GestureDetector mGestureDetector;
+    private EditText etKeyboard;
     private RelativeLayout rlTouch;
     private Button btnBack, btnLeft, btnRight, btnRollUp, btnRollDown, btnVoice;
-    private EditText etKeyboard;
-    private SpeechRecognizer mIat;
-    private RecognizerDialog mIatDialog;
     private VerticalSeekBar vsbVolume, vsbBright;
+    private GestureDetector mGestureDetector;
+    private RecognizerDialog mIatDialog;
+    private SpeechRecognizer mIat;
 
+    private static String TAG = MouseActivity.class.getSimpleName();
     final int MOUSEEVENTF_CANCEL = 0x0001;      // 移动
     final int MOUSEEVENTF_MOVE = 0x0001;        // 移动
     final int MOUSEEVENTF_LEFTDOWN = 0x0002;    // 按下左键
@@ -68,15 +69,13 @@ public class MouseActivity extends BaseActivity implements View.OnTouchListener,
     final int MOUSEEVENTF_ROLLDOWN = 0x0009;    // 向下拖动滚动
     final int KEYBOARDEVENTF = 0x000A;          // 向下拖动滚动
 
-    private ApplicationUtil app;
     private int clickButton = 0;
     private boolean isLongPress = false;
     private float touchMoveX = 0, touchMoveY = 0;
     private Thread mThread = null;
-    int ret = 0;
     private String mEngineType = SpeechConstant.TYPE_CLOUD;
-    private SharedPreferences mSharedPreferences;
     private HashMap<String, String> mIatResults = new LinkedHashMap<>();
+    private SharedPreferences mSharedPreferences;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -413,7 +412,7 @@ public class MouseActivity extends BaseActivity implements View.OnTouchListener,
         mIat.setParameter(SpeechConstant.PARAMS, null);
         mIat.setParameter(SpeechConstant.ENGINE_TYPE, mEngineType);
         mIat.setParameter(SpeechConstant.RESULT_TYPE, "json");
-        String lag = mSharedPreferences.getString("iat_language_preference","mandarin");
+        String lag = mSharedPreferences.getString("iat_language_preference", "mandarin");
         if (lag.equals("en_us")) {
             mIat.setParameter(SpeechConstant.LANGUAGE, "en_us");
         } else {

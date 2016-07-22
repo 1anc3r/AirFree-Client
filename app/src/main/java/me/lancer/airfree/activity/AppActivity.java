@@ -8,7 +8,9 @@ import java.util.List;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.pm.PackageInfo;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.os.Handler;
@@ -25,13 +27,14 @@ import me.lancer.airfree.model.AppBean;
 public class AppActivity extends BaseActivity implements View.OnClickListener {
 
     private Button btnBack;
-    private List<AppBean> appList = new ArrayList<>();
-    private List<String> posList = new ArrayList<>();
-    private AppAdapter adapter;
     private ListView lvApp;
+    private ProgressDialog mProgressDialog;
 
     private final static int SCAN_OK = 1;
-    private ProgressDialog mProgressDialog;
+
+    private AppAdapter adapter;
+    private List<AppBean> appList = new ArrayList<>();
+    private List<String> posList = new ArrayList<>();
 
     private Handler lHandler = new Handler() {
 
@@ -62,13 +65,24 @@ public class AppActivity extends BaseActivity implements View.OnClickListener {
         lvApp.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
             @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+            public void onItemClick(AdapterView<?> parent, View view, final int position, long id) {
                 AlertDialog.Builder builder = new AlertDialog.Builder(AppActivity.this);
                 builder.setTitle("详细信息");
                 builder.setMessage("应用名 : " + appList.get(position).getAppName()
                         + "\n\n" +
                         "包名 : " + appList.get(position).getPackageName());
-                builder.setPositiveButton("知道了", new DialogInterface.OnClickListener() {
+                builder.setPositiveButton("卸载", new DialogInterface.OnClickListener() {
+
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        Intent intent = new Intent();
+                        intent.setAction(Intent.ACTION_DELETE);
+                        intent.setData(Uri.parse(appList.get(position).getPackageName()));
+                        startActivity(intent);
+                        dialog.dismiss();
+                    }
+                });
+                builder.setNegativeButton("好的", new DialogInterface.OnClickListener() {
 
                     @Override
                     public void onClick(DialogInterface dialog, int which) {

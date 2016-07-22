@@ -47,27 +47,19 @@ import me.lancer.distance.R;
 
 public class RemoteActivity extends BaseActivity implements View.OnClickListener {
 
+    ApplicationUtil app;
+
+    LinearLayout btnMouse, btnPower, btnShot, btnVoice, btnVolume, btnBright, btnGesture, btnOpen, btnTalk;
+    private EditText etSearch;
+    private SeekBar sbVolume, sbBright;
+    private RecognizerDialog mIatDialog;
+    private SpeechRecognizer mIat;
+
     private static String TAG = RemoteActivity.class.getSimpleName();
 
-    LinearLayout btnMouse;
-    LinearLayout btnPower;
-    LinearLayout btnShot;
-    LinearLayout btnVoice;
-    LinearLayout btnVolume;
-    LinearLayout btnBright;
-    LinearLayout btnGesture;
-    LinearLayout btnOpen;
-    LinearLayout btnTalk;
-    private SeekBar sbVolume, sbBright;
-    private SpeechRecognizer mIat;
-    private RecognizerDialog mIatDialog;
-    private EditText etSearch;
-
-    ApplicationUtil app;
-    int ret = 0;
     private String mEngineType = SpeechConstant.TYPE_CLOUD;
-    private SharedPreferences mSharedPreferences;
     private HashMap<String, String> mIatResults = new LinkedHashMap<>();
+    private SharedPreferences mSharedPreferences;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -192,11 +184,11 @@ public class RemoteActivity extends BaseActivity implements View.OnClickListener
                         .setItems(this.getResources().getStringArray(R.array.remote_entries),
                                 new DialogInterface.OnClickListener() {
 
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                sendMessage("remote", "" + (which+1));
-                            }
-                        })
+                                    @Override
+                                    public void onClick(DialogInterface dialog, int which) {
+                                        sendMessage("remote", "" + (which + 1));
+                                    }
+                                })
                         .show();
             } else if (v == btnTalk) {
 //                LayoutInflater inflater = LayoutInflater.from(this);
@@ -321,7 +313,7 @@ public class RemoteActivity extends BaseActivity implements View.OnClickListener
         mIat.setParameter(SpeechConstant.PARAMS, null);
         mIat.setParameter(SpeechConstant.ENGINE_TYPE, mEngineType);
         mIat.setParameter(SpeechConstant.RESULT_TYPE, "json");
-        String lag = mSharedPreferences.getString("iat_language_preference","mandarin");
+        String lag = mSharedPreferences.getString("iat_language_preference", "mandarin");
         if (lag.equals("en_us")) {
             mIat.setParameter(SpeechConstant.LANGUAGE, "en_us");
         } else {

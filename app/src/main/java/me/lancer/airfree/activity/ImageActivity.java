@@ -31,12 +31,14 @@ import me.lancer.airfree.adapter.PictureGroupAdapter;
 public class ImageActivity extends BaseActivity implements View.OnClickListener {
 
     private Button btnBack;
-    private final static int SCAN_OK = 1;
+    private GridView mGroupGridView;
     private ProgressDialog mProgressDialog;
+
+    private final static int SCAN_OK = 1;
+
+    private PictureGroupAdapter adapter;
     private HashMap<String, List<String>> mGruopMap = new HashMap<>();
     private List<ImageBean> mImageList = new ArrayList<>();
-    private PictureGroupAdapter adapter;
-    private GridView mGroupGridView;
 
     private Handler mHandler = new Handler() {
 

@@ -14,10 +14,11 @@ import me.lancer.distance.R;
 
 public class VolumeActivity extends BaseActivity implements View.OnClickListener, SeekBar.OnSeekBarChangeListener {
 
+    ApplicationUtil app;
+
     private Button btnBack;
     private SeekBar sbVolume;
 
-    ApplicationUtil app;
     private Thread mThreadClient = null;
     private String recvMessageClient = "";
 

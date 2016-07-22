@@ -32,15 +32,16 @@ import me.lancer.distance.R;
 
 public class MainActivity extends BaseActivity {
 
+    ApplicationUtil app;
+
     private Context context = null;
-    private List<View> viewList = new ArrayList<>();
-    private LocalActivityManager manager = null;
     private TabHost tabHost = null;
     private ViewPager pager = null;
     private FloatingActionButton fabLink;
 
-    ApplicationUtil app;
     private long exitTime;
+    private LocalActivityManager manager = null;
+    private List<View> viewList = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

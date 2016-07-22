@@ -1,7 +1,6 @@
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent" >
+    android:layout_height="match_parent">
 
     <LinearLayout
         android:id="@+id/ll_titile"
@@ -33,20 +32,19 @@
     </LinearLayout>
 
     <GridView
-        android:padding="5dp"
-        android:scrollbars="none"
         android:id="@+id/gv_all"
-        android:layout_below="@+id/ll_titile"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:listSelector="@android:color/transparent"
+        android:layout_below="@+id/ll_titile"
         android:cacheColorHint="@android:color/transparent"
-        android:stretchMode="columnWidth"
-        android:horizontalSpacing="5dp"
-        android:gravity="center"
-        android:verticalSpacing="5dp"
         android:columnWidth="150dp"
-        android:numColumns="2" >
-    </GridView>
+        android:gravity="center"
+        android:horizontalSpacing="5dp"
+        android:listSelector="@android:color/transparent"
+        android:numColumns="2"
+        android:padding="5dp"
+        android:scrollbars="none"
+        android:stretchMode="columnWidth"
+        android:verticalSpacing="5dp"></GridView>
 
 </RelativeLayout>

@@ -8,10 +8,10 @@
     android:fitsSystemWindows="true">
 
     <LinearLayout
+        android:id="@+id/ll_icon"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="25dp"
-        android:id="@+id/ll_icon"
         android:gravity="center"
         android:orientation="vertical">
 
@@ -53,19 +53,19 @@
                 android:textColorHint="#ffdddddd" />
 
             <!--<View-->
-                <!--android:layout_width="match_parent"-->
-                <!--android:layout_height="0.5dp"-->
-                <!--android:background="@drawable/base_horization_line" />-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="0.5dp"-->
+            <!--android:background="@drawable/base_horization_line" />-->
 
             <!--<EditText-->
-                <!--android:id="@+id/et_port"-->
-                <!--android:layout_width="fill_parent"-->
-                <!--android:layout_height="@dimen/base_action_bar_height"-->
-                <!--android:background="@color/transparent"-->
-                <!--android:drawablePadding="5dip"-->
-                <!--android:hint="PORT端口"-->
-                <!--android:paddingLeft="10dip"-->
-                <!--android:textColorHint="#ffdddddd" />-->
+            <!--android:id="@+id/et_port"-->
+            <!--android:layout_width="fill_parent"-->
+            <!--android:layout_height="@dimen/base_action_bar_height"-->
+            <!--android:background="@color/transparent"-->
+            <!--android:drawablePadding="5dip"-->
+            <!--android:hint="PORT端口"-->
+            <!--android:paddingLeft="10dip"-->
+            <!--android:textColorHint="#ffdddddd" />-->
         </LinearLayout>
 
         <LinearLayout
@@ -107,8 +107,8 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="fill_parent"
-                android:text=" "
-                android:gravity="center" />
+                android:gravity="center"
+                android:text=" " />
 
             <Button
                 android:id="@+id/btn_scan"

@@ -14,9 +14,6 @@ import java.util.List;
 import me.lancer.airfree.model.TalkBean;
 import me.lancer.distance.R;
 
-/**
- * Created by 方直 on 2016/5/15.
- */
 public class TalkAdapter extends BaseAdapter {
 
     private List<TalkBean> talkList;
@@ -63,21 +60,23 @@ public class TalkAdapter extends BaseAdapter {
             viewHolder = (ViewHolder) convertView.getTag();
         }
 
-        if (item.getType().equals("Q")){
+        if (item.getType().equals("Q")) {
             viewHolder.btvLeft.setVisibility(View.VISIBLE);
             viewHolder.btvLeft.setText(item.getContent());
             viewHolder.tvLeftId.setVisibility(View.VISIBLE);
             viewHolder.tvLeftId.setText(item.getId());
             viewHolder.tvLeft.setVisibility(View.VISIBLE);
             viewHolder.btvRight.setVisibility(View.GONE);
+            viewHolder.tvRightId.setVisibility(View.GONE);
             viewHolder.tvRight.setVisibility(View.GONE);
-        } else if (item.getType().equals("A")){
+        } else if (item.getType().equals("A")) {
             viewHolder.btvRight.setVisibility(View.VISIBLE);
             viewHolder.btvRight.setText(item.getContent());
             viewHolder.tvRightId.setVisibility(View.VISIBLE);
             viewHolder.tvRightId.setText(item.getId());
             viewHolder.tvRight.setVisibility(View.VISIBLE);
             viewHolder.btvLeft.setVisibility(View.GONE);
+            viewHolder.tvLeftId.setVisibility(View.GONE);
             viewHolder.tvLeft.setVisibility(View.GONE);
         }
 
