@@ -6,29 +6,45 @@
     android:focusable="true"
     android:focusableInTouchMode="true"
     android:gravity="center"
-    android:orientation="vertical"
-    android:paddingBottom="24dp"
-    android:paddingTop="24dp">
+    android:orientation="vertical">
 
     <LinearLayout
         android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="fill_parent"
+        android:background="@color/common_bg"
         android:focusable="true"
         android:focusableInTouchMode="true"
-        android:orientation="horizontal">
+        android:orientation="vertical">
 
-        <EditText
-            android:id="@+id/et_search"
-            android:layout_width="0dp"
+        <LinearLayout
+            android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="3"
-            android:editable="true"
+            android:layout_margin="4dp"
+            android:layout_weight="1"
+            android:background="@drawable/input_bg"
             android:focusable="true"
             android:focusableInTouchMode="true"
-            android:imeOptions="actionSearch"
-            android:inputType="text"
-            android:textSize="@dimen/text_size_large" />
+            android:orientation="vertical">
 
-    </LinearLayout>
+            <EditText
+                android:id="@+id/et_search"
+                android:layout_width="fill_parent"
+                android:layout_height="40dp"
+                android:background="@color/transparent"
+                android:drawablePadding="10dip"
+                android:gravity="left|center"
+                android:imeOptions="actionSearch"
+                android:singleLine="true"
+                android:inputType="text"
+                android:minLines="10"
+                android:paddingLeft="5dip"
+                android:shadowDx="0.0"
+                android:shadowDy="1.0"
+                android:shadowRadius="1.0"
+                android:textColorHint="#ffdddddd" />
+
+        </LinearLayout>
+
+        </LinearLayout>
 
 </LinearLayout>

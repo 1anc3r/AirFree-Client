@@ -100,6 +100,23 @@ public class PictureChildAdapter extends BaseAdapter {
         });
 
         viewHolder.mImageView.setTag(path);
+        //利用NativeImageLoader类加载本地图片
+        Bitmap bitmap = NativeImageLoader.getInstance().loadNativeImage(path, mPoint, new NativeImageLoader.NativeImageCallBack() {
+
+            @Override
+            public void onImageLoader(Bitmap bitmap, String path) {
+                ImageView mImageView = (ImageView) mGridView.findViewWithTag(path);
+                if (bitmap != null && mImageView != null) {
+                    mImageView.setImageBitmap(bitmap);
+                }
+            }
+        });
+
+        if (bitmap != null) {
+            viewHolder.mImageView.setImageBitmap(bitmap);
+        } else {
+            viewHolder.mImageView.setImageResource(R.drawable.ic_pictures_no);
+        }
 
         viewHolder.mCheckBox.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -119,24 +136,6 @@ public class PictureChildAdapter extends BaseAdapter {
         });
         viewHolder.mCheckBox.setChecked(posList.contains("" + position) ? true : false);
         viewHolder.mCheckBox.bringToFront();
-
-        //利用NativeImageLoader类加载本地图片
-        Bitmap bitmap = NativeImageLoader.getInstance().loadNativeImage(path, mPoint, new NativeImageLoader.NativeImageCallBack() {
-
-            @Override
-            public void onImageLoader(Bitmap bitmap, String path) {
-                ImageView mImageView = (ImageView) mGridView.findViewWithTag(path);
-                if (bitmap != null && mImageView != null) {
-                    mImageView.setImageBitmap(bitmap);
-                }
-            }
-        });
-
-        if (bitmap != null) {
-            viewHolder.mImageView.setImageBitmap(bitmap);
-        } else {
-            viewHolder.mImageView.setImageResource(R.drawable.ic_pictures_no);
-        }
 
         return convertView;
     }

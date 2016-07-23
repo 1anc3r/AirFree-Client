@@ -10,8 +10,6 @@ import android.os.Handler;
 import android.os.Message;
 import android.text.TextUtils;
 import android.util.Log;
-import android.view.View;
-import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.ImageView;
@@ -20,8 +18,7 @@ import android.widget.Toast;
 import org.json.JSONObject;
 
 import me.lancer.airfree.util.ApplicationUtil;
-import me.lancer.airfree.util.FileTrans;
-import tyrantgit.explosionfield.ExplosionField;
+import me.lancer.airfree.util.FileTransUtil;
 
 public class BaseActivity extends Activity {
 
@@ -140,7 +137,7 @@ public class BaseActivity extends Activity {
             String success = null;
             try {
                 int port_ = Integer.parseInt(port);
-                FileTrans.doWrite(ip, port_, filename, sHandler);
+                FileTransUtil.doWrite(ip, port_, filename, sHandler);
             } catch (Exception e) {
                 success = e.toString();
             }
@@ -208,7 +205,7 @@ public class BaseActivity extends Activity {
             String success = null;
             try {
                 int port_ = Integer.parseInt(port);
-                FileTrans.doRead(port_, filename, rHandler);
+                FileTransUtil.doRead(port_, filename, rHandler);
             } catch (Exception e) {
                 success = e.toString();
             }

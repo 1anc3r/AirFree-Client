@@ -20,7 +20,7 @@ import com.nineoldandroids.animation.ObjectAnimator;
 
 import me.lancer.airfree.model.FileBean;
 import me.lancer.distance.R;
-import me.lancer.airfree.util.FileTypeReferee;
+import me.lancer.airfree.util.FileTypeRefereeUtil;
 
 public class FileAdapter extends BaseAdapter {
 
@@ -71,7 +71,7 @@ public class FileAdapter extends BaseAdapter {
         }
 
         File tmp = new File(fileList.get(position).getPath());
-        FileTypeReferee ftr = new FileTypeReferee();
+        FileTypeRefereeUtil ftr = new FileTypeRefereeUtil();
         if (tmp.isFile()) {
             if (ftr.getFileType(tmp).equals("application/vnd.android.package-archive")) {
                 viewHolder.ivShow.setImageResource(R.drawable.ic_fm_icon_apk);

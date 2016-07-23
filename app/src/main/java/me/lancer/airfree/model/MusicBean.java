@@ -2,17 +2,31 @@ package me.lancer.airfree.model;
 
 public class MusicBean {
 
-    private String path;
+    private long id;
 
     private String title;
 
-    private String album;
-
     private String artist;
 
-    public MusicBean(String path, String title, String album, String artist) {
+    private String album;
+
+    private long albumId;
+
+    private long duration;
+
+    private long size;
+
+    private String path;
+
+    public MusicBean() {
+
+    }
+
+    public MusicBean(long id, String path, String title, long albumId, String album, String artist) {
+        this.id = id;
         this.path = path;
         this.title = title;
+        this.albumId = albumId;
         this.album = album;
         this.artist = artist;
     }
@@ -47,5 +61,37 @@ public class MusicBean {
 
     public void setArtist(String artist) {
         this.artist = artist;
+    }
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
+
+    public long getAlbumId() {
+        return albumId;
+    }
+
+    public void setAlbumId(long albumId) {
+        this.albumId = albumId;
+    }
+
+    public long getDuration() {
+        return duration;
+    }
+
+    public void setDuration(long duration) {
+        this.duration = duration;
+    }
+
+    public long getSize() {
+        return size;
+    }
+
+    public void setSize(long size) {
+        this.size = size;
     }
 }

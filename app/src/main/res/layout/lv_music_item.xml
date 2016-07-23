@@ -15,7 +15,8 @@
         android:gravity="left|center"
         android:orientation="horizontal">
 
-        <ImageView
+        <me.lancer.airfree.model.ImageViewBean
+            android:id="@+id/iv_album"
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:src="@drawable/ic_fm_icon_music" />

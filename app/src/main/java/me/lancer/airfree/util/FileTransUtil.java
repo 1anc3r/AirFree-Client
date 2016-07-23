@@ -8,7 +8,7 @@ import android.util.Log;
 import java.net.*;
 import java.io.*;
 
-public class FileTrans {
+public class FileTransUtil {
     static final int BUFFER_SIZE = 1048576;
 
     private static int readChunk(InputStream input, ByteArrayOutputStream bytes, byte[] buffer) throws

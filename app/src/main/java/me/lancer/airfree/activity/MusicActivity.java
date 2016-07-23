@@ -6,8 +6,11 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
+import android.app.AlertDialog;
+import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.ContentResolver;
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.database.Cursor;
@@ -18,33 +21,49 @@ import android.os.Handler;
 import android.os.Message;
 import android.preference.PreferenceManager;
 import android.provider.MediaStore;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
+import android.view.Gravity;
+import android.view.KeyEvent;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
+import android.view.inputmethod.EditorInfo;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import me.lancer.airfree.adapter.MusicAdapter;
 import me.lancer.airfree.model.MusicBean;
 import me.lancer.airfree.util.ApplicationUtil;
+import me.lancer.airfree.util.InputTools;
 import me.lancer.distance.R;
 
 public class MusicActivity extends BaseActivity implements View.OnClickListener {
 
     ApplicationUtil app;
-    private Button btnBack;
     private ListView lvMusic;
+    private EditText etSearch;
     private ProgressDialog mProgressDialog;
-    private LinearLayout llBottom, btnDelete, btnCopy, btnMove, btnShare, btnAll;
+    private LinearLayout llBack, llSearch, llBottom, btnDelete, btnCopy, btnMove, btnShare, btnAll;
 
     private final static int SCAN_OK = 1;
 
     private MusicAdapter adapter;
-    private List<MusicBean> mp3List = new ArrayList<>();
+    private List<MusicBean> musicList = new ArrayList<>();
+    private List<MusicBean> refenList = new ArrayList<>();
     private List<String> posList = new ArrayList<>();
+    private List<String> searchList = new ArrayList<>();
+    private Handler handler = new Handler();
     private SharedPreferences pref;
     private Boolean isAll = false;
+    private String searchStr = new String();
 
     private Handler mHandler = new Handler() {
 
@@ -54,7 +73,7 @@ public class MusicActivity extends BaseActivity implements View.OnClickListener 
             switch (msg.what) {
                 case SCAN_OK:
                     mProgressDialog.dismiss();
-                    Collections.sort(mp3List, TitleComparator);
+                    Collections.sort(musicList, TitleComparator);
                     adapter.notifyDataSetChanged();
                     break;
             }
@@ -89,10 +108,12 @@ public class MusicActivity extends BaseActivity implements View.OnClickListener 
 
     private void init() {
         app = (ApplicationUtil) MusicActivity.this.getApplication();
-        btnBack = (Button) findViewById(R.id.btn_back);
-        btnBack.setOnClickListener(this);
+        llBack = (LinearLayout) findViewById(R.id.ll_back);
+        llBack.setOnClickListener(this);
+        llSearch = (LinearLayout) findViewById(R.id.ll_search);
+        llSearch.setOnClickListener(this);
         lvMusic = (ListView) findViewById(R.id.lv_music);
-        adapter = new MusicAdapter(MusicActivity.this, mp3List, posList, posHandler);
+        adapter = new MusicAdapter(MusicActivity.this, musicList, posList, searchList, posHandler);
         lvMusic.setAdapter(adapter);
         llBottom = (LinearLayout) findViewById(R.id.ll_bottom);
         btnDelete = (LinearLayout) findViewById(R.id.btn_del);
@@ -109,9 +130,45 @@ public class MusicActivity extends BaseActivity implements View.OnClickListener 
 
     @Override
     public void onClick(View v) {
-        if (v == btnBack) {
+        if (v == llBack) {
             setResult(RESULT_OK, null);
             finish();
+        } else if (v == llSearch) {
+            InputMethodManager inputManager = (InputMethodManager) getApplication().getSystemService(Context.INPUT_METHOD_SERVICE);
+            inputManager.toggleSoftInput(0, InputMethodManager.HIDE_NOT_ALWAYS);
+            LayoutInflater inflater = LayoutInflater.from(this);
+            LinearLayout layout = (LinearLayout) inflater.inflate(R.layout.searchbar_dialog_view, null);
+            final Dialog dialog = new AlertDialog.Builder(MusicActivity.this).create();
+            etSearch = (EditText) layout.findViewById(R.id.et_search);
+            setSearchTextChanged();
+            etSearch.setText(searchStr);
+            etSearch.setFocusableInTouchMode(true);
+            etSearch.setFocusable(true);
+            etSearch.requestFocus();
+            etSearch.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+
+                @Override
+                public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+                    if (actionId == EditorInfo.IME_ACTION_DONE || actionId == EditorInfo.IME_ACTION_SEARCH
+                            || actionId == EditorInfo.IME_ACTION_GO || actionId == EditorInfo.IME_ACTION_NEXT
+                            || actionId == EditorInfo.IME_ACTION_NONE || actionId == EditorInfo.IME_ACTION_PREVIOUS
+                            || actionId == EditorInfo.IME_ACTION_SEND || event.getAction() == KeyEvent.KEYCODE_ENTER) {
+                        dialog.dismiss();
+                        return true;
+                    }
+                    return false;
+                }
+            });
+            dialog.show();
+            Window window = dialog.getWindow();
+            window.setContentView(layout);
+            WindowManager.LayoutParams lp = window.getAttributes();
+            window.setGravity(Gravity.CENTER | Gravity.BOTTOM);
+            lp.y = 0;
+            window.setAttributes(lp);
+            window.clearFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);
+            window.clearFlags(WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE | WindowManager.LayoutParams.FLAG_ALT_FOCUSABLE_IM);
+            window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE);
         } else if (v == btnDelete) {
             Handler dHandler = new Handler();
             dHandler.post(deleteFile);
@@ -121,7 +178,7 @@ public class MusicActivity extends BaseActivity implements View.OnClickListener 
         } else if (v == btnCopy) {
             List<String> portal = new ArrayList<>();
             for (int i = 0; i < posList.size(); i++) {
-                portal.add(mp3List.get(Integer.parseInt(posList.get(i))).getPath());
+                portal.add(musicList.get(Integer.parseInt(posList.get(i))).getPath());
             }
             Bundle bundle = new Bundle();
             bundle.putString("method", "copy");
@@ -133,7 +190,7 @@ public class MusicActivity extends BaseActivity implements View.OnClickListener 
         } else if (v == btnMove) {
             List<String> portal = new ArrayList<>();
             for (int i = 0; i < posList.size(); i++) {
-                portal.add(mp3List.get(Integer.parseInt(posList.get(i))).getPath());
+                portal.add(musicList.get(Integer.parseInt(posList.get(i))).getPath());
             }
             Bundle bundle = new Bundle();
             bundle.putString("method", "move");
@@ -148,7 +205,7 @@ public class MusicActivity extends BaseActivity implements View.OnClickListener 
                 String ip = pref.getString("ip", "");
                 String filename = "";
                 for (int i = 0; i < posList.size(); i++) {
-                    filename = mp3List.get(Integer.parseInt(posList.get(i))).getPath();
+                    filename = musicList.get(Integer.parseInt(posList.get(i))).getPath();
                     sendMessage("file", filename);
                     new SendTask(ip, "59672", filename).execute();
                 }
@@ -157,54 +214,6 @@ public class MusicActivity extends BaseActivity implements View.OnClickListener 
             }
         }
     }
-
-    Runnable deleteFile = new Runnable() {
-
-        @Override
-        public void run() {
-            Collections.sort(posList, mComparator);
-            for (int i = 0; i < posList.size(); i++) {
-                String deletePath = mp3List.get(Integer.parseInt(posList.get(i))).getPath();
-                File deleteFile = new File(deletePath);
-                Log.e("IP & PORT", "正在删除:" + deletePath);
-                if (deleteFile.exists() && deleteFile.isFile() && deleteFile.canWrite()) {
-                    deleteFile.delete();
-                    Log.e("IP & PORT", "删除成功!");
-                } else {
-                    Log.e("IP & PORT", "删除失败!");
-                }
-            }
-            int count = 0;
-            for (int i = 0; i < posList.size(); i++) {
-                mp3List.remove(mp3List.get(Integer.parseInt(posList.get(i)) - count));
-                count++;
-            }
-            posList.clear();
-            lvMusic.requestLayout();
-            adapter.notifyDataSetChanged();
-        }
-    };
-
-    Runnable selectAllFile = new Runnable() {
-
-        @Override
-        public void run() {
-            if (isAll == false) {
-                posList.clear();
-                for (int i = 0; i < mp3List.size(); i++) {
-                    posList.add("" + i);
-                }
-                isAll = true;
-                llBottom.setVisibility(View.VISIBLE);
-            } else {
-                posList.clear();
-                isAll = false;
-                llBottom.setVisibility(View.GONE);
-            }
-            Log.e("IP & PORT", "" + posList);
-            adapter.notifyDataSetChanged();
-        }
-    };
 
     private void getMusics() {
         if (!Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED)) {
@@ -220,25 +229,122 @@ public class MusicActivity extends BaseActivity implements View.OnClickListener 
                 ContentResolver mContentResolver = MusicActivity.this.getContentResolver();
                 Cursor mCursor = mContentResolver.query(mMusicUri, null, null, null, null);
                 while (mCursor.moveToNext()) {
+                    long id = mCursor.getLong(mCursor
+                            .getColumnIndex(MediaStore.Audio.Media._ID));
                     String path = mCursor.getString(mCursor
                             .getColumnIndex(MediaStore.Audio.Media.DATA));
                     String title = mCursor.getString(mCursor
                             .getColumnIndex(MediaStore.Audio.AudioColumns.TITLE));
+                    long albumId = mCursor.getInt(mCursor
+                            .getColumnIndex(MediaStore.Audio.Media.ALBUM_ID));
                     String album = mCursor.getString(mCursor
                             .getColumnIndex(MediaStore.Audio.AudioColumns.ALBUM));
                     String artist = mCursor.getString(mCursor
                             .getColumnIndex(MediaStore.Audio.AudioColumns.ARTIST));
 
-                    MusicBean item = new MusicBean(path, title, album, artist);
-                    mp3List.add(item);
+                    MusicBean item = new MusicBean(id, path, title, albumId, album, artist);
+                    refenList.add(item);
+                    musicList.add(item);
                 }
                 mCursor.close();
                 mHandler.sendEmptyMessage(SCAN_OK);
 
             }
         }).start();
-
     }
+
+    private void setSearchTextChanged() {
+
+        etSearch.addTextChangedListener(new TextWatcher() {
+
+            @Override
+            public void onTextChanged(CharSequence arg0, int arg1, int arg2, int arg3) {
+                handler.post(changed);
+            }
+
+            @Override
+            public void beforeTextChanged(CharSequence arg0, int arg1, int arg2, int arg3) {
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+//                handler.post(changed);
+            }
+        });
+    }
+
+    private void getContactSub(List<MusicBean> contactSub, String searchStr) {
+        int length = refenList.size();
+        for (int i = 0; i < length; ++i) {
+            if (refenList.get(i).getTitle().contains(searchStr)
+                    || refenList.get(i).getArtist().contains(searchStr)) {
+                contactSub.add(refenList.get(i));
+            }
+        }
+    }
+
+    Runnable deleteFile = new Runnable() {
+
+        @Override
+        public void run() {
+            Collections.sort(posList, mComparator);
+            for (int i = 0; i < posList.size(); i++) {
+                String deletePath = musicList.get(Integer.parseInt(posList.get(i))).getPath();
+                File deleteFile = new File(deletePath);
+                Log.e("IP & PORT", "正在删除:" + deletePath);
+                if (deleteFile.exists() && deleteFile.isFile() && deleteFile.canWrite()) {
+                    deleteFile.delete();
+                    Log.e("IP & PORT", "删除成功!");
+                } else {
+                    Log.e("IP & PORT", "删除失败!");
+                }
+            }
+            int count = 0;
+            for (int i = 0; i < posList.size(); i++) {
+                musicList.remove(musicList.get(Integer.parseInt(posList.get(i)) - count));
+                count++;
+            }
+            posList.clear();
+            lvMusic.requestLayout();
+            adapter.notifyDataSetChanged();
+        }
+    };
+
+    Runnable selectAllFile = new Runnable() {
+
+        @Override
+        public void run() {
+            if (isAll == false) {
+                posList.clear();
+                for (int i = 0; i < musicList.size(); i++) {
+                    posList.add("" + i);
+                }
+                isAll = true;
+                llBottom.setVisibility(View.VISIBLE);
+            } else {
+                posList.clear();
+                isAll = false;
+                llBottom.setVisibility(View.GONE);
+            }
+            Log.e("IP & PORT", "" + posList);
+            adapter.notifyDataSetChanged();
+        }
+    };
+
+    Runnable changed = new Runnable() {
+
+        @Override
+        public void run() {
+            // TODO Auto-generated method stub
+            searchStr = etSearch.getText().toString();
+            searchList.clear();
+            searchList.add(searchStr);
+            musicList.clear();
+            getContactSub(musicList, searchStr);
+            Collections.sort(musicList, TitleComparator);
+            adapter.notifyDataSetChanged();
+        }
+    };
 
     Comparator mComparator = new Comparator() {
         public int compare(Object obj1, Object obj2) {

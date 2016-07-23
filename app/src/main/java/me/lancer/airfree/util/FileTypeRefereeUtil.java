@@ -2,15 +2,15 @@ package me.lancer.airfree.util;
 
 import java.io.File;
 
-public class FileTypeReferee {
+public class FileTypeRefereeUtil {
 
     File file;
 
-    public FileTypeReferee(){
+    public FileTypeRefereeUtil(){
 
     }
 
-    public FileTypeReferee(File file) {
+    public FileTypeRefereeUtil(File file) {
         this.file = file;
     }
 
