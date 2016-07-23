@@ -28,7 +28,7 @@ Her name is not initially called AirFree, I call her AirFree because AirFree and
 <img src="http://o7gy5l0ax.bkt.clouddn.com/Screenshot_2016-07-21-16-26-40.png" width = "432" height = "768" alt="Remote Control"/>
 
 ### Setting
-<img src="http://o7gy5l0ax.bkt.clouddn.com/Screenshot_2016-07-21-16-26-40.png" width = "432" height = "768" alt="About Us"/>
+<img src="http://o7gy5l0ax.bkt.clouddn.com/Screenshot_2016-07-21-16-26-51.png" width = "432" height = "768" alt="About Us"/>
 
 Demo Download: [AirFree-Client.apk](http://o7gy5l0ax.bkt.clouddn.com/app-debug.apk).
 
