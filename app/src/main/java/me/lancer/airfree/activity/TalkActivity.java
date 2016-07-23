@@ -70,7 +70,6 @@ public class TalkActivity extends BaseActivity implements View.OnClickListener {
 
     @Override
     protected void onDestroy() {
-        Log.e("IP & PORT", "onDestroy");
         if (iStop == false) {
             sendMessage("talk", getIPAddress() + ":退出了聊天室");
             iStop = true;
@@ -142,7 +141,6 @@ public class TalkActivity extends BaseActivity implements View.OnClickListener {
         public void run() {
             try {
                 while (!iStop) {
-                    Log.e("IP & PORT", iStop + "");
                     recvMessageClient = app.getmBufferedReaderClient().readLine();
                     Log.e("IP & PORT", "接收成功(T):" + recvMessageClient);
                     JSONTokener jt = new JSONTokener(recvMessageClient);

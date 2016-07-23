@@ -77,9 +77,11 @@ public class BaseActivity extends Activity {
                 JSONObject jb = new JSONObject();
                 jb.put("command", command);
                 jb.put("parameter", parameter);
-                Log.e("IP & PORT", "发送成功:" + jb.toString());
-                app.getmPrintWriterClient().print(jb.toString() + "\n");
-                app.getmPrintWriterClient().flush();
+                if (jb.toString() != null) {
+                    app.getmPrintWriterClient().print(jb.toString() + "\n");
+                    app.getmPrintWriterClient().flush();
+                    Log.e("IP & PORT", "发送成功:" + jb.toString());
+                }
             } catch (Exception e) {
                 Log.e("IP & PORT", "发送异常:" + e.getMessage());
                 ShowToast("发送异常:" + e.getMessage());
@@ -98,7 +100,7 @@ public class BaseActivity extends Activity {
     class SendTask extends AsyncTask<Object, Void, String> {
         private String ip, port, filename;
         private ProgressDialog mProgressDialog;
-        private Handler mHandler = new Handler() {
+        private Handler sHandler = new Handler() {
 
             @Override
             public void handleMessage(Message msg) {
@@ -138,7 +140,7 @@ public class BaseActivity extends Activity {
             String success = null;
             try {
                 int port_ = Integer.parseInt(port);
-                FileTrans.doWrite(ip, port_, filename, mHandler);
+                FileTrans.doWrite(ip, port_, filename, sHandler);
             } catch (Exception e) {
                 success = e.toString();
             }
@@ -148,14 +150,26 @@ public class BaseActivity extends Activity {
 
     class ReadTask extends AsyncTask<Object, Void, String> {
         private String ip, port, filename;
-        private ProgressDialog mProgressDialog;
         private ImageView iv;
+        private ProgressDialog mProgressDialog;
+        private Handler rHandler = new Handler() {
+
+            @Override
+            public void handleMessage(Message msg) {
+                super.handleMessage(msg);
+                Log.e("IP & PORT", "进度:" + msg.what);
+                mProgressDialog.setProgress(msg.what);
+            }
+        };
 
         protected ReadTask(String ip, String port, String filename) {
             super();
             this.ip = ip;
             this.port = port;
             this.filename = filename;
+            this.mProgressDialog = new ProgressDialog(BaseActivity.this);
+            mProgressDialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
+            mProgressDialog.setTitle(null);
         }
 
         protected ReadTask(String ip, String port, String filename, ImageView iv) {
@@ -164,6 +178,9 @@ public class BaseActivity extends Activity {
             this.port = port;
             this.filename = filename;
             this.iv = iv;
+            this.mProgressDialog = new ProgressDialog(BaseActivity.this);
+            mProgressDialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
+            mProgressDialog.setTitle(null);
         }
 
         protected void onPreExecute() {
@@ -191,7 +208,7 @@ public class BaseActivity extends Activity {
             String success = null;
             try {
                 int port_ = Integer.parseInt(port);
-                FileTrans.doRead(port_, filename);
+                FileTrans.doRead(port_, filename, rHandler);
             } catch (Exception e) {
                 success = e.toString();
             }
