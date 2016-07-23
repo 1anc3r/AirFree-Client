@@ -1,16 +1,28 @@
 package me.lancer.airfree.activity;
 
+import android.app.AlertDialog;
+import android.app.Dialog;
+import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Environment;
 import android.os.Handler;
 import android.os.Message;
 import android.preference.PreferenceManager;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.KeyEvent;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
+import android.view.inputmethod.EditorInfo;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -24,24 +36,28 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
-import me.lancer.airfree.adapter.LetterAdapter;
+import me.lancer.airfree.adapter.ComputerAdapter;
 import me.lancer.airfree.util.ApplicationUtil;
 import me.lancer.distance.R;
-import me.lancer.airfree.model.LetterBean;
+import me.lancer.airfree.model.ComputerBean;
 
 public class ComputerActivity extends BaseActivity implements View.OnClickListener {
 
     ApplicationUtil app;
 
-    private Button btnBack;
     private TextView tvPath;
     private ListView lvFile;
-    private LinearLayout llBottom, btnShare, btnOpen;
+    private EditText etSearch;
+    private LinearLayout llBack, llSearch, llBottom, btnShare, btnOpen;
 
-    private LetterAdapter adapter;
-    private List<LetterBean> fileList = new ArrayList<>();
+    private ComputerAdapter adapter;
+    private List<ComputerBean> fileList = new ArrayList<>();
+    private List<ComputerBean> refenList = new ArrayList<>();
     private List<String> posList = new ArrayList<>();
-    private LetterBean parentfile = new LetterBean("this PC", "this PC");
+    private List<String> searchList = new ArrayList<>();
+    private String searchStr = new String();
+    private Handler handler = new Handler();
+    private ComputerBean parentfile = new ComputerBean("this PC", "this PC");
     private String parentpath = "this PC";
     private String temppath = "";
     private Thread mThreadClient = null;
@@ -66,7 +82,8 @@ public class ComputerActivity extends BaseActivity implements View.OnClickListen
                     for (String item : arrstr) {
                         String[] temp = item.split("\\\\");
                         String name = temp[temp.length - 1];
-                        fileList.add(new LetterBean(item, name, parentpath, parentfile));
+                        fileList.add(new ComputerBean(item, name, parentpath, parentfile));
+                        refenList.add(new ComputerBean(item, name, parentpath, parentfile));
                     }
                 } else {
                     if (posList.contains("" + allPos)) {
@@ -120,11 +137,13 @@ public class ComputerActivity extends BaseActivity implements View.OnClickListen
 
     private void init() {
         app = (ApplicationUtil) ComputerActivity.this.getApplication();
-        btnBack = (Button) findViewById(R.id.btn_back);
-        btnBack.setOnClickListener(this);
+        llBack = (LinearLayout) findViewById(R.id.ll_back);
+        llBack.setOnClickListener(this);
+        llSearch = (LinearLayout) findViewById(R.id.ll_search);
+        llSearch.setOnClickListener(this);
         tvPath = (TextView) findViewById(R.id.tv_path);
         lvFile = (ListView) findViewById(R.id.lv_file);
-        adapter = new LetterAdapter(ComputerActivity.this, fileList, posList, posHandler);
+        adapter = new ComputerAdapter(ComputerActivity.this, fileList, posList, searchList, posHandler);
         lvFile.setAdapter(adapter);
         lvFile.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
@@ -183,7 +202,7 @@ public class ComputerActivity extends BaseActivity implements View.OnClickListen
 
     @Override
     public void onClick(View v) {
-        if (v == btnBack) {
+        if (v == llBack) {
             if (iStop == false) {
                 iStop = true;
 //        cHandler.removeCallbacks(cRunnable);
@@ -191,6 +210,41 @@ public class ComputerActivity extends BaseActivity implements View.OnClickListen
             }
             setResult(RESULT_OK, null);
             finish();
+        } else if (v == llSearch) {
+            InputMethodManager inputManager = (InputMethodManager) getApplication().getSystemService(Context.INPUT_METHOD_SERVICE);
+            inputManager.toggleSoftInput(0, InputMethodManager.HIDE_NOT_ALWAYS);
+            LayoutInflater inflater = LayoutInflater.from(this);
+            LinearLayout layout = (LinearLayout) inflater.inflate(R.layout.searchbar_dialog_view, null);
+            final Dialog dialog = new AlertDialog.Builder(ComputerActivity.this).create();
+            etSearch = (EditText) layout.findViewById(R.id.et_search);
+            setSearchTextChanged();
+            etSearch.setText(searchStr);
+            etSearch.setFocusableInTouchMode(true);
+            etSearch.setFocusable(true);
+            etSearch.requestFocus();
+            etSearch.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+
+                @Override
+                public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+                    if (actionId == EditorInfo.IME_ACTION_DONE || actionId == EditorInfo.IME_ACTION_SEARCH
+                            || actionId == EditorInfo.IME_ACTION_GO || actionId == EditorInfo.IME_ACTION_NEXT
+                            || actionId == EditorInfo.IME_ACTION_NONE || actionId == EditorInfo.IME_ACTION_PREVIOUS
+                            || actionId == EditorInfo.IME_ACTION_SEND || event.getAction() == KeyEvent.KEYCODE_ENTER) {
+                        dialog.dismiss();
+                        return true;
+                    }
+                    return false;
+                }
+            });
+            dialog.show();
+            Window window = dialog.getWindow();
+            window.setContentView(layout);
+            WindowManager.LayoutParams lp = window.getAttributes();
+            window.setGravity(Gravity.CENTER | Gravity.BOTTOM);
+            window.setAttributes(lp);
+            window.clearFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);
+            window.clearFlags(WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE | WindowManager.LayoutParams.FLAG_ALT_FOCUSABLE_IM);
+            window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE);
         } else if (v == btnShare) {
             if (app.getmPrintWriterClient() != null) {
                 pref = PreferenceManager.getDefaultSharedPreferences(this);
@@ -208,6 +262,44 @@ public class ComputerActivity extends BaseActivity implements View.OnClickListen
             }
         } else if (v == btnOpen) {
             sendMessage("remote", fileList.get(Integer.parseInt(posList.get(0))).getFilePath());
+        }
+    }
+
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if (keyCode == KeyEvent.KEYCODE_BACK) {
+            Handler bHandler = new Handler();
+            bHandler.post(back2parent);
+            return true;
+        }
+        return super.onKeyDown(keyCode, event);
+    }
+
+    private void setSearchTextChanged() {
+
+        etSearch.addTextChangedListener(new TextWatcher() {
+
+            @Override
+            public void onTextChanged(CharSequence arg0, int arg1, int arg2, int arg3) {
+                handler.post(changed);
+            }
+
+            @Override
+            public void beforeTextChanged(CharSequence arg0, int arg1, int arg2, int arg3) {
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+//                handler.post(changed);
+            }
+        });
+    }
+
+    private void getContactSub(List<ComputerBean> contactSub, String searchStr) {
+        int length = refenList.size();
+        for (int i = 0; i < length; ++i) {
+            if (refenList.get(i).getFileName().contains(searchStr)) {
+                contactSub.add(refenList.get(i));
+            }
         }
     }
 
@@ -248,15 +340,6 @@ public class ComputerActivity extends BaseActivity implements View.OnClickListen
         }
     };
 
-    public boolean onKeyDown(int keyCode, KeyEvent event) {
-        if (keyCode == KeyEvent.KEYCODE_BACK) {
-            Handler bHandler = new Handler();
-            bHandler.post(back2parent);
-            return true;
-        }
-        return super.onKeyDown(keyCode, event);
-    }
-
     Runnable back2parent = new Runnable() {
 
         @Override
@@ -280,6 +363,20 @@ public class ComputerActivity extends BaseActivity implements View.OnClickListen
         }
     };
 
+    Runnable changed = new Runnable() {
+
+        @Override
+        public void run() {
+            searchStr = etSearch.getText().toString();
+            searchList.clear();
+            searchList.add(searchStr);
+            fileList.clear();
+            getContactSub(fileList, searchStr);
+            Collections.sort(fileList, NameComparator);
+            adapter.notifyDataSetChanged();
+        }
+    };
+
     Comparator PosComparator = new Comparator() {
         public int compare(Object obj1, Object obj2) {
             String str1 = (String) obj1;
@@ -289,6 +386,20 @@ public class ComputerActivity extends BaseActivity implements View.OnClickListen
             else if (Integer.parseInt(str1) == Integer.parseInt(str2))
                 return 0;
             else if (Integer.parseInt(str1) > Integer.parseInt(str2))
+                return 1;
+            return 0;
+        }
+    };
+
+    Comparator NameComparator = new Comparator() {
+        public int compare(Object obj1, Object obj2) {
+            ComputerBean file1 = (ComputerBean) obj1;
+            ComputerBean file2 = (ComputerBean) obj2;
+            if (file1.getFileName().compareToIgnoreCase(file2.getFileName()) < 0)
+                return -1;
+            else if (file1.getFileName().compareToIgnoreCase(file2.getFileName()) == 0)
+                return 0;
+            else if (file1.getFileName().compareToIgnoreCase(file2.getFileName()) > 0)
                 return 1;
             return 0;
         }
