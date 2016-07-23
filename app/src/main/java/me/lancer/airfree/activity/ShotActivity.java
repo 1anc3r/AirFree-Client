@@ -61,7 +61,11 @@ public class ShotActivity extends BaseActivity implements View.OnClickListener {
 
     @Override
     protected void onDestroy() {
-        iStop=true;
+        if (iStop == false) {
+            iStop = true;
+//        sHandler.removeCallbacks(sRunnable);
+            mThreadClient.interrupt();
+        }
         super.onDestroy();
     }
 
@@ -75,7 +79,7 @@ public class ShotActivity extends BaseActivity implements View.OnClickListener {
         ivShow = (ImageView) findViewById(R.id.iv_show);
         ivShow.setOnClickListener(this);
         int what = intent.getIntExtra("what", 0);
-        if (what == 1){
+        if (what == 1) {
             btnScreenShot.performClick();
         }
     }
@@ -83,7 +87,11 @@ public class ShotActivity extends BaseActivity implements View.OnClickListener {
     @Override
     public void onClick(View v) {
         if (v == btnBack) {
-            iStop=true;
+            if (iStop == false) {
+                iStop = true;
+//        sHandler.removeCallbacks(sRunnable);
+                mThreadClient.interrupt();
+            }
             setResult(RESULT_OK, null);
             finish();
         } else if (v == btnScreenShot) {
@@ -98,10 +106,10 @@ public class ShotActivity extends BaseActivity implements View.OnClickListener {
 //            sHandler.post(sRunnable);
             mThreadClient = new Thread(sRunnable);
             mThreadClient.start();
-        } else if (v == ivShow){
-            File file=new File(filename);
-            Intent intent =new Intent(Intent.ACTION_VIEW);
-            Uri mUri = Uri.parse("file://"+file.getPath());
+        } else if (v == ivShow) {
+            File file = new File(filename);
+            Intent intent = new Intent(Intent.ACTION_VIEW);
+            Uri mUri = Uri.parse("file://" + file.getPath());
             intent.setDataAndType(mUri, "image/*");
             startActivity(intent);
         }
@@ -145,7 +153,11 @@ public class ShotActivity extends BaseActivity implements View.OnClickListener {
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         if (keyCode == KeyEvent.KEYCODE_BACK && event.getRepeatCount() == 0) {
-            iStop=true;
+            if (iStop == false) {
+                iStop = true;
+//        sHandler.removeCallbacks(sRunnable);
+                mThreadClient.interrupt();
+            }
             finish();
             overridePendingTransition(R.anim.slide_up_in, R.anim.slide_down_out);
             return false;

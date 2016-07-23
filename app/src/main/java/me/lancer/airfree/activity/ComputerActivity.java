@@ -110,7 +110,11 @@ public class ComputerActivity extends BaseActivity implements View.OnClickListen
 
     @Override
     protected void onDestroy() {
-        iStop = true;
+        if (iStop == false) {
+            iStop = true;
+//        cHandler.removeCallbacks(cRunnable);
+            mThreadClient.interrupt();
+        }
         super.onDestroy();
     }
 
@@ -180,7 +184,11 @@ public class ComputerActivity extends BaseActivity implements View.OnClickListen
     @Override
     public void onClick(View v) {
         if (v == btnBack) {
-            iStop = true;
+            if (iStop == false) {
+                iStop = true;
+//        cHandler.removeCallbacks(cRunnable);
+                mThreadClient.interrupt();
+            }
             setResult(RESULT_OK, null);
             finish();
         } else if (v == btnShare) {
@@ -253,7 +261,11 @@ public class ComputerActivity extends BaseActivity implements View.OnClickListen
         @Override
         public void run() {
             if (parentpath.equals("this PC")) {
-                iStop = true;
+                if (iStop == false) {
+                    iStop = true;
+//        cHandler.removeCallbacks(cRunnable);
+                    mThreadClient.interrupt();
+                }
                 setResult(RESULT_OK, null);
                 finish();
             } else {

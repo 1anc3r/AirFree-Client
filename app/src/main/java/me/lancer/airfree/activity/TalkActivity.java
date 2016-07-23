@@ -71,12 +71,17 @@ public class TalkActivity extends BaseActivity implements View.OnClickListener {
     @Override
     protected void onDestroy() {
         Log.e("IP & PORT", "onDestroy");
-        iStop = true;
-        mThreadClient.interrupt();
+        if (iStop == false) {
+            sendMessage("talk", getIPAddress() + ":退出了聊天室");
+            iStop = true;
+//        tHandler.removeCallbacks(tRunnable);
+            mThreadClient.interrupt();
+        }
         super.onDestroy();
     }
 
     private void init() {
+        sendMessage("talk", getIPAddress() + ":加入了聊天室");
         app = (ApplicationUtil) this.getApplication();
         btnBack = (Button) findViewById(R.id.btn_back);
         btnBack.setOnClickListener(this);
@@ -96,7 +101,12 @@ public class TalkActivity extends BaseActivity implements View.OnClickListener {
     @Override
     public void onClick(View v) {
         if (v == btnBack) {
-            iStop = true;
+            if (iStop == false) {
+                sendMessage("talk", getIPAddress() + ":退出了聊天室");
+                iStop = true;
+//        tHandler.removeCallbacks(tRunnable);
+                mThreadClient.interrupt();
+            }
             setResult(RESULT_OK, null);
             finish();
         } else if (v == btnSend) {
@@ -113,8 +123,12 @@ public class TalkActivity extends BaseActivity implements View.OnClickListener {
     @Override
     public boolean onKeyDown(int keyCode, @NonNull KeyEvent event) {
         if (keyCode == KeyEvent.KEYCODE_BACK && event.getRepeatCount() == 0) {
-            iStop = true;
-            mThreadClient.interrupt();
+            if (iStop == false) {
+                sendMessage("talk", getIPAddress() + ":退出了聊天室");
+                iStop = true;
+//        tHandler.removeCallbacks(tRunnable);
+                mThreadClient.interrupt();
+            }
             finish();
             overridePendingTransition(R.anim.slide_up_in, R.anim.slide_down_out);
             return false;
@@ -127,23 +141,19 @@ public class TalkActivity extends BaseActivity implements View.OnClickListener {
         @Override
         public void run() {
             try {
-                if (app.getmBufferedReaderClient() != null) {
-                    while (true) {
-                        if (iStop) {
-                            break;
-                        }
-                        recvMessageClient = app.getmBufferedReaderClient().readLine();
-                        Log.e("IP & PORT", "接收成功(T):" + recvMessageClient);
-                        JSONTokener jt = new JSONTokener(recvMessageClient);
-                        JSONObject jb = (JSONObject) jt.nextValue();
-                        String command = jb.getString("command");
-                        String paramet = jb.getString("parameter");
-                        if (command.contains("talk")) {
-                            Message msg = tHandler.obtainMessage();
-                            msg.what = 1;
-                            msg.obj = paramet;
-                            tHandler.sendMessage(msg);
-                        }
+                while (!iStop) {
+                    Log.e("IP & PORT", iStop + "");
+                    recvMessageClient = app.getmBufferedReaderClient().readLine();
+                    Log.e("IP & PORT", "接收成功(T):" + recvMessageClient);
+                    JSONTokener jt = new JSONTokener(recvMessageClient);
+                    JSONObject jb = (JSONObject) jt.nextValue();
+                    String command = jb.getString("command");
+                    String paramet = jb.getString("parameter");
+                    if (command.contains("talk")) {
+                        Message msg = tHandler.obtainMessage();
+                        msg.what = 1;
+                        msg.obj = paramet;
+                        tHandler.sendMessage(msg);
                     }
                 }
             } catch (Exception e) {
