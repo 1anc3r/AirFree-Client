@@ -51,6 +51,7 @@ public class FileTrans {
             // 9.9Mb file into the stack.
             Message msg = new Message();
             msg.what = (int) (100 * (1.0 * (length - size) / length));
+            Log.e("IP ＆ PORT", msg.what + "");
             handler.sendMessage(msg);
             os.write(bs.toByteArray());
             bs.reset();
