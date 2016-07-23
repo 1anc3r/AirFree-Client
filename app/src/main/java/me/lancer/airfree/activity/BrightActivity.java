@@ -79,12 +79,13 @@ public class BrightActivity extends BaseActivity implements View.OnClickListener
             int count = 0;
             if (app.getmBufferedReaderClient() != null) {
                 try {
-                    if ((count = app.getmBufferedReaderClient().read(buffer)) > 0) {
-                        recvMessageClient = getInfoBuff(buffer, count);
-                        Message msg = new Message();
-                        msg.what = 1;
-                        mHandler.sendMessage(msg);
-                    }
+//                    if ((count = app.getmBufferedReaderClient().read(buffer)) > 0) {
+//                        recvMessageClient = getInfoBuff(buffer, count);
+                    recvMessageClient = app.getmBufferedReaderClient().readLine();
+                    Message msg = new Message();
+                    msg.what = 1;
+                    mHandler.sendMessage(msg);
+//                    }
                 } catch (Exception e) {
                     Log.e("IP & PORT", "接收异常:" + e.getMessage());
                     recvMessageClient = "接收异常:" + e.getMessage();

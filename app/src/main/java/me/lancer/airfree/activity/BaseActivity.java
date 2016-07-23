@@ -184,8 +184,8 @@ public class BaseActivity extends Activity {
         }
 
         protected void onPreExecute() {
-            mProgressDialog = ProgressDialog.show(BaseActivity.this, null, "正在接收...");
-            Log.e("IP & PORT", "开始接收");
+            mProgressDialog.show();
+            Log.e("IP & PORT", "开始接收!");
         }
 
         protected void onPostExecute(String failed) {

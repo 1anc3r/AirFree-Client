@@ -216,24 +216,25 @@ public class ComputerActivity extends BaseActivity implements View.OnClickListen
         @Override
         public void run() {
             if (!iStop) {
-                char[] buffer = new char[1024];
+                char[] buffer = new char[2048];
                 int count = 0;
                 if (app.getmBufferedReaderClient() != null) {
                     try {
-                        if ((count = app.getmBufferedReaderClient().read(buffer)) > 0) {
-                            recvMessageClient = getInfoBuff(buffer, count);
-                            Log.e("IP & PORT", "接收成功(C):" + recvMessageClient);
-                            JSONTokener jt = new JSONTokener(recvMessageClient);
-                            JSONObject jb = (JSONObject) jt.nextValue();
-                            String command = jb.getString("command");
-                            String paramet = jb.getString("parameter");
-                            if (command.contains("computer")) {
-                                Message msg = cHandler.obtainMessage();
-                                msg.what = 1;
-                                msg.obj = paramet;
-                                cHandler.sendMessage(msg);
-                            }
+//                        if ((count = app.getmBufferedReaderClient().read(buffer)) > 0) {
+//                            recvMessageClient = getInfoBuff(buffer, count);
+                        recvMessageClient = app.getmBufferedReaderClient().readLine();
+                        Log.e("IP & PORT", "接收成功(C):" + recvMessageClient);
+                        JSONTokener jt = new JSONTokener(recvMessageClient);
+                        JSONObject jb = (JSONObject) jt.nextValue();
+                        String command = jb.getString("command");
+                        String paramet = jb.getString("parameter");
+                        if (command.contains("computer")) {
+                            Message msg = cHandler.obtainMessage();
+                            msg.what = 1;
+                            msg.obj = paramet;
+                            cHandler.sendMessage(msg);
                         }
+//                        }
                     } catch (Exception e) {
                         Log.e("IP & PORT", "接收异常:" + e.getMessage());
                         recvMessageClient = "接收异常:" + e.getMessage();

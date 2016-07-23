@@ -124,20 +124,21 @@ public class ShotActivity extends BaseActivity implements View.OnClickListener {
                 int count = 0;
                 if (app.getmBufferedReaderClient() != null) {
                     try {
-                        if ((count = app.getmBufferedReaderClient().read(buffer)) > 0) {
-                            recvMessageClient = getInfoBuff(buffer, count);
-                            Log.e("IP & PORT", "接收成功(S):" + recvMessageClient);
-                            JSONTokener jt = new JSONTokener(recvMessageClient);
-                            JSONObject jb = (JSONObject) jt.nextValue();
-                            String command = jb.getString("command");
-                            String paramet = jb.getString("parameter");
-                            if (command.contains("screenshot")) {
-                                Message msg = sHandler.obtainMessage();
-                                msg.what = 1;
-                                msg.obj = paramet;
-                                sHandler.sendMessage(msg);
-                            }
+//                        if ((count = app.getmBufferedReaderClient().read(buffer)) > 0) {
+//                            recvMessageClient = getInfoBuff(buffer, count);
+                        recvMessageClient = app.getmBufferedReaderClient().readLine();
+                        Log.e("IP & PORT", "接收成功(S):" + recvMessageClient);
+                        JSONTokener jt = new JSONTokener(recvMessageClient);
+                        JSONObject jb = (JSONObject) jt.nextValue();
+                        String command = jb.getString("command");
+                        String paramet = jb.getString("parameter");
+                        if (command.contains("screenshot")) {
+                            Message msg = sHandler.obtainMessage();
+                            msg.what = 1;
+                            msg.obj = paramet;
+                            sHandler.sendMessage(msg);
                         }
+//                        }
                     } catch (Exception e) {
                         Log.e("IP & PORT", "接收异常:" + e.getMessage());
                         recvMessageClient = "接收异常:" + e.getMessage();

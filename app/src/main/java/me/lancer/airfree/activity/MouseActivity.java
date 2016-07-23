@@ -87,7 +87,7 @@ public class MouseActivity extends BaseActivity implements View.OnTouchListener,
 
     @Override
     protected void onDestroy() {
-        iStop=true;
+        iStop = true;
         super.onDestroy();
     }
 
@@ -306,7 +306,7 @@ public class MouseActivity extends BaseActivity implements View.OnTouchListener,
     @Override
     public void onClick(View v) {
         if (v == btnBack) {
-            iStop=true;
+            iStop = true;
             setResult(RESULT_OK, null);
             finish();
         } else if (v == btnVoice) {
@@ -322,7 +322,7 @@ public class MouseActivity extends BaseActivity implements View.OnTouchListener,
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         if (keyCode == KeyEvent.KEYCODE_BACK && event.getRepeatCount() == 0) {
-            iStop=true;
+            iStop = true;
             finish();
             overridePendingTransition(R.anim.slide_up_in, R.anim.slide_down_out);
             return false;

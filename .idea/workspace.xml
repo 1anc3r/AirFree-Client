@@ -6,15 +6,21 @@
     </shared>
   </component>
   <component name="AndroidLogFilters">
-    <option name="TOOL_WINDOW_CUSTOM_FILTER" value="IP &amp;" />
+    <option name="TOOL_WINDOW_CUSTOM_FILTER" value="air" />
     <option name="TOOL_WINDOW_LOG_LEVEL" value="ERROR" />
-    <option name="TOOL_WINDOW_CONFIGURED_FILTER" value="Show only selected application" />
+    <option name="TOOL_WINDOW_CONFIGURED_FILTER" value="No Filters" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="fdddf504-4f33-41cb-8570-d9e4c99bcbd5" name="Default" comment="">
+    <list default="true" id="fdddf504-4f33-41cb-8570-d9e4c99bcbd5" name="Default" comment="Some improve.">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/java/me/lancer/airfree/model/Update.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/me/lancer/airfree/activity/BaseActivity.java" afterPath="$PROJECT_DIR$/app/src/main/java/me/lancer/airfree/activity/BaseActivity.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/me/lancer/airfree/util/FileTrans.java" afterPath="$PROJECT_DIR$/app/src/main/java/me/lancer/airfree/util/FileTrans.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/me/lancer/airfree/activity/TalkActivity.java" afterPath="$PROJECT_DIR$/app/src/main/java/me/lancer/airfree/activity/TalkActivity.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/me/lancer/airfree/activity/BrightActivity.java" afterPath="$PROJECT_DIR$/app/src/main/java/me/lancer/airfree/activity/BrightActivity.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/me/lancer/airfree/activity/ComputerActivity.java" afterPath="$PROJECT_DIR$/app/src/main/java/me/lancer/airfree/activity/ComputerActivity.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/me/lancer/airfree/activity/MouseActivity.java" afterPath="$PROJECT_DIR$/app/src/main/java/me/lancer/airfree/activity/MouseActivity.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/me/lancer/airfree/activity/PowerActivity.java" afterPath="$PROJECT_DIR$/app/src/main/java/me/lancer/airfree/activity/PowerActivity.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/me/lancer/airfree/activity/ShotActivity.java" afterPath="$PROJECT_DIR$/app/src/main/java/me/lancer/airfree/activity/ShotActivity.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/me/lancer/airfree/activity/VolumeActivity.java" afterPath="$PROJECT_DIR$/app/src/main/java/me/lancer/airfree/activity/VolumeActivity.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/misc.xml" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="AirFree-Client.iws" />
@@ -43,97 +49,17 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="ComputerActivity.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/me/lancer/airfree/activity/ComputerActivity.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="119" column="0" selection-start-line="119" selection-start-column="0" selection-end-line="119" selection-end-column="0" />
-              <folding>
-                <element signature="e#8876#10455#0" expanded="true" />
-                <element signature="e#10454#10455#0" expanded="true" />
-                <element signature="e#10769#11475#0" expanded="true" />
-                <element signature="e#11474#11475#0" expanded="true" />
-                <element signature="e#11509#11987#0" expanded="true" />
-                <element signature="e#11986#11987#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="ShotActivity.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/me/lancer/airfree/activity/ShotActivity.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="156" column="29" selection-start-line="156" selection-start-column="29" selection-end-line="156" selection-end-column="29" />
-              <folding>
-                <element signature="e#3811#5354#0" expanded="true" />
-                <element signature="e#5353#5354#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="TalkActivity.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/me/lancer/airfree/activity/TalkActivity.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="73" column="12" selection-start-line="73" selection-start-column="12" selection-end-line="73" selection-end-column="60" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="DeviceActivity.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/me/lancer/airfree/activity/DeviceActivity.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="56" column="23" selection-start-line="56" selection-start-column="23" selection-end-line="56" selection-end-column="23" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="BaseActivity.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/me/lancer/airfree/activity/BaseActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-1.601626">
-              <caret line="182" column="43" selection-start-line="182" selection-start-column="43" selection-end-line="182" selection-end-column="43" />
+            <state vertical-scroll-proportion="3.2295082">
+              <caret line="210" column="52" selection-start-line="210" selection-start-column="52" selection-end-line="210" selection-end-column="52" />
               <folding>
                 <element signature="e#3233#3499#0" expanded="true" />
                 <element signature="e#3498#3499#0" expanded="true" />
                 <element signature="e#4976#5242#0" expanded="true" />
                 <element signature="e#5241#5242#0" expanded="true" />
               </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="FileTrans.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/me/lancer/airfree/util/FileTrans.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="51" column="40" selection-start-line="51" selection-start-column="40" selection-end-line="51" selection-end-column="40" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="PowerActivity.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/me/lancer/airfree/activity/PowerActivity.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="130" column="45" selection-start-line="130" selection-start-column="45" selection-end-line="130" selection-end-column="45" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="MouseActivity.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/me/lancer/airfree/activity/MouseActivity.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="209" column="19" selection-start-line="209" selection-start-column="12" selection-end-line="209" selection-end-column="19" />
-              <folding />
             </state>
           </provider>
         </entry>
@@ -2432,10 +2358,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/app/src/main/java/me/lancer/airfree/model/ImageBean.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/me/lancer/airfree/model/AppBean.java" />
-        <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_talk.xml" />
-        <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_app.xml" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_bright.xml" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_document.xml" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_gesture.xml" />
@@ -2461,7 +2383,6 @@
         <option value="$PROJECT_DIR$/build.gradle" />
         <option value="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/feedback_dialog_view.xml" />
-        <option value="$PROJECT_DIR$/app/src/main/java/me/lancer/airfree/activity/SettingActivity.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/me/lancer/airfree/activity/MainActivity.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/me/lancer/airfree/util/ApplicationUtil.java" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_remote.xml" />
@@ -2476,13 +2397,18 @@
         <option value="$PROJECT_DIR$/app/src/main/java/me/lancer/airfree/activity/ImageIActivity.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/me/lancer/airfree/activity/MusicActivity.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/me/lancer/airfree/activity/LinkActivity.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/me/lancer/airfree/activity/MouseActivity.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/me/lancer/airfree/activity/PowerActivity.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/me/lancer/airfree/activity/ShotActivity.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/me/lancer/airfree/activity/TalkActivity.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/me/lancer/airfree/model/Update.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/me/lancer/airfree/activity/SettingActivity.java" />
+        <option value="$PROJECT_DIR$/app/src/main/res/values/strings.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/me/lancer/airfree/util/FileTrans.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/me/lancer/airfree/activity/BaseActivity.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/me/lancer/airfree/activity/MouseActivity.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/me/lancer/airfree/activity/BrightActivity.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/me/lancer/airfree/activity/ComputerActivity.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/me/lancer/airfree/activity/ShotActivity.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/me/lancer/airfree/activity/PowerActivity.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/me/lancer/airfree/activity/VolumeActivity.java" />
       </list>
     </option>
   </component>
@@ -2546,6 +2472,56 @@
             <PATH_ELEMENT>
               <option name="myItemId" value="app" />
               <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidModuleNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="AirFree-Client" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidModuleNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="res" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidResFolderNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="xml" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidResFolderTypeNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="AirFree-Client" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidModuleNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="res" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidResFolderNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="values" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidResFolderTypeNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="AirFree-Client" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidModuleNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="res" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidResFolderNode" />
             </PATH_ELEMENT>
           </PATH>
           <PATH>
@@ -2622,6 +2598,38 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="AirFree-Client" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="AirFree-Client" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="AirFree-Client" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="AirFree-Client" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="build" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
         </subPane>
       </pane>
       <pane id="Scope" />
@@ -2632,7 +2640,7 @@
     <property name="settings.editor.splitter.proportion" value="0.2" />
     <property name="recentsLimit" value="5" />
     <property name="ANDROID_EXTENDED_DEVICE_CHOOSER_SERIALS" value="A7J5T15608010655" />
-    <property name="last_opened_file_path" value="F:/XiYouCanteen" />
+    <property name="last_opened_file_path" value="D:/BaiduYunDownload/AirFree-Client-master/AirFree-Client-master" />
   </component>
   <component name="RecentsManager">
     <key name="android.template.packageName">
@@ -2887,7 +2895,13 @@
       <option name="project" value="LOCAL" />
       <updated>1469238325480</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="Some improve.">
+      <created>1469241846219</created>
+      <option name="number" value="00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1469241846219</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="TodoView">
@@ -2942,34 +2956,14 @@
     <MESSAGE value="Solved some bugs." />
     <MESSAGE value="Getting computer letter has some problem." />
     <MESSAGE value="I resolved problems in fun. Remote Device, I'm so strong, Oh yeah!" />
-    <option name="LAST_COMMIT_MESSAGE" value="I resolved problems in fun. Remote Device, I'm so strong, Oh yeah!" />
+    <MESSAGE value="Some improve." />
+    <option name="LAST_COMMIT_MESSAGE" value="Some improve." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/drawable/btn_logout_selector.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/drawable/btn_selector.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/drawable/btn_true_pressed.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/res/drawable/btn_true_selector.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -3040,13 +3034,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="5" column="11" selection-start-line="5" selection-start-column="11" selection-end-line="5" selection-end-column="11" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/me/lancer/airfree/model/Feedback.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="9" column="23" selection-start-line="9" selection-start-column="23" selection-end-line="9" selection-end-column="23" />
         </state>
       </provider>
     </entry>
@@ -3147,13 +3134,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/me/lancer/airfree/activity/TransfActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="29" column="13" selection-start-line="29" selection-start-column="13" selection-end-line="29" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/libzxing/build.gradle">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -3184,24 +3164,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/me/lancer/airfree/activity/DocumentActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.7579618">
-          <caret line="46" column="23" selection-start-line="46" selection-start-column="23" selection-end-line="46" selection-end-column="23" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/me/lancer/airfree/activity/EmptyActivity.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="2" column="13" selection-start-line="2" selection-start-column="13" selection-end-line="2" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/me/lancer/airfree/activity/GestureActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="21" column="13" selection-start-line="21" selection-start-column="13" selection-end-line="21" selection-end-column="13" />
         </state>
       </provider>
     </entry>
@@ -3216,13 +3182,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-2.881356">
           <caret line="38" column="23" selection-start-line="38" selection-start-column="23" selection-end-line="38" selection-end-column="23" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/me/lancer/airfree/activity/MainActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="83" column="54" selection-start-line="83" selection-start-column="54" selection-end-line="83" selection-end-column="54" />
         </state>
       </provider>
     </entry>
@@ -3247,57 +3206,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/me/lancer/airfree/activity/SettingActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="6.280255">
-          <caret line="159" column="45" selection-start-line="159" selection-start-column="45" selection-end-line="159" selection-end-column="45" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/me/lancer/airfree/activity/LinkActivity.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.48726115">
           <caret line="52" column="4" selection-start-line="52" selection-start-column="4" selection-end-line="52" selection-end-column="4" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/me/lancer/airfree/activity/MouseActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="209" column="19" selection-start-line="209" selection-start-column="12" selection-end-line="209" selection-end-column="19" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/me/lancer/airfree/activity/PowerActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="130" column="45" selection-start-line="130" selection-start-column="45" selection-end-line="130" selection-end-column="45" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/me/lancer/airfree/activity/AppActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="79" column="66" selection-start-line="79" selection-start-column="66" selection-end-line="79" selection-end-column="66" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/me/lancer/airfree/activity/BrightActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="14" column="13" selection-start-line="14" selection-start-column="13" selection-end-line="14" selection-end-column="13" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/me/lancer/airfree/activity/DeviceActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="56" column="23" selection-start-line="56" selection-start-column="23" selection-end-line="56" selection-end-column="23" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -3309,10 +3221,123 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/me/lancer/airfree/model/Update.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.11147541">
+          <caret line="2" column="14" selection-start-line="2" selection-start-column="14" selection-end-line="2" selection-end-column="14" />
+          <folding>
+            <element signature="e#146#147#0" expanded="true" />
+            <element signature="e#176#177#0" expanded="true" />
+            <element signature="e#222#223#0" expanded="true" />
+            <element signature="e#260#261#0" expanded="true" />
+            <element signature="e#294#295#0" expanded="true" />
+            <element signature="e#324#325#0" expanded="true" />
+            <element signature="e#370#371#0" expanded="true" />
+            <element signature="e#408#409#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/me/lancer/airfree/model/Feedback.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="9" column="23" selection-start-line="9" selection-start-column="23" selection-end-line="9" selection-end-column="23" />
+          <folding>
+            <element signature="e#169#170#0" expanded="true" />
+            <element signature="e#199#200#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/values/strings.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-3.0">
+          <caret line="34" column="54" selection-start-line="34" selection-start-column="54" selection-end-line="34" selection-end-column="54" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/me/lancer/airfree/activity/SettingActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="169" column="21" selection-start-line="169" selection-start-column="21" selection-end-line="169" selection-end-column="21" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/me/lancer/airfree/util/FileTrans.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="51" column="40" selection-start-line="51" selection-start-column="40" selection-end-line="51" selection-end-column="40" />
+          <caret line="47" column="46" selection-start-line="47" selection-start-column="46" selection-end-line="47" selection-end-column="46" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/me/lancer/airfree/activity/MouseActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.33114755">
+          <caret line="270" column="13" selection-start-line="270" selection-start-column="13" selection-end-line="270" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/me/lancer/airfree/activity/GestureActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.49836066">
+          <caret line="109" column="9" selection-start-line="0" selection-start-column="0" selection-end-line="112" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/me/lancer/airfree/activity/MainActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-3.0131147">
+          <caret line="83" column="54" selection-start-line="83" selection-start-column="54" selection-end-line="83" selection-end-column="54" />
+          <folding>
+            <element signature="e#3589#3590#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/me/lancer/airfree/activity/DocumentActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.55409837">
+          <caret line="272" column="6" selection-start-line="272" selection-start-column="6" selection-end-line="272" selection-end-column="6" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/me/lancer/airfree/activity/DeviceActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.38688526">
+          <caret line="438" column="57" selection-start-line="438" selection-start-column="57" selection-end-line="438" selection-end-column="57" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/me/lancer/airfree/activity/BrightActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="79" column="57" selection-start-line="79" selection-start-column="57" selection-end-line="79" selection-end-column="57" />
+          <folding>
+            <element signature="e#2052#2994#0" expanded="true" />
+            <element signature="e#2993#2994#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/me/lancer/airfree/activity/ShotActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="136" column="33" selection-start-line="136" selection-start-column="33" selection-end-line="136" selection-end-column="33" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/me/lancer/airfree/activity/ComputerActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="233" column="46" selection-start-line="233" selection-start-column="46" selection-end-line="233" selection-end-column="46" />
           <folding />
         </state>
       </provider>
@@ -3320,41 +3345,50 @@
     <entry file="file://$PROJECT_DIR$/app/src/main/java/me/lancer/airfree/activity/TalkActivity.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="73" column="12" selection-start-line="73" selection-start-column="12" selection-end-line="73" selection-end-column="60" />
+          <caret line="141" column="17" selection-start-line="141" selection-start-column="17" selection-end-line="141" selection-end-column="17" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/me/lancer/airfree/activity/ShotActivity.java">
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/me/lancer/airfree/activity/AppActivity.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="156" column="29" selection-start-line="156" selection-start-column="29" selection-end-line="156" selection-end-column="29" />
+          <caret line="141" column="25" selection-start-line="0" selection-start-column="0" selection-end-line="146" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/me/lancer/airfree/activity/PowerActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="134" column="25" selection-start-line="134" selection-start-column="25" selection-end-line="134" selection-end-column="25" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/me/lancer/airfree/activity/VolumeActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="69" column="47" selection-start-line="69" selection-start-column="47" selection-end-line="69" selection-end-column="47" />
           <folding>
-            <element signature="e#3811#5354#0" expanded="true" />
-            <element signature="e#5353#5354#0" expanded="true" />
+            <element signature="e#1641#2602#0" expanded="true" />
+            <element signature="e#2601#2602#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/me/lancer/airfree/activity/ComputerActivity.java">
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/me/lancer/airfree/activity/TransfActivity.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="119" column="0" selection-start-line="119" selection-start-column="0" selection-end-line="119" selection-end-column="0" />
-          <folding>
-            <element signature="e#8876#10455#0" expanded="true" />
-            <element signature="e#10454#10455#0" expanded="true" />
-            <element signature="e#10769#11475#0" expanded="true" />
-            <element signature="e#11474#11475#0" expanded="true" />
-            <element signature="e#11509#11987#0" expanded="true" />
-            <element signature="e#11986#11987#0" expanded="true" />
-          </folding>
+        <state vertical-scroll-proportion="-1.8983606">
+          <caret line="29" column="13" selection-start-line="29" selection-start-column="13" selection-end-line="29" selection-end-column="13" />
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/me/lancer/airfree/activity/BaseActivity.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-1.601626">
-          <caret line="182" column="43" selection-start-line="182" selection-start-column="43" selection-end-line="182" selection-end-column="43" />
+        <state vertical-scroll-proportion="3.2295082">
+          <caret line="210" column="52" selection-start-line="210" selection-start-column="52" selection-end-line="210" selection-end-column="52" />
           <folding>
             <element signature="e#3233#3499#0" expanded="true" />
             <element signature="e#3498#3499#0" expanded="true" />
