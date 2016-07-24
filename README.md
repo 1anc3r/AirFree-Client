@@ -5,6 +5,7 @@ AirFree-Server is [here](https://github.com/1anc3r/AirFree-Server).
 
 ## Summary
 A few months ago, I began to make this poject which can transfer commands and files between android-phone and windows-pc. I learned a lot via this project, such as how to use transfer commands and files via socket, how to transfer commands and files faster and better, but also on how to achieve commands on windows, how to integrate voice control and gesture control on android ... thanks for every day to learn new knowledge point, and every person to help me.
+
 The poject's name isn't called AirFree initially, because AirFree and Alfred homonym and Alfred is the name of Batman's old housekeeper, I hope this poject can help us as Alfred help Bruce Wayne. How to use : connect android-phone and windows-pc via same Wi-Fi, controling windows-pc remotely on your android-phone.
 
 ## Features
