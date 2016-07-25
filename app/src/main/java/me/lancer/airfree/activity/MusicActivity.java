@@ -32,7 +32,6 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputMethodManager;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.ListView;
@@ -42,7 +41,6 @@ import android.widget.Toast;
 import me.lancer.airfree.adapter.MusicAdapter;
 import me.lancer.airfree.model.MusicBean;
 import me.lancer.airfree.util.ApplicationUtil;
-import me.lancer.airfree.util.InputTools;
 import me.lancer.distance.R;
 
 public class MusicActivity extends BaseActivity implements View.OnClickListener {
@@ -60,10 +58,10 @@ public class MusicActivity extends BaseActivity implements View.OnClickListener 
     private List<MusicBean> refenList = new ArrayList<>();
     private List<String> posList = new ArrayList<>();
     private List<String> searchList = new ArrayList<>();
+    private String searchStr = new String();
     private Handler handler = new Handler();
     private SharedPreferences pref;
     private Boolean isAll = false;
-    private String searchStr = new String();
 
     private Handler mHandler = new Handler() {
 
@@ -164,7 +162,6 @@ public class MusicActivity extends BaseActivity implements View.OnClickListener 
             window.setContentView(layout);
             WindowManager.LayoutParams lp = window.getAttributes();
             window.setGravity(Gravity.CENTER | Gravity.BOTTOM);
-            lp.y = 0;
             window.setAttributes(lp);
             window.clearFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);
             window.clearFlags(WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE | WindowManager.LayoutParams.FLAG_ALT_FOCUSABLE_IM);
@@ -184,7 +181,7 @@ public class MusicActivity extends BaseActivity implements View.OnClickListener 
             bundle.putString("method", "copy");
             bundle.putStringArrayList("source", (ArrayList<String>) portal);
             Intent intent = new Intent();
-            intent.setClass(MusicActivity.this, DeviceActivity.class);
+            intent.setClass(MusicActivity.this, MobileActivity.class);
             intent.putExtras(bundle);
             startActivity(intent);
         } else if (v == btnMove) {
@@ -196,7 +193,7 @@ public class MusicActivity extends BaseActivity implements View.OnClickListener 
             bundle.putString("method", "move");
             bundle.putStringArrayList("source", (ArrayList<String>) portal);
             Intent intent = new Intent();
-            intent.setClass(MusicActivity.this, DeviceActivity.class);
+            intent.setClass(MusicActivity.this, MobileActivity.class);
             intent.putExtras(bundle);
             startActivity(intent);
         } else if (v == btnShare) {

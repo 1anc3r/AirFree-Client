@@ -4,7 +4,7 @@ import android.graphics.drawable.Drawable;
 
 import java.util.List;
 
-public class AppBean {
+public class ApplicationBean {
 
     private int versionCode = 0;
 
@@ -16,12 +16,12 @@ public class AppBean {
 
     private Drawable appIcon = null;
 
-    public AppBean() {
+    public ApplicationBean() {
 
     }
 
-    public AppBean(int versionCode, String appName, String packageName,
-                   String versionName, Drawable appIcon) {
+    public ApplicationBean(int versionCode, String appName, String packageName,
+                           String versionName, Drawable appIcon) {
         this.versionCode = versionCode;
         this.appName = appName;
         this.packageName = packageName;

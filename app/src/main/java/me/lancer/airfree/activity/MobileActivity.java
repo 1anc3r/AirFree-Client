@@ -13,6 +13,9 @@ import java.util.Comparator;
 import java.util.Date;
 import java.util.List;
 
+import android.app.AlertDialog;
+import android.app.Dialog;
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -20,35 +23,49 @@ import android.os.Environment;
 import android.os.Handler;
 import android.os.Message;
 import android.preference.PreferenceManager;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.KeyEvent;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
+import android.view.inputmethod.EditorInfo;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import me.lancer.distance.R;
-import me.lancer.airfree.adapter.FileAdapter;
-import me.lancer.airfree.model.FileBean;
+import me.lancer.airfree.adapter.MobileAdapter;
+import me.lancer.airfree.model.MobileBean;
 import me.lancer.airfree.util.ApplicationUtil;
 
-public class DeviceActivity extends BaseActivity implements View.OnClickListener {
+public class MobileActivity extends BaseActivity implements View.OnClickListener {
 
     ApplicationUtil app;
     private TextView tvPath, tvShow;
     private ListView lvFile;
-    private Button btnBack, btnPaste, btnCancell;
-    private LinearLayout llBottom, btnDelete, btnCopy, btnMove, btnShare, btnAll;
+    private EditText etSearch;
+    private Button btnPaste, btnCancell;
+    private LinearLayout llBack, llSearch, llBottom, btnDelete, btnCopy, btnMove, btnShare, btnAll;
 
     private final static int SCAN_OK = 1;
 
-    private FileAdapter adapter;
-    private List<FileBean> fileList = new ArrayList<>();
+    private MobileAdapter adapter;
+    private List<MobileBean> fileList = new ArrayList<>();
+    private List<MobileBean> refenList = new ArrayList<>();
     private List<String> posList = new ArrayList<>();
     private List<String> srcList = new ArrayList<>();
+    private List<String> searchList = new ArrayList<>();
+    private String searchStr = new String();
+    private Handler handler = new Handler();
     private String method;
     private String parentpath;
     private File parentfile;
@@ -98,12 +115,12 @@ public class DeviceActivity extends BaseActivity implements View.OnClickListener
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_device);
+        setContentView(R.layout.activity_mobile);
         init();
     }
 
     private void init() {
-        app = (ApplicationUtil) DeviceActivity.this.getApplication();
+        app = (ApplicationUtil) MobileActivity.this.getApplication();
         tvShow = (TextView) findViewById(R.id.tv_show);
         Intent i = getIntent();
         Bundle b = i.getExtras();
@@ -119,11 +136,13 @@ public class DeviceActivity extends BaseActivity implements View.OnClickListener
             parentpath = Environment.getExternalStorageDirectory().getAbsolutePath();
             tvShow.setText("内部存储");
         }
-        btnBack = (Button) findViewById(R.id.btn_back);
-        btnBack.setOnClickListener(this);
+        llBack = (LinearLayout) findViewById(R.id.ll_back);
+        llBack.setOnClickListener(this);
+        llSearch = (LinearLayout) findViewById(R.id.ll_search);
+        llSearch.setOnClickListener(this);
         tvPath = (TextView) findViewById(R.id.tv_path);
         lvFile = (ListView) findViewById(R.id.lv_file);
-        adapter = new FileAdapter(DeviceActivity.this, fileList, posList, mHandler);
+        adapter = new MobileAdapter(MobileActivity.this, fileList, posList, searchList, mHandler);
         lvFile.setAdapter(adapter);
         lvFile.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
@@ -166,9 +185,44 @@ public class DeviceActivity extends BaseActivity implements View.OnClickListener
 
     @Override
     public void onClick(View v) {
-        if (v == btnBack) {
+        if (v == llBack) {
             setResult(RESULT_OK, null);
             finish();
+        } else if (v == llSearch) {
+            InputMethodManager inputManager = (InputMethodManager) getApplication().getSystemService(Context.INPUT_METHOD_SERVICE);
+            inputManager.toggleSoftInput(0, InputMethodManager.HIDE_NOT_ALWAYS);
+            LayoutInflater inflater = LayoutInflater.from(this);
+            LinearLayout layout = (LinearLayout) inflater.inflate(R.layout.searchbar_dialog_view, null);
+            final Dialog dialog = new AlertDialog.Builder(MobileActivity.this).create();
+            etSearch = (EditText) layout.findViewById(R.id.et_search);
+            setSearchTextChanged();
+            etSearch.setText(searchStr);
+            etSearch.setFocusableInTouchMode(true);
+            etSearch.setFocusable(true);
+            etSearch.requestFocus();
+            etSearch.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+
+                @Override
+                public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+                    if (actionId == EditorInfo.IME_ACTION_DONE || actionId == EditorInfo.IME_ACTION_SEARCH
+                            || actionId == EditorInfo.IME_ACTION_GO || actionId == EditorInfo.IME_ACTION_NEXT
+                            || actionId == EditorInfo.IME_ACTION_NONE || actionId == EditorInfo.IME_ACTION_PREVIOUS
+                            || actionId == EditorInfo.IME_ACTION_SEND || event.getAction() == KeyEvent.KEYCODE_ENTER) {
+                        dialog.dismiss();
+                        return true;
+                    }
+                    return false;
+                }
+            });
+            dialog.show();
+            Window window = dialog.getWindow();
+            window.setContentView(layout);
+            WindowManager.LayoutParams lp = window.getAttributes();
+            window.setGravity(Gravity.CENTER | Gravity.BOTTOM);
+            window.setAttributes(lp);
+            window.clearFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);
+            window.clearFlags(WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE | WindowManager.LayoutParams.FLAG_ALT_FOCUSABLE_IM);
+            window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE);
         } else if (v == btnDelete) {
             Handler dHandler = new Handler();
             dHandler.post(deleteFile);
@@ -184,7 +238,7 @@ public class DeviceActivity extends BaseActivity implements View.OnClickListener
             bundle.putString("method", "copy");
             bundle.putStringArrayList("source", (ArrayList<String>) portal);
             Intent intent = new Intent();
-            intent.setClass(DeviceActivity.this, DeviceActivity.class);
+            intent.setClass(MobileActivity.this, MobileActivity.class);
             intent.putExtras(bundle);
             startActivity(intent);
         } else if (v == btnMove) {
@@ -196,7 +250,7 @@ public class DeviceActivity extends BaseActivity implements View.OnClickListener
             bundle.putString("method", "move");
             bundle.putStringArrayList("source", (ArrayList<String>) portal);
             Intent intent = new Intent();
-            intent.setClass(DeviceActivity.this, DeviceActivity.class);
+            intent.setClass(MobileActivity.this, MobileActivity.class);
             intent.putExtras(bundle);
             startActivity(intent);
         } else if (v == btnPaste) {
@@ -241,51 +295,6 @@ public class DeviceActivity extends BaseActivity implements View.OnClickListener
         return super.onKeyDown(keyCode, event);
     }
 
-    Runnable back2parent = new Runnable() {
-
-        @Override
-        public void run() {
-            if (parentpath.equals(Environment.getExternalStorageDirectory().getAbsolutePath()) || parentpath.equals("/mnt/ext_sdcard") || parentpath.equals("/mnt/ext_sdcard/")) {
-                setResult(RESULT_OK, null);
-                finish();
-            } else {
-                parentfile = new File(parentpath);
-                parentpath = parentfile.getParent();
-                tvPath.setText(parentpath);
-                fileList.clear();
-                posList.clear();
-                lHandler.post(getFile);
-            }
-        }
-    };
-
-    Runnable deleteFile = new Runnable() {
-
-        @Override
-        public void run() {
-            Collections.sort(posList, PosComparator);
-            for (int i = 0; i < posList.size(); i++) {
-                String deletePath = fileList.get(Integer.parseInt(posList.get(i))).getPath();
-                File deleteFile = new File(deletePath);
-                Log.e("IP & PORT", "正在删除:" + deletePath);
-                if (deleteFile.exists() && deleteFile.isFile() && deleteFile.canWrite()) {
-                    deleteFile.delete();
-                    Log.e("IP & PORT", "删除成功!");
-                } else {
-                    Log.e("IP & PORT", "删除失败!");
-                }
-            }
-            int count = 0;
-            for (int i = 0; i < posList.size(); i++) {
-                fileList.remove(fileList.get(Integer.parseInt(posList.get(i)) - count));
-                count++;
-            }
-            posList.clear();
-            lvFile.requestLayout();
-            adapter.notifyDataSetChanged();
-        }
-    };
-
     private void copyFile(String inputPath, String inputFile, String outputPath) {
         InputStream in = null;
         OutputStream out = null;
@@ -293,7 +302,7 @@ public class DeviceActivity extends BaseActivity implements View.OnClickListener
             File input = new File(inputPath);
             if (input.isFile()) {
                 Log.e("IP & PORT", "正在复制:" + inputPath + " to " + outputPath + "/" + inputFile);
-                fileList.add(new FileBean(outputPath + "/" + inputFile,
+                fileList.add(new MobileBean(outputPath + "/" + inputFile,
                         inputFile, outputPath, new ArrayList<String>(),
                         format.format(new Date((new File(outputPath + "/" + inputFile)).lastModified()))));
                 File dir = new File(outputPath);
@@ -328,7 +337,7 @@ public class DeviceActivity extends BaseActivity implements View.OnClickListener
         OutputStream out = null;
         try {
             Log.e("IP & PORT", "正在剪切:" + inputPath + " to " + outputPath + "/" + inputFile);
-            fileList.add(new FileBean(outputPath + "/" + inputFile,
+            fileList.add(new MobileBean(outputPath + "/" + inputFile,
                     inputFile, outputPath, new ArrayList<String>(),
                     format.format(new Date((new File(outputPath + "/" + inputFile)).lastModified()))));
             File dir = new File(outputPath);
@@ -353,6 +362,35 @@ public class DeviceActivity extends BaseActivity implements View.OnClickListener
             Log.e("IP & PORT", "剪切失败:" + fnfe1.getMessage());
         } catch (Exception e) {
             Log.e("IP & PORT", "剪切失败:" + e.getMessage());
+        }
+    }
+
+    private void setSearchTextChanged() {
+
+        etSearch.addTextChangedListener(new TextWatcher() {
+
+            @Override
+            public void onTextChanged(CharSequence arg0, int arg1, int arg2, int arg3) {
+                handler.post(changed);
+            }
+
+            @Override
+            public void beforeTextChanged(CharSequence arg0, int arg1, int arg2, int arg3) {
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+//                handler.post(changed);
+            }
+        });
+    }
+
+    private void getContactSub(List<MobileBean> contactSub, String searchStr) {
+        int length = refenList.size();
+        for (int i = 0; i < length; ++i) {
+            if (refenList.get(i).getFileName().contains(searchStr)) {
+                contactSub.add(refenList.get(i));
+            }
         }
     }
 
@@ -400,17 +438,80 @@ public class DeviceActivity extends BaseActivity implements View.OnClickListener
                                     }
                                 }
                             }
-                            fileList.add(new FileBean(filei.getAbsolutePath(), filei.getName(), parentpath, childs,
+                            fileList.add(new MobileBean(filei.getAbsolutePath(), filei.getName(), parentpath, childs,
+                                    format.format(new Date((new File(filei.getAbsolutePath())).lastModified()))));
+                            refenList.add(new MobileBean(filei.getAbsolutePath(), filei.getName(), parentpath, childs,
                                     format.format(new Date((new File(filei.getAbsolutePath())).lastModified()))));
                         } else if (filei.exists() && filei.isFile() && filei.canRead() && filei.canWrite()) {
                             List<String> childs = new ArrayList<>();
-                            fileList.add(new FileBean(filei.getAbsolutePath(), filei.getName(), parentpath, childs,
+                            fileList.add(new MobileBean(filei.getAbsolutePath(), filei.getName(), parentpath, childs,
+                                    format.format(new Date((new File(filei.getAbsolutePath())).lastModified()))));
+                            refenList.add(new MobileBean(filei.getAbsolutePath(), filei.getName(), parentpath, childs,
                                     format.format(new Date((new File(filei.getAbsolutePath())).lastModified()))));
                         }
                     }
                 }
             }
             lHandler.sendEmptyMessage(SCAN_OK);
+        }
+    };
+
+    Runnable back2parent = new Runnable() {
+
+        @Override
+        public void run() {
+            if (parentpath.equals(Environment.getExternalStorageDirectory().getAbsolutePath()) || parentpath.equals("/mnt/ext_sdcard") || parentpath.equals("/mnt/ext_sdcard/")) {
+                setResult(RESULT_OK, null);
+                finish();
+            } else {
+                parentfile = new File(parentpath);
+                parentpath = parentfile.getParent();
+                tvPath.setText(parentpath);
+                fileList.clear();
+                posList.clear();
+                lHandler.post(getFile);
+            }
+        }
+    };
+
+    Runnable deleteFile = new Runnable() {
+
+        @Override
+        public void run() {
+            Collections.sort(posList, PosComparator);
+            for (int i = 0; i < posList.size(); i++) {
+                String deletePath = fileList.get(Integer.parseInt(posList.get(i))).getPath();
+                File deleteFile = new File(deletePath);
+                Log.e("IP & PORT", "正在删除:" + deletePath);
+                if (deleteFile.exists() && deleteFile.isFile() && deleteFile.canWrite()) {
+                    deleteFile.delete();
+                    Log.e("IP & PORT", "删除成功!");
+                } else {
+                    Log.e("IP & PORT", "删除失败!");
+                }
+            }
+            int count = 0;
+            for (int i = 0; i < posList.size(); i++) {
+                fileList.remove(fileList.get(Integer.parseInt(posList.get(i)) - count));
+                count++;
+            }
+            posList.clear();
+            lvFile.requestLayout();
+            adapter.notifyDataSetChanged();
+        }
+    };
+
+    Runnable changed = new Runnable() {
+
+        @Override
+        public void run() {
+            searchStr = etSearch.getText().toString();
+            searchList.clear();
+            searchList.add(searchStr);
+            fileList.clear();
+            getContactSub(fileList, searchStr);
+            Collections.sort(fileList, NameComparator);
+            adapter.notifyDataSetChanged();
         }
     };
 
@@ -430,8 +531,8 @@ public class DeviceActivity extends BaseActivity implements View.OnClickListener
 
     Comparator NameComparator = new Comparator() {
         public int compare(Object obj1, Object obj2) {
-            FileBean file1 = (FileBean) obj1;
-            FileBean file2 = (FileBean) obj2;
+            MobileBean file1 = (MobileBean) obj1;
+            MobileBean file2 = (MobileBean) obj2;
             if (file1.getFileName().compareToIgnoreCase(file2.getFileName()) < 0)
                 return -1;
             else if (file1.getFileName().compareToIgnoreCase(file2.getFileName()) == 0)

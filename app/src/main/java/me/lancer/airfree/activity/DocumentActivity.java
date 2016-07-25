@@ -8,7 +8,10 @@ import java.util.Comparator;
 import java.util.Date;
 import java.util.List;
 
+import android.app.AlertDialog;
+import android.app.Dialog;
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -16,32 +19,47 @@ import android.os.Environment;
 import android.os.Handler;
 import android.os.Message;
 import android.preference.PreferenceManager;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
+import android.view.Gravity;
+import android.view.KeyEvent;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
+import android.view.inputmethod.EditorInfo;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
-import me.lancer.airfree.adapter.DocAdapter;
+import me.lancer.airfree.adapter.DocumentAdapter;
 import me.lancer.airfree.util.ApplicationUtil;
 import me.lancer.distance.R;
-import me.lancer.airfree.model.FileBean;
+import me.lancer.airfree.model.MobileBean;
 
 public class DocumentActivity extends BaseActivity implements View.OnClickListener {
 
     ApplicationUtil app;
 
-    private Button btnBack;
     private ListView lvDoc;
+    private EditText etSearch;
     private ProgressDialog mProgressDialog;
-    private LinearLayout llBottom, btnDelete, btnCopy, btnMove, btnShare, btnAll;
+    private LinearLayout llBack, llSearch, llBottom, btnDelete, btnCopy, btnMove, btnShare, btnAll;
 
     private final static int SCAN_OK = 1;
 
-    private DocAdapter adapter;
-    private List<FileBean> docList = new ArrayList<>();
+    private DocumentAdapter adapter;
+    private List<MobileBean> docList = new ArrayList<>();
+    private List<MobileBean> refenList = new ArrayList<>();
     private List<String> posList = new ArrayList<>();
+    private List<String> searchList = new ArrayList<>();
+    private String searchStr = new String();
+    private Handler handler = new Handler();
     private SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
     private SharedPreferences pref;
     private Boolean isAll = false;
@@ -56,7 +74,7 @@ public class DocumentActivity extends BaseActivity implements View.OnClickListen
                     mProgressDialog.dismiss();
                     Collections.sort(docList, NameComparator);
                     llBottom.setVisibility(View.GONE);
-                    adapter = new DocAdapter(DocumentActivity.this, docList, posList, mHandler);
+                    adapter = new DocumentAdapter(DocumentActivity.this, docList, posList, searchList, mHandler);
                     lvDoc.setAdapter(adapter);
                     break;
             }
@@ -92,8 +110,10 @@ public class DocumentActivity extends BaseActivity implements View.OnClickListen
 
     private void init() {
         app = (ApplicationUtil) DocumentActivity.this.getApplication();
-        btnBack = (Button) findViewById(R.id.btn_back);
-        btnBack.setOnClickListener(this);
+        llBack = (LinearLayout) findViewById(R.id.ll_back);
+        llBack.setOnClickListener(this);
+        llSearch = (LinearLayout) findViewById(R.id.ll_search);
+        llSearch.setOnClickListener(this);
         lvDoc = (ListView) findViewById(R.id.lv_doc);
         llBottom = (LinearLayout) findViewById(R.id.ll_bottom);
         btnDelete = (LinearLayout) findViewById(R.id.btn_del);
@@ -110,9 +130,44 @@ public class DocumentActivity extends BaseActivity implements View.OnClickListen
 
     @Override
     public void onClick(View v) {
-        if (v == btnBack) {
+        if (v == llBack) {
             setResult(RESULT_OK, null);
             finish();
+        } else if (v == llSearch) {
+            InputMethodManager inputManager = (InputMethodManager) getApplication().getSystemService(Context.INPUT_METHOD_SERVICE);
+            inputManager.toggleSoftInput(0, InputMethodManager.HIDE_NOT_ALWAYS);
+            LayoutInflater inflater = LayoutInflater.from(this);
+            LinearLayout layout = (LinearLayout) inflater.inflate(R.layout.searchbar_dialog_view, null);
+            final Dialog dialog = new AlertDialog.Builder(DocumentActivity.this).create();
+            etSearch = (EditText) layout.findViewById(R.id.et_search);
+            setSearchTextChanged();
+            etSearch.setText(searchStr);
+            etSearch.setFocusableInTouchMode(true);
+            etSearch.setFocusable(true);
+            etSearch.requestFocus();
+            etSearch.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+
+                @Override
+                public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+                    if (actionId == EditorInfo.IME_ACTION_DONE || actionId == EditorInfo.IME_ACTION_SEARCH
+                            || actionId == EditorInfo.IME_ACTION_GO || actionId == EditorInfo.IME_ACTION_NEXT
+                            || actionId == EditorInfo.IME_ACTION_NONE || actionId == EditorInfo.IME_ACTION_PREVIOUS
+                            || actionId == EditorInfo.IME_ACTION_SEND || event.getAction() == KeyEvent.KEYCODE_ENTER) {
+                        dialog.dismiss();
+                        return true;
+                    }
+                    return false;
+                }
+            });
+            dialog.show();
+            Window window = dialog.getWindow();
+            window.setContentView(layout);
+            WindowManager.LayoutParams lp = window.getAttributes();
+            window.setGravity(Gravity.CENTER | Gravity.BOTTOM);
+            window.setAttributes(lp);
+            window.clearFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);
+            window.clearFlags(WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE | WindowManager.LayoutParams.FLAG_ALT_FOCUSABLE_IM);
+            window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE);
         } else if (v == btnDelete) {
             Handler dHandler = new Handler();
             dHandler.post(deleteFile);
@@ -128,7 +183,7 @@ public class DocumentActivity extends BaseActivity implements View.OnClickListen
             bundle.putString("method", "copy");
             bundle.putStringArrayList("source", (ArrayList<String>) portal);
             Intent intent = new Intent();
-            intent.setClass(DocumentActivity.this, DeviceActivity.class);
+            intent.setClass(DocumentActivity.this, MobileActivity.class);
             intent.putExtras(bundle);
             startActivity(intent);
         } else if (v == btnMove) {
@@ -140,7 +195,7 @@ public class DocumentActivity extends BaseActivity implements View.OnClickListen
             bundle.putString("method", "move");
             bundle.putStringArrayList("source", (ArrayList<String>) portal);
             Intent intent = new Intent();
-            intent.setClass(DocumentActivity.this, DeviceActivity.class);
+            intent.setClass(DocumentActivity.this, MobileActivity.class);
             intent.putExtras(bundle);
             startActivity(intent);
         } else if (v == btnShare) {
@@ -158,6 +213,88 @@ public class DocumentActivity extends BaseActivity implements View.OnClickListen
             }
         }
     }
+
+    private void getAllDocument() {
+        if (!Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED)) {
+            ShowToast("暂无外部存储");
+            return;
+        }
+        mProgressDialog = ProgressDialog.show(this, null, "正在加载...");
+        new Thread(new Runnable() {
+
+            @Override
+            public void run() {
+                getDocument(Environment.getExternalStorageDirectory());
+                lHandler.sendEmptyMessage(SCAN_OK);
+
+            }
+        }).start();
+    }
+
+    private void getDocument(File root) {
+        File fileis[] = root.listFiles();
+        if (fileis != null) {
+            for (File filei : fileis) {
+                if (filei.isDirectory()) {
+                    getDocument(filei);
+                } else {
+                    String fileName = filei.getName();
+                    if (fileName.endsWith(".txt")
+                            || fileName.endsWith(".doc") || fileName.endsWith(".pdf")
+                            || fileName.endsWith(".xlsx") || fileName.endsWith(".ppt")) {
+                        List<String> childs = new ArrayList<>();
+                        docList.add(new MobileBean(filei.getAbsolutePath(), filei.getName(), root.getAbsolutePath(), childs,
+                                format.format(new Date((new File(filei.getAbsolutePath())).lastModified()))));
+                        refenList.add(new MobileBean(filei.getAbsolutePath(), filei.getName(), root.getAbsolutePath(), childs,
+                                format.format(new Date((new File(filei.getAbsolutePath())).lastModified()))));
+                    }
+                }
+            }
+        }
+    }
+
+    private void setSearchTextChanged() {
+
+        etSearch.addTextChangedListener(new TextWatcher() {
+
+            @Override
+            public void onTextChanged(CharSequence arg0, int arg1, int arg2, int arg3) {
+                handler.post(changed);
+            }
+
+            @Override
+            public void beforeTextChanged(CharSequence arg0, int arg1, int arg2, int arg3) {
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+//                handler.post(changed);
+            }
+        });
+    }
+
+    private void getContactSub(List<MobileBean> contactSub, String searchStr) {
+        int length = refenList.size();
+        for (int i = 0; i < length; ++i) {
+            if (refenList.get(i).getFileName().contains(searchStr)) {
+                contactSub.add(refenList.get(i));
+            }
+        }
+    }
+
+    Runnable changed = new Runnable() {
+
+        @Override
+        public void run() {
+            searchStr = etSearch.getText().toString();
+            searchList.clear();
+            searchList.add(searchStr);
+            docList.clear();
+            getContactSub(docList, searchStr);
+            Collections.sort(docList, NameComparator);
+            adapter.notifyDataSetChanged();
+        }
+    };
 
     Runnable deleteFile = new Runnable() {
 
@@ -207,43 +344,6 @@ public class DocumentActivity extends BaseActivity implements View.OnClickListen
         }
     };
 
-    private void getAllDocument() {
-        if (!Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED)) {
-            ShowToast("暂无外部存储");
-            return;
-        }
-        mProgressDialog = ProgressDialog.show(this, null, "正在加载...");
-        new Thread(new Runnable() {
-
-            @Override
-            public void run() {
-                getDocument(Environment.getExternalStorageDirectory());
-                lHandler.sendEmptyMessage(SCAN_OK);
-
-            }
-        }).start();
-    }
-
-    private void getDocument(File root) {
-        File fileis[] = root.listFiles();
-        if (fileis != null) {
-            for (File filei : fileis) {
-                if (filei.isDirectory()) {
-                    getDocument(filei);
-                } else {
-                    String fileName = filei.getName();
-                    if (fileName.endsWith(".txt")
-                            || fileName.endsWith(".doc") || fileName.endsWith(".pdf")
-                            || fileName.endsWith(".xlsx") || fileName.endsWith(".ppt")) {
-                        List<String> childs = new ArrayList<>();
-                        docList.add(new FileBean(filei.getAbsolutePath(), filei.getName(), root.getAbsolutePath(), childs,
-                                format.format(new Date((new File(filei.getAbsolutePath())).lastModified()))));
-                    }
-                }
-            }
-        }
-    }
-
     Comparator PosComparator = new Comparator() {
         public int compare(Object obj1, Object obj2) {
             String str1 = (String) obj1;
@@ -260,8 +360,8 @@ public class DocumentActivity extends BaseActivity implements View.OnClickListen
 
     Comparator NameComparator = new Comparator() {
         public int compare(Object obj1, Object obj2) {
-            FileBean file1 = (FileBean) obj1;
-            FileBean file2 = (FileBean) obj2;
+            MobileBean file1 = (MobileBean) obj1;
+            MobileBean file2 = (MobileBean) obj2;
             if (file1.getFileName().compareToIgnoreCase(file2.getFileName()) < 0)
                 return -1;
             else if (file1.getFileName().compareToIgnoreCase(file2.getFileName()) == 0)

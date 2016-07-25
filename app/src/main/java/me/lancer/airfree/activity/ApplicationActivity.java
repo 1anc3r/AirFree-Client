@@ -21,10 +21,10 @@ import android.widget.Button;
 import android.widget.ListView;
 
 import me.lancer.distance.R;
-import me.lancer.airfree.adapter.AppAdapter;
-import me.lancer.airfree.model.AppBean;
+import me.lancer.airfree.adapter.ApplicationAdapter;
+import me.lancer.airfree.model.ApplicationBean;
 
-public class AppActivity extends BaseActivity implements View.OnClickListener {
+public class ApplicationActivity extends BaseActivity implements View.OnClickListener {
 
     private Button btnBack;
     private ListView lvApp;
@@ -32,8 +32,8 @@ public class AppActivity extends BaseActivity implements View.OnClickListener {
 
     private final static int SCAN_OK = 1;
 
-    private AppAdapter adapter;
-    private List<AppBean> appList = new ArrayList<>();
+    private ApplicationAdapter adapter;
+    private List<ApplicationBean> appList = new ArrayList<>();
     private List<String> posList = new ArrayList<>();
 
     private Handler lHandler = new Handler() {
@@ -45,7 +45,7 @@ public class AppActivity extends BaseActivity implements View.OnClickListener {
                 case SCAN_OK:
                     mProgressDialog.dismiss();
                     Collections.sort(appList, AppComparator);
-                    adapter = new AppAdapter(AppActivity.this, appList, posList);
+                    adapter = new ApplicationAdapter(ApplicationActivity.this, appList, posList);
                     lvApp.setAdapter(adapter);
                     break;
             }
@@ -66,7 +66,7 @@ public class AppActivity extends BaseActivity implements View.OnClickListener {
 
             @Override
             public void onItemClick(AdapterView<?> parent, View view, final int position, long id) {
-                AlertDialog.Builder builder = new AlertDialog.Builder(AppActivity.this);
+                AlertDialog.Builder builder = new AlertDialog.Builder(ApplicationActivity.this);
                 builder.setTitle("详细信息");
                 builder.setMessage("应用名 : " + appList.get(position).getAppName()
                         + "\n\n" +
@@ -117,7 +117,7 @@ public class AppActivity extends BaseActivity implements View.OnClickListener {
                 List<PackageInfo> packages = getPackageManager().getInstalledPackages(0);
                 for (int i = 0; i < packages.size(); i++) {
                     PackageInfo packageInfo = packages.get(i);
-                    AppBean appInfo = new AppBean();
+                    ApplicationBean appInfo = new ApplicationBean();
                     appInfo.setVersionCode(packageInfo.versionCode);
                     appInfo.setAppName(packageInfo.applicationInfo.loadLabel(getPackageManager()).toString());
                     appInfo.setPackageName(packageInfo.packageName);
@@ -132,8 +132,8 @@ public class AppActivity extends BaseActivity implements View.OnClickListener {
 
     Comparator AppComparator = new Comparator() {
         public int compare(Object obj1, Object obj2) {
-            AppBean app1 = (AppBean) obj1;
-            AppBean app2 = (AppBean) obj2;
+            ApplicationBean app1 = (ApplicationBean) obj1;
+            ApplicationBean app2 = (ApplicationBean) obj2;
             if (app1.getAppName().compareToIgnoreCase(app2.getAppName()) < 0)
                 return -1;
             else if (app1.getAppName().compareToIgnoreCase(app2.getAppName()) == 0)

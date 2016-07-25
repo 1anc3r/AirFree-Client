@@ -1,6 +1,6 @@
 package me.lancer.airfree.model;
 
-public class Update {
+public class UpdateBean {
 
     private String version;
 

@@ -109,7 +109,7 @@ public class ImageIActivity extends BaseActivity implements View.OnClickListener
             bundle.putString("method", "copy");
             bundle.putStringArrayList("source", (ArrayList<String>) portal);
             Intent intent = new Intent();
-            intent.setClass(ImageIActivity.this, DeviceActivity.class);
+            intent.setClass(ImageIActivity.this, MobileActivity.class);
             intent.putExtras(bundle);
             startActivity(intent);
         } else if (v == btnMove) {
@@ -121,7 +121,7 @@ public class ImageIActivity extends BaseActivity implements View.OnClickListener
             bundle.putString("method", "move");
             bundle.putStringArrayList("source", (ArrayList<String>) portal);
             Intent intent = new Intent();
-            intent.setClass(ImageIActivity.this, DeviceActivity.class);
+            intent.setClass(ImageIActivity.this, MobileActivity.class);
             intent.putExtras(bundle);
             startActivity(intent);
         } else if (v == btnShare) {

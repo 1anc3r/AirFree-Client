@@ -19,7 +19,7 @@
             android:layout_width="24dp"
             android:layout_height="24dp"
             android:layout_marginLeft="8dp"
-            android:background="@drawable/ic_arrow_back_white_24dp"
+            android:background="@drawable/ic_chevron_left_white_24dp"
             android:gravity="center_vertical|left" />
 
         <TextView

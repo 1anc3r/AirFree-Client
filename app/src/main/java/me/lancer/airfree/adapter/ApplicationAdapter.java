@@ -11,15 +11,15 @@ import android.widget.TextView;
 import java.util.List;
 
 import me.lancer.distance.R;
-import me.lancer.airfree.model.AppBean;
+import me.lancer.airfree.model.ApplicationBean;
 
-public class AppAdapter extends BaseAdapter {
+public class ApplicationAdapter extends BaseAdapter {
 
-    private List<AppBean> appList;
+    private List<ApplicationBean> appList;
     private List<String> posList;
     protected LayoutInflater mInflater;
 
-    public AppAdapter(Context context, List<AppBean> appList, List<String> posList) {
+    public ApplicationAdapter(Context context, List<ApplicationBean> appList, List<String> posList) {
         this.appList = appList;
         this.posList = posList;
         mInflater = LayoutInflater.from(context);

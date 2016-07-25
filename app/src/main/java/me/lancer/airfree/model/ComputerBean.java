@@ -1,6 +1,6 @@
 package me.lancer.airfree.model;
 
-public class LetterBean {
+public class ComputerBean {
 
     private String filePath;
 
@@ -8,14 +8,14 @@ public class LetterBean {
 
     private String fileParentPath;
 
-    private LetterBean fileParent;
+    private ComputerBean fileParent;
 
-    public LetterBean(String filePath, String fileName) {
+    public ComputerBean(String filePath, String fileName) {
         this.filePath = filePath;
         this.fileName = fileName;
     }
 
-    public LetterBean(String filePath, String fileName, String fileParentPath, LetterBean fileParent) {
+    public ComputerBean(String filePath, String fileName, String fileParentPath, ComputerBean fileParent) {
         this.filePath = filePath;
         this.fileName = fileName;
         this.fileParentPath = fileParentPath;
@@ -46,11 +46,11 @@ public class LetterBean {
         this.fileParentPath = fileParentPath;
     }
 
-    public LetterBean getFileParent() {
+    public ComputerBean getFileParent() {
         return fileParent;
     }
 
-    public void setFileParent(LetterBean fileParent) {
+    public void setFileParent(ComputerBean fileParent) {
         this.fileParent = fileParent;
     }
 }

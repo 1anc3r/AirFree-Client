@@ -135,7 +135,6 @@ public class MusicAdapter extends BaseAdapter {
         viewHolder.mCheckBox.setChecked(posList.contains("" + position) ? true : false);
         viewHolder.mCheckBox.bringToFront();
 
-        Log.e("IP & PORT", "adapter" + searchList);
         String title = musicList.get(position).getTitle();
         String artist = musicList.get(position).getArtist();
         if (searchList.size() > 0) {

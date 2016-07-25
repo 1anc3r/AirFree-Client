@@ -2,7 +2,7 @@ package me.lancer.airfree.model;
 
 import java.util.List;
 
-public class FileBean {
+public class MobileBean {
 
     private String path;
 
@@ -14,11 +14,11 @@ public class FileBean {
 
     private String fileDate;
 
-    public FileBean() {
+    public MobileBean() {
 
     }
 
-    public FileBean(String path, String fileName, String fileParent, List<String> fileChilds, String fileDate) {
+    public MobileBean(String path, String fileName, String fileParent, List<String> fileChilds, String fileDate) {
         this.path = path;
         this.fileName = fileName;
         this.fileParent = fileParent;

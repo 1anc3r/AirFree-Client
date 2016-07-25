@@ -36,7 +36,7 @@ public class ShotActivity extends BaseActivity implements View.OnClickListener {
     final int POWEREVENTF_SCREENSHOT = 0x0001;    //截屏
 
     private String filename;
-    private Thread mThreadClient = null;
+    //    private Thread mThreadClient = null;
     private String recvMessageClient = "";
     private SharedPreferences pref;
     private boolean iStop = false;
@@ -63,8 +63,8 @@ public class ShotActivity extends BaseActivity implements View.OnClickListener {
     protected void onDestroy() {
         if (iStop == false) {
             iStop = true;
-//        sHandler.removeCallbacks(sRunnable);
-            mThreadClient.interrupt();
+            sHandler.removeCallbacks(sRunnable);
+//            mThreadClient.interrupt();
         }
         super.onDestroy();
     }
@@ -82,6 +82,8 @@ public class ShotActivity extends BaseActivity implements View.OnClickListener {
         if (what == 1) {
             btnScreenShot.performClick();
         }
+//        mThreadClient = new Thread(sRunnable);
+//        mThreadClient.start();
     }
 
     @Override
@@ -89,8 +91,8 @@ public class ShotActivity extends BaseActivity implements View.OnClickListener {
         if (v == btnBack) {
             if (iStop == false) {
                 iStop = true;
-//        sHandler.removeCallbacks(sRunnable);
-                mThreadClient.interrupt();
+                sHandler.removeCallbacks(sRunnable);
+//                mThreadClient.interrupt();
             }
             setResult(RESULT_OK, null);
             finish();
@@ -103,9 +105,7 @@ public class ShotActivity extends BaseActivity implements View.OnClickListener {
             filename = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DCIM).getAbsolutePath() + "/screenshot" + date_ + ".jpeg";
             sendMessage("screenshot", POWEREVENTF_SCREENSHOT + "");
             new ReadTask(ip, "59672", filename, ivShow).execute();
-//            sHandler.post(sRunnable);
-            mThreadClient = new Thread(sRunnable);
-            mThreadClient.start();
+            sHandler.post(sRunnable);
         } else if (v == ivShow) {
             File file = new File(filename);
             Intent intent = new Intent(Intent.ACTION_VIEW);
@@ -156,8 +156,8 @@ public class ShotActivity extends BaseActivity implements View.OnClickListener {
         if (keyCode == KeyEvent.KEYCODE_BACK && event.getRepeatCount() == 0) {
             if (iStop == false) {
                 iStop = true;
-//        sHandler.removeCallbacks(sRunnable);
-                mThreadClient.interrupt();
+                sHandler.removeCallbacks(sRunnable);
+//                mThreadClient.interrupt();
             }
             finish();
             overridePendingTransition(R.anim.slide_up_in, R.anim.slide_down_out);

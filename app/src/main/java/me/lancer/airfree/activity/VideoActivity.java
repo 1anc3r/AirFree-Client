@@ -162,7 +162,7 @@ public class VideoActivity extends BaseActivity implements View.OnClickListener 
             bundle.putString("method", "copy");
             bundle.putStringArrayList("source", (ArrayList<String>) portal);
             Intent intent = new Intent();
-            intent.setClass(VideoActivity.this, DeviceActivity.class);
+            intent.setClass(VideoActivity.this, MobileActivity.class);
             intent.putExtras(bundle);
             startActivity(intent);
         } else if (v == btnMove) {
@@ -174,7 +174,7 @@ public class VideoActivity extends BaseActivity implements View.OnClickListener 
             bundle.putString("method", "move");
             bundle.putStringArrayList("source", (ArrayList<String>) portal);
             Intent intent = new Intent();
-            intent.setClass(VideoActivity.this, DeviceActivity.class);
+            intent.setClass(VideoActivity.this, MobileActivity.class);
             intent.putExtras(bundle);
             startActivity(intent);
         } else if (v == btnShare) {

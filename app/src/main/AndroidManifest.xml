@@ -72,7 +72,7 @@
             android:screenOrientation="portrait"
             android:label="@string/title_activity_bright" />
         <activity
-            android:name="me.lancer.airfree.activity.DeviceActivity"
+            android:name="me.lancer.airfree.activity.MobileActivity"
             android:screenOrientation="portrait"
             android:label="@string/title_activity_device" />
         <activity
@@ -92,7 +92,7 @@
             android:screenOrientation="portrait"
             android:label="@string/title_activity_computer" />
         <activity
-            android:name="me.lancer.airfree.activity.AppActivity"
+            android:name="me.lancer.airfree.activity.ApplicationActivity"
             android:screenOrientation="portrait"
             android:label="@string/title_activity_app" />
         <activity

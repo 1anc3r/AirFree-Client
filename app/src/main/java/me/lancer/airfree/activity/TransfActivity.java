@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
@@ -12,7 +11,6 @@ import java.util.ArrayList;
 
 import me.lancer.airfree.util.ApplicationUtil;
 import me.lancer.distance.R;
-import tyrantgit.explosionfield.ExplosionField;
 
 public class TransfActivity extends BaseActivity implements View.OnClickListener {
 
@@ -76,7 +74,7 @@ public class TransfActivity extends BaseActivity implements View.OnClickListener
             bundle.putString("method", "in");
             bundle.putStringArrayList("source", new ArrayList<String>());
             Intent intent = new Intent();
-            intent.setClass(TransfActivity.this, DeviceActivity.class);
+            intent.setClass(TransfActivity.this, MobileActivity.class);
             intent.putExtras(bundle);
             startActivity(intent);
         } else if (v == btnSdcard) {
@@ -84,7 +82,7 @@ public class TransfActivity extends BaseActivity implements View.OnClickListener
             bundle.putString("method", "out");
             bundle.putStringArrayList("source", new ArrayList<String>());
             Intent intent = new Intent();
-            intent.setClass(TransfActivity.this, DeviceActivity.class);
+            intent.setClass(TransfActivity.this, MobileActivity.class);
             intent.putExtras(bundle);
             startActivity(intent);
         } else if (v == btnImage) {
@@ -105,14 +103,14 @@ public class TransfActivity extends BaseActivity implements View.OnClickListener
             startActivity(intent);
         } else if (v == btnApp) {
             Intent intent = new Intent();
-            intent.setClass(TransfActivity.this, AppActivity.class);
+            intent.setClass(TransfActivity.this, ApplicationActivity.class);
             startActivity(intent);
         } else if (v == btnDownload) {
             Bundle bundle = new Bundle();
             bundle.putString("method", "download");
             bundle.putStringArrayList("source", new ArrayList<String>());
             Intent intent = new Intent();
-            intent.setClass(TransfActivity.this, DeviceActivity.class);
+            intent.setClass(TransfActivity.this, MobileActivity.class);
             intent.putExtras(bundle);
             startActivity(intent);
         }

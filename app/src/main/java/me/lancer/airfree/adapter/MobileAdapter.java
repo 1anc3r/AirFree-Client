@@ -4,8 +4,12 @@ import java.io.File;
 import java.util.List;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.os.Handler;
 import android.os.Message;
+import android.text.Spannable;
+import android.text.SpannableStringBuilder;
+import android.text.style.ForegroundColorSpan;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,20 +22,22 @@ import android.widget.TextView;
 import com.nineoldandroids.animation.AnimatorSet;
 import com.nineoldandroids.animation.ObjectAnimator;
 
-import me.lancer.airfree.model.FileBean;
+import me.lancer.airfree.model.MobileBean;
 import me.lancer.distance.R;
 import me.lancer.airfree.util.FileTypeRefereeUtil;
 
-public class FileAdapter extends BaseAdapter {
+public class MobileAdapter extends BaseAdapter {
 
-    private List<FileBean> fileList;
+    private List<MobileBean> fileList;
+    private List<String> searchList;
     private List<String> posList;
     private Handler mHandler;
     protected LayoutInflater mInflater;
 
-    public FileAdapter(Context context, List<FileBean> fileList, List<String> posList, Handler mHandler) {
+    public MobileAdapter(Context context, List<MobileBean> fileList, List<String> posList, List<String> searchList, Handler mHandler) {
         this.fileList = fileList;
         this.posList = posList;
+        this.searchList = searchList;
         this.mHandler = mHandler;
         mInflater = LayoutInflater.from(context);
     }
@@ -126,6 +132,22 @@ public class FileAdapter extends BaseAdapter {
         });
         viewHolder.mCheckBox.setChecked(posList.contains("" + position) ? true : false);
         viewHolder.mCheckBox.bringToFront();
+
+        String fileName = fileList.get(position).getFileName();
+        if (searchList.size() > 0) {
+            String keyword = searchList.get(0);
+            if ((fileName != null && fileName.contains(keyword))) {
+                ForegroundColorSpan span = new ForegroundColorSpan(Color.RED);
+                SpannableStringBuilder builder1 = new SpannableStringBuilder(fileName);
+                int index1 = fileName.indexOf(keyword);
+                if (index1 != -1) {
+                    builder1.setSpan(span, index1, index1 + keyword.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+                }
+                viewHolder.tvName.setText(builder1);
+            } else {
+                viewHolder.tvName.setText(fileName);
+            }
+        }
 
         return convertView;
     }
