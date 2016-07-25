@@ -3,13 +3,14 @@
 
 AirFree-Server is [here](https://github.com/1anc3r/AirFree-Server).
 
+
 ## Introduction
 A few months ago, I began to code this poject which can transfer commands and files between android-phone and windows-pc. I learned a lot via this project, thanks for every day to learn new knowledge point, and every person to help me.
 
 The name of this poject isn't called AirFree initially, because AirFree and Alfred homonym, and Alfred is the name of Batman's old housekeeper, I hope this poject can help us as Alfred help Bruce Wayne. 
 
 ## Link:
-* Blog: [http://www.1anc3r.me](http://www.1anc3r.me)
+* Blog Posts: [AirFree —— Android to PC Remote](http://www.1anc3r.me/airfree-android-to-pc-remote)
 * Github: [https://github.com/1anc3r](https://github.com/1anc3r)
 * AirFree-Client Downloads: [AirFree-Client.apk](http://o7gy5l0ax.bkt.clouddn.com/AirFree-Client.apk)
 * AirFree-Server Downloads: [AirFree-Server.exe](http://pan.baidu.com/s/1pKDmnb1)
