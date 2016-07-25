@@ -13,7 +13,7 @@ The name of this poject isn't called AirFree initially, because AirFree and Alfr
 * Blog Posts: [AirFree —— Android to PC Remote](http://www.1anc3r.me/airfree-android-to-pc-remote)
 * Github: [https://github.com/1anc3r](https://github.com/1anc3r)
 * AirFree-Client Downloads: [AirFree-Client.apk](http://o7gy5l0ax.bkt.clouddn.com/AirFree-Client.apk)
-* AirFree-Server Downloads: [AirFree-Server.exe](http://pan.baidu.com/s/1pKDmnb1)
+* AirFree-Server Downloads: [AirFree-Server.exe](http://pan.baidu.com/s/1skI7QFF)
 
 ## How to Use:
 1. Android-phone and windows-pc connect to the same Wi-Fi, or android-phone / windows-pc connect to windows-pc / android-phone 's hotspot, then open AirFree-Server and AirFree-Client.
