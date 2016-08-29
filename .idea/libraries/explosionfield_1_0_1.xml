@@ -5,6 +5,8 @@
       <root url="jar://$PROJECT_DIR$/app/build/intermediates/exploded-aar/tyrantgit/explosionfield/1.0.1/jars/classes.jar!/" />
     </CLASSES>
     <JAVADOC />
-    <SOURCES />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/tyrantgit/explosionfield/1.0.1/5e0de9c74e2855b253ee49e30d0a540ebac78dc5/explosionfield-1.0.1-sources.jar!/" />
+    </SOURCES>
   </library>
 </component>

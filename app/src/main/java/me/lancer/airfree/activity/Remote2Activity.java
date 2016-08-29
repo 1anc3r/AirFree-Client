@@ -2,31 +2,24 @@ package me.lancer.airfree.activity;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.app.Activity;
 import android.os.Environment;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
+import android.view.GestureDetector;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
-import android.view.WindowManager;
-import android.view.inputmethod.EditorInfo;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.SeekBar;
-import android.widget.TextView;
-import android.widget.Toast;
-
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.LinkedHashMap;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-
-import org.json.JSONException;
-import org.json.JSONObject;
 
 import com.iflytek.cloud.ErrorCode;
 import com.iflytek.cloud.InitListener;
@@ -37,192 +30,168 @@ import com.iflytek.cloud.SpeechError;
 import com.iflytek.cloud.SpeechRecognizer;
 import com.iflytek.cloud.ui.RecognizerDialog;
 import com.iflytek.cloud.ui.RecognizerDialogListener;
-
 import com.iflytek.sunflower.FlowerCollector;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.LinkedHashMap;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import me.lancer.airfree.util.ApplicationUtil;
 import me.lancer.airfree.util.IatSettings;
 import me.lancer.airfree.util.JsonParser;
 import me.lancer.distance.R;
 
-public class RemoteActivity extends BaseActivity implements View.OnClickListener {
+public class Remote2Activity extends BaseActivity implements View.OnClickListener{
 
     ApplicationUtil app;
 
-    LinearLayout btnMouse, btnPower, btnShot, btnVoice, btnVolume, btnBright, btnGesture, btnOpen, btnTalk;
-    private EditText etSearch;
+    private Button btnBack, btnLeft, btnRight, btnUp, btnDown, btnVoice, btnVolume, btnBright, btnPlay;
     private SeekBar sbVolume, sbBright;
     private RecognizerDialog mIatDialog;
     private SpeechRecognizer mIat;
 
-    private static String TAG = RemoteActivity.class.getSimpleName();
+    private static String TAG = Remote2Activity.class.getSimpleName();
 
     private String mEngineType = SpeechConstant.TYPE_CLOUD;
     private HashMap<String, String> mIatResults = new LinkedHashMap<>();
     private SharedPreferences mSharedPreferences;
+    private boolean iStop = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_remote);
+        setContentView(R.layout.activity_remote2);
         init();
     }
 
+    @Override
+    protected void onDestroy() {
+        iStop = true;
+        super.onDestroy();
+    }
+
     private void init() {
-        app = (ApplicationUtil) RemoteActivity.this.getApplication();
-        btnPower = (LinearLayout) findViewById(R.id.btn_power);
-        btnPower.setOnClickListener(this);
-        btnShot = (LinearLayout) findViewById(R.id.btn_shot);
-        btnShot.setOnClickListener(this);
-        btnMouse = (LinearLayout) findViewById(R.id.btn_mouse);
-        btnMouse.setOnClickListener(this);
-        btnGesture = (LinearLayout) findViewById(R.id.btn_gesture);
-        btnGesture.setOnClickListener(this);
-        btnVoice = (LinearLayout) findViewById(R.id.btn_voice);
+        app = (ApplicationUtil) Remote2Activity.this.getApplication();
+        btnBack = (Button) findViewById(R.id.btn_back);
+        btnBack.setOnClickListener(this);
+        btnVoice = (Button) findViewById(R.id.btn_voice);
         btnVoice.setOnClickListener(this);
-        btnVolume = (LinearLayout) findViewById(R.id.btn_volume);
+        btnRight = (Button) findViewById(R.id.btn_right);
+        btnRight.setOnClickListener(this);
+        btnLeft = (Button) findViewById(R.id.btn_left);
+        btnLeft.setOnClickListener(this);
+        btnUp = (Button) findViewById(R.id.btn_up);
+        btnUp.setOnClickListener(this);
+        btnDown = (Button) findViewById(R.id.btn_down);
+        btnDown.setOnClickListener(this);
+        btnVolume = (Button) findViewById(R.id.btn_volume);
         btnVolume.setOnClickListener(this);
-        btnBright = (LinearLayout) findViewById(R.id.btn_bright);
+        btnBright = (Button) findViewById(R.id.btn_bright);
         btnBright.setOnClickListener(this);
-        btnOpen = (LinearLayout) findViewById(R.id.btn_open);
-        btnOpen.setOnClickListener(this);
-        btnTalk = (LinearLayout) findViewById(R.id.btn_talk);
-        btnTalk.setOnClickListener(this);
-        mIat = SpeechRecognizer.createRecognizer(RemoteActivity.this, mInitListener);
-        mIatDialog = new RecognizerDialog(RemoteActivity.this, mInitListener);
+        btnPlay = (Button) findViewById(R.id.btn_play);
+        btnPlay.setOnClickListener(this);
+        mIat = SpeechRecognizer.createRecognizer(Remote2Activity.this, mInitListener);
+        mIatDialog = new RecognizerDialog(Remote2Activity.this, mInitListener);
         mSharedPreferences = getSharedPreferences(IatSettings.PREFER_NAME, MODE_PRIVATE);
     }
 
     @Override
     public void onClick(View v) {
-        if (app.isConnecting()) {
-            if (v == btnPower) {
-                Intent intent = new Intent();
-                intent.putExtra("what", 0);
-                intent.setClass(RemoteActivity.this, PowerActivity.class);
-                startActivity(intent);
-                this.getParent().overridePendingTransition(R.anim.slide_up_in, R.anim.slide_down_out);
-            } else if (v == btnShot) {
-                Intent intent = new Intent();
-                intent.putExtra("what", 0);
-                intent.setClass(RemoteActivity.this, ShotActivity.class);
-                startActivity(intent);
-                this.getParent().overridePendingTransition(R.anim.slide_up_in, R.anim.slide_down_out);
-            } else if (v == btnMouse) {
-                Intent intent = new Intent();
-                intent.setClass(RemoteActivity.this, MouseActivity.class);
-                startActivity(intent);
-                this.getParent().overridePendingTransition(R.anim.slide_up_in, R.anim.slide_down_out);
-            } else if (v == btnGesture) {
-                Intent intent = new Intent();
-                intent.setClass(RemoteActivity.this, GestureActivity.class);
-                startActivity(intent);
-                this.getParent().overridePendingTransition(R.anim.slide_up_in, R.anim.slide_down_out);
-            } else if (v == btnVoice) {
-                FlowerCollector.onEvent(RemoteActivity.this, "iat_recognize");
-                mIatResults.clear();
-                setParam();
-                mIatDialog.setListener(mRecognizerDialogListener);
-                mIatDialog.show();
-                showTip(getString(R.string.text_begin));
-            } else if (v == btnVolume) {
+        if (v == btnLeft) {
+            sendMessage("remote", "15");
+        } else if (v == btnRight) {
+            sendMessage("remote", "14");
+        } else if (v == btnUp) {
+            sendMessage("remote", "13");
+        } else if (v == btnDown) {
+            sendMessage("remote", "12");
+        } else if (v == btnPlay) {
+            sendMessage("remote", "16");
+        } else if (v == btnBack) {
+            iStop = true;
+            setResult(RESULT_OK, null);
+            finish();
+            overridePendingTransition(R.anim.slide_up_in, R.anim.slide_down_out);
+        } else if (v == btnVoice) {
+            FlowerCollector.onEvent(Remote2Activity.this, "iat_recognize");
+            mIatResults.clear();
+            setParam();
+            mIatDialog.setListener(mRecognizerDialogListener);
+            mIatDialog.show();
+            showTip(getString(R.string.text_begin));
+        } else if (v == btnVolume) {
+            LayoutInflater inflater = LayoutInflater.from(this);
+            LinearLayout layout = (LinearLayout) inflater.inflate(R.layout.seekbar_dialog_view, null);
+            final Dialog dialog = new AlertDialog.Builder(Remote2Activity.this).create();
+            sbVolume = (SeekBar) layout.findViewById(R.id.sb_vorb);
+            sbVolume.setProgress(50);
+            sbVolume.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+
+                @Override
+                public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+                    sendMessage("volume", "" + progress);
+                }
+
+                @Override
+                public void onStartTrackingTouch(SeekBar seekBar) {
+                }
+
+                @Override
+                public void onStopTrackingTouch(SeekBar seekBar) {
+                }
+            });
+            dialog.show();
+            dialog.getWindow().setContentView(layout);
+        } else if (v == btnBright) {
 //                Intent intent = new Intent();
-//                intent.setClass(RemoteActivity.this, VolumeActivity.class);
+//                intent.setClass(MouseActivity.this, BrightActivity.class);
 //                startActivity(intent);
 //                this.getParent().overridePendingTransition(R.anim.slide_up_in, R.anim.slide_down_out);
-                LayoutInflater inflater = LayoutInflater.from(this);
-                LinearLayout layout = (LinearLayout) inflater.inflate(R.layout.seekbar_dialog_view, null);
-                final Dialog dialog = new AlertDialog.Builder(RemoteActivity.this).create();
-                sbVolume = (SeekBar) layout.findViewById(R.id.sb_vorb);
-                sbVolume.setProgress(50);
-                sbVolume.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+            LayoutInflater inflater = LayoutInflater.from(this);
+            LinearLayout layout = (LinearLayout) inflater.inflate(R.layout.seekbar_dialog_view, null);
+            final Dialog dialog = new AlertDialog.Builder(Remote2Activity.this).create();
+            sbBright = (SeekBar) layout.findViewById(R.id.sb_vorb);
+            sbBright.setProgress(50);
+            sbBright.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
 
-                    @Override
-                    public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-                        sendMessage("volume", "" + progress);
-                    }
+                @Override
+                public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+                    sendMessage("bright", "" + progress);
+                }
 
-                    @Override
-                    public void onStartTrackingTouch(SeekBar seekBar) {
-                    }
+                @Override
+                public void onStartTrackingTouch(SeekBar seekBar) {
+                }
 
-                    @Override
-                    public void onStopTrackingTouch(SeekBar seekBar) {
-                    }
-                });
-                dialog.show();
-                dialog.getWindow().setContentView(layout);
-            } else if (v == btnBright) {
-//                Intent intent = new Intent();
-//                intent.setClass(RemoteActivity.this, BrightActivity.class);
-//                startActivity(intent);
-//                this.getParent().overridePendingTransition(R.anim.slide_up_in, R.anim.slide_down_out);
-                LayoutInflater inflater = LayoutInflater.from(this);
-                LinearLayout layout = (LinearLayout) inflater.inflate(R.layout.seekbar_dialog_view, null);
-                final Dialog dialog = new AlertDialog.Builder(RemoteActivity.this).create();
-                sbBright = (SeekBar) layout.findViewById(R.id.sb_vorb);
-                sbBright.setProgress(50);
-                sbBright.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
-
-                    @Override
-                    public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-                        sendMessage("bright", "" + progress);
-                    }
-
-                    @Override
-                    public void onStartTrackingTouch(SeekBar seekBar) {
-                    }
-
-                    @Override
-                    public void onStopTrackingTouch(SeekBar seekBar) {
-                    }
-                });
-                dialog.show();
-                dialog.getWindow().setContentView(layout);
-            } else if (v == btnOpen) {
-                Intent intent = new Intent();
-                intent.setClass(RemoteActivity.this, Remote2Activity.class);
-                startActivity(intent);
-                this.getParent().overridePendingTransition(R.anim.slide_up_in, R.anim.slide_down_out);
-            } else if (v == btnTalk) {
-//                LayoutInflater inflater = LayoutInflater.from(this);
-//                LinearLayout layout = (LinearLayout) inflater.inflate(R.layout.searchbar_dialog_view, null);
-//                final Dialog dialog = new AlertDialog.Builder(RemoteActivity.this).create();
-//                etSearch = (EditText) layout.findViewById(R.id.et_search);
-//                etSearch.setFocusableInTouchMode(true);
-//                etSearch.setFocusable(true);
-//                etSearch.requestFocus();
-//                etSearch.setOnEditorActionListener(new TextView.OnEditorActionListener() {
-//
-//                    @Override
-//                    public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
-//                        if (actionId == EditorInfo.IME_ACTION_SEARCH) {
-//                            sendMessage("remote", "s?wd=" + etSearch.getText());
-//                            dialog.dismiss();
-//                            return true;
-//                        }
-//                        return false;
-//                    }
-//                });
-//                dialog.show();
-//                dialog.getWindow().setContentView(layout);
-//                dialog.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE | WindowManager.LayoutParams.FLAG_ALT_FOCUSABLE_IM);
-//                dialog.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE);
-                Intent intent = new Intent();
-                intent.setClass(RemoteActivity.this, TalkActivity.class);
-                startActivity(intent);
-                this.getParent().overridePendingTransition(R.anim.slide_up_in, R.anim.slide_down_out);
-            }
-        } else {
-            Toast.makeText(this, "没有连接!", Toast.LENGTH_SHORT).show();
+                @Override
+                public void onStopTrackingTouch(SeekBar seekBar) {
+                }
+            });
+            dialog.show();
+            dialog.getWindow().setContentView(layout);
         }
+    }
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if (keyCode == KeyEvent.KEYCODE_BACK && event.getRepeatCount() == 0) {
+            iStop = true;
+            finish();
+            overridePendingTransition(R.anim.slide_up_in, R.anim.slide_down_out);
+            return false;
+        }
+        return false;
     }
 
     private InitListener mInitListener = new InitListener() {
 
         @Override
         public void onInit(int code) {
-            Log.d(TAG, "SpeechRecognizer init() code = " + code);
             if (code != ErrorCode.SUCCESS) {
                 showTip("初始化失败，错误码：" + code);
             }
@@ -257,7 +226,6 @@ public class RemoteActivity extends BaseActivity implements View.OnClickListener
         @Override
         public void onVolumeChanged(int volume, byte[] data) {
             showTip("当前正在说话，音量大小：" + volume);
-            Log.d(TAG, "返回音频数据：" + data.length);
         }
 
         @Override
@@ -271,6 +239,7 @@ public class RemoteActivity extends BaseActivity implements View.OnClickListener
         public void onResult(RecognizerResult results, boolean isLast) {
             Log.e("IP & PORT", isLast + " " + results.toString());
             if (!isLast) {
+                Log.e("IP & PORT", "in");
                 printResult(results);
             }
         }
@@ -394,25 +363,25 @@ public class RemoteActivity extends BaseActivity implements View.OnClickListener
         } else if (result.contains("关机")) {
             Intent intent = new Intent();
             intent.putExtra("what", 1);
-            intent.setClass(RemoteActivity.this, PowerActivity.class);
+            intent.setClass(Remote2Activity.this, PowerActivity.class);
             startActivity(intent);
             this.getParent().overridePendingTransition(R.anim.slide_up_in, R.anim.slide_down_out);
         } else if (result.contains("重启")) {
             Intent intent = new Intent();
             intent.putExtra("what", 2);
-            intent.setClass(RemoteActivity.this, PowerActivity.class);
+            intent.setClass(Remote2Activity.this, PowerActivity.class);
             startActivity(intent);
             this.getParent().overridePendingTransition(R.anim.slide_up_in, R.anim.slide_down_out);
         } else if (result.contains("注销")) {
             Intent intent = new Intent();
             intent.putExtra("what", 3);
-            intent.setClass(RemoteActivity.this, PowerActivity.class);
+            intent.setClass(Remote2Activity.this, PowerActivity.class);
             startActivity(intent);
             this.getParent().overridePendingTransition(R.anim.slide_up_in, R.anim.slide_down_out);
         } else if (result.contains("截屏") || result.contains("截图")) {
             Intent intent = new Intent();
             intent.putExtra("what", 1);
-            intent.setClass(RemoteActivity.this, ShotActivity.class);
+            intent.setClass(Remote2Activity.this, ShotActivity.class);
             startActivity(intent);
             this.getParent().overridePendingTransition(R.anim.slide_up_in, R.anim.slide_down_out);
         } else if (result.contains("唱支歌") || result.contains("music")) {
@@ -422,12 +391,5 @@ public class RemoteActivity extends BaseActivity implements View.OnClickListener
         } else {
             sendMessage("remote", "s?wd=" + result);
         }
-    }
-
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        mIat.cancel();
-        mIat.destroy();
     }
 }

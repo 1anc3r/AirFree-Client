@@ -1,5 +1,7 @@
 package me.lancer.airfree.activity;
 
+import android.app.AlertDialog;
+import android.app.Dialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -9,13 +11,16 @@ import android.text.TextWatcher;
 import android.util.Log;
 import android.view.GestureDetector;
 import android.view.KeyEvent;
+import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.view.View.OnClickListener;
 import android.view.View.OnLongClickListener;
+import android.widget.SeekBar;
 
 import com.iflytek.cloud.ErrorCode;
 import com.iflytek.cloud.InitListener;
@@ -50,8 +55,9 @@ public class MouseActivity extends BaseActivity implements View.OnTouchListener,
 
     private EditText etKeyboard;
     private RelativeLayout rlTouch;
-    private Button btnBack, btnLeft, btnRight, btnRollUp, btnRollDown, btnVoice;
-    private VerticalSeekBar vsbVolume, vsbBright;
+    private Button btnBack, btnLeft, btnRight, btnRollUp, btnRollDown, btnVoice, btnVolume, btnBright;
+    private SeekBar sbVolume, sbBright;
+//    private VerticalSeekBar vsbVolume, vsbBright;
     private GestureDetector mGestureDetector;
     private RecognizerDialog mIatDialog;
     private SpeechRecognizer mIat;
@@ -67,7 +73,7 @@ public class MouseActivity extends BaseActivity implements View.OnTouchListener,
     final int MOUSEEVENTF_DOUBLETAP = 0x0007;   // 双击
     final int MOUSEEVENTF_ROLLUP = 0x0008;      // 向上拖动滚动
     final int MOUSEEVENTF_ROLLDOWN = 0x0009;    // 向下拖动滚动
-    final int KEYBOARDEVENTF = 0x000A;          // 向下拖动滚动
+    final int KEYBOARDEVENTF = 0x000A;
 
     private int clickButton = 0;
     private boolean isLongPress = false;
@@ -109,6 +115,10 @@ public class MouseActivity extends BaseActivity implements View.OnTouchListener,
         btnRollDown.setOnClickListener(onButtonClickListener);
         btnRollDown.setLongClickable(true);
 //        btnRollDown.setOnLongClickListener(onButtonLongClickListener);
+        btnVolume = (Button) findViewById(R.id.btn_volume);
+        btnVolume.setOnClickListener(this);
+        btnBright = (Button) findViewById(R.id.btn_bright);
+        btnBright.setOnClickListener(this);
         mGestureDetector = new GestureDetector(this);
         rlTouch = (RelativeLayout) findViewById(R.id.rl_touch);
         rlTouch.setOnTouchListener(this);
@@ -309,6 +319,7 @@ public class MouseActivity extends BaseActivity implements View.OnTouchListener,
             iStop = true;
             setResult(RESULT_OK, null);
             finish();
+            overridePendingTransition(R.anim.slide_up_in, R.anim.slide_down_out);
         } else if (v == btnVoice) {
             FlowerCollector.onEvent(MouseActivity.this, "iat_recognize");
             mIatResults.clear();
@@ -316,6 +327,60 @@ public class MouseActivity extends BaseActivity implements View.OnTouchListener,
             mIatDialog.setListener(mRecognizerDialogListener);
             mIatDialog.show();
             showTip(getString(R.string.text_begin));
+        } else if (v == btnVolume) {
+//                Intent intent = new Intent();
+//                intent.setClass(MouseActivity.this, VolumeActivity.class);
+//                startActivity(intent);
+//                this.getParent().overridePendingTransition(R.anim.slide_up_in, R.anim.slide_down_out);
+            LayoutInflater inflater = LayoutInflater.from(this);
+            LinearLayout layout = (LinearLayout) inflater.inflate(R.layout.seekbar_dialog_view, null);
+            final Dialog dialog = new AlertDialog.Builder(MouseActivity.this).create();
+            sbVolume = (SeekBar) layout.findViewById(R.id.sb_vorb);
+            sbVolume.setProgress(50);
+            sbVolume.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+
+                @Override
+                public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+                    sendMessage("volume", "" + progress);
+                }
+
+                @Override
+                public void onStartTrackingTouch(SeekBar seekBar) {
+                }
+
+                @Override
+                public void onStopTrackingTouch(SeekBar seekBar) {
+                }
+            });
+            dialog.show();
+            dialog.getWindow().setContentView(layout);
+        } else if (v == btnBright) {
+//                Intent intent = new Intent();
+//                intent.setClass(MouseActivity.this, BrightActivity.class);
+//                startActivity(intent);
+//                this.getParent().overridePendingTransition(R.anim.slide_up_in, R.anim.slide_down_out);
+            LayoutInflater inflater = LayoutInflater.from(this);
+            LinearLayout layout = (LinearLayout) inflater.inflate(R.layout.seekbar_dialog_view, null);
+            final Dialog dialog = new AlertDialog.Builder(MouseActivity.this).create();
+            sbBright = (SeekBar) layout.findViewById(R.id.sb_vorb);
+            sbBright.setProgress(50);
+            sbBright.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+
+                @Override
+                public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+                    sendMessage("bright", "" + progress);
+                }
+
+                @Override
+                public void onStartTrackingTouch(SeekBar seekBar) {
+                }
+
+                @Override
+                public void onStopTrackingTouch(SeekBar seekBar) {
+                }
+            });
+            dialog.show();
+            dialog.getWindow().setContentView(layout);
         }
     }
 
@@ -438,26 +503,60 @@ public class MouseActivity extends BaseActivity implements View.OnTouchListener,
     private void DealWitdResult(String result) {
         if (result.contains("打开命令行")) {
             sendMessage("remote", "1");
+        } else if (result.contains("关闭命令行")) {
+            sendMessage("remote", "-1");
         } else if (result.contains("打开任务管理器")) {
             sendMessage("remote", "2");
+        } else if (result.contains("关闭任务管理器")) {
+            sendMessage("remote", "-2");
         } else if (result.contains("打开资源管理器") || result.contains("打开我的电脑")) {
             sendMessage("remote", "3");
+        } else if (result.contains("关闭资源管理器") || result.contains("关闭我的电脑")) {
+            sendMessage("remote", "-3");
         } else if (result.contains("打开设备管理器")) {
             sendMessage("remote", "4");
+        } else if (result.contains("关闭设备管理器")) {
+            sendMessage("remote", "-4");
         } else if (result.contains("打开磁盘管理器")) {
             sendMessage("remote", "5");
+        } else if (result.contains("关闭磁盘管理器")) {
+            sendMessage("remote", "-5");
         } else if (result.contains("打开注册表编辑器")) {
             sendMessage("remote", "6");
+        } else if (result.contains("关闭注册表编辑器")) {
+            sendMessage("remote", "-6");
         } else if (result.contains("打开计算器")) {
             sendMessage("remote", "7");
+        } else if (result.contains("关闭计算器")) {
+            sendMessage("remote", "-7");
         } else if (result.contains("打开记事本")) {
             sendMessage("remote", "8");
+        } else if (result.contains("关闭记事本")) {
+            sendMessage("remote", "-8");
         } else if (result.contains("打开画图板")) {
             sendMessage("remote", "9");
+        } else if (result.contains("关闭画图板")) {
+            sendMessage("remote", "-9");
         } else if (result.contains("打开写字板")) {
-            sendMessage("remote", "0");
+            sendMessage("remote", "10");
+        } else if (result.contains("关闭写字板")) {
+            sendMessage("remote", "-10");
         } else if (result.contains("打开浏览器")) {
             sendMessage("remote", "11");
+        } else if (result.contains("下") || result.contains("下一页") || result.contains("降低音量")) {
+            sendMessage("remote", "12");
+        } else if (result.contains("上") || result.contains("上一页") || result.contains("升高音量")) {
+            sendMessage("remote", "13");
+        } else if (result.contains("右") || result.contains("快进")) {
+            sendMessage("remote", "14");
+        } else if (result.contains("左") || result.contains("快退")) {
+            sendMessage("remote", "15");
+        } else if (result.contains("暂停") || result.contains("播放")) {
+            sendMessage("remote", "16");
+        } else if (result.contains("切换窗口")){
+            sendMessage("remote", "1024");
+        } else if (result.contains("关闭窗口")){
+            sendMessage("remote", "-1024");
         } else if (result.matches("打开*[a-z]盘")) {
             Pattern p = Pattern.compile("打开(.*?)盘");
             Matcher m = p.matcher(result);

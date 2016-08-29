@@ -108,6 +108,7 @@ public class TalkActivity extends BaseActivity implements View.OnClickListener {
             }
             setResult(RESULT_OK, null);
             finish();
+            overridePendingTransition(R.anim.slide_up_in, R.anim.slide_down_out);
         } else if (v == btnSend) {
             if (etContent.getText().toString().equals("")) {
                 Log.e("IP ＆ PORT", "null");

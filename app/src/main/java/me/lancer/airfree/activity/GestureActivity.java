@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.gesture.Gesture;
 import android.gesture.GestureLibraries;
 import android.gesture.GestureLibrary;
@@ -13,6 +14,7 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.view.KeyEvent;
 import android.view.View;
+import android.widget.Button;
 import android.widget.LinearLayout;
 
 import me.lancer.airfree.util.ApplicationUtil;
@@ -24,6 +26,7 @@ public class GestureActivity extends BaseActivity implements View.OnClickListene
     ApplicationUtil app;
 
     private GestureOverlayView govTouch;
+    private Button btnBack;
     private LinearLayout btnGestureProblem;
 
     private GestureLibrary mGestureLib;
@@ -89,6 +92,8 @@ public class GestureActivity extends BaseActivity implements View.OnClickListene
         }
         btnGestureProblem = (LinearLayout) findViewById(R.id.btn_gesture_problem);
         btnGestureProblem.setOnClickListener(this);
+        btnBack = (Button) findViewById(R.id.btn_back);
+        btnBack.setOnClickListener(this);
     }
 
     @Override
@@ -105,8 +110,19 @@ public class GestureActivity extends BaseActivity implements View.OnClickListene
     public void onClick(View v) {
         if (v == btnGestureProblem) {
             new AlertDialog.Builder(GestureActivity.this)
-                    .setItems(this.getResources().getStringArray(R.array.gesture_entries), null)
+                    .setItems(this.getResources().getStringArray(R.array.gesture_entries),
+                            new DialogInterface.OnClickListener() {
+
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    sendMessage("remote", "" + (which + 1));
+                                }
+                            })
                     .show();
+        } else if (v == btnBack){
+            setResult(RESULT_OK, null);
+            finish();
+            overridePendingTransition(R.anim.slide_up_in, R.anim.slide_down_out);
         }
     }
 }

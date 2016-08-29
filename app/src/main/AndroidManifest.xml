@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="me.lancer.distance" >
+    package="me.lancer.distance">
 
     <uses-permission android:name="android.permission.WRITE_SETTINGS" />
     <uses-permission android:name="android.permission.INTERNET" />
@@ -20,11 +20,11 @@
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
-        android:theme="@style/AppTheme" >
+        android:theme="@style/AppTheme">
         <activity
             android:name="me.lancer.airfree.activity.MainActivity"
-            android:screenOrientation="portrait"
-            android:label="@string/app_name" >
+            android:label="@string/app_name"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -37,87 +37,88 @@
             android:screenOrientation="portrait" />
         <activity
             android:name="me.lancer.airfree.activity.TransfActivity"
-            android:screenOrientation="portrait"
-            android:label="@string/title_activity_transf" />
+            android:label="@string/title_activity_transf"
+            android:screenOrientation="portrait" />
         <activity
             android:name="me.lancer.airfree.activity.RemoteActivity"
-            android:screenOrientation="portrait"
-            android:label="@string/title_activity_remote" />
+            android:label="@string/title_activity_remote"
+            android:screenOrientation="portrait" />
         <activity
             android:name="me.lancer.airfree.activity.SettingActivity"
-            android:screenOrientation="portrait"
-            android:label="@string/title_activity_seting" />
+            android:label="@string/title_activity_seting"
+            android:screenOrientation="portrait" />
         <activity
             android:name="me.lancer.airfree.activity.LinkActivity"
-            android:screenOrientation="portrait"
-            android:label="@string/title_activity_link" />
+            android:label="@string/title_activity_link"
+            android:screenOrientation="portrait" />
         <activity
             android:name="me.lancer.airfree.activity.MouseActivity"
-            android:screenOrientation="portrait"
-            android:label="@string/title_activity_mouse" />
+            android:label="@string/title_activity_mouse"
+            android:screenOrientation="portrait" />
         <activity
             android:name="me.lancer.airfree.activity.PowerActivity"
-            android:screenOrientation="portrait"
-            android:label="@string/title_activity_power" />
+            android:label="@string/title_activity_power"
+            android:screenOrientation="portrait" />
         <activity
             android:name="me.lancer.airfree.activity.ShotActivity"
-            android:screenOrientation="portrait"
-            android:label="@string/title_activity_shot" />
+            android:label="@string/title_activity_shot"
+            android:screenOrientation="portrait" />
         <activity
             android:name="me.lancer.airfree.activity.VolumeActivity"
-            android:screenOrientation="portrait"
-            android:label="@string/title_activity_volume" />
+            android:label="@string/title_activity_volume"
+            android:screenOrientation="portrait" />
         <activity
             android:name="me.lancer.airfree.activity.BrightActivity"
-            android:screenOrientation="portrait"
-            android:label="@string/title_activity_bright" />
+            android:label="@string/title_activity_bright"
+            android:screenOrientation="portrait" />
         <activity
             android:name="me.lancer.airfree.activity.MobileActivity"
-            android:screenOrientation="portrait"
-            android:label="@string/title_activity_device" />
+            android:label="@string/title_activity_device"
+            android:screenOrientation="portrait" />
         <activity
             android:name="me.lancer.airfree.activity.ImageActivity"
-            android:screenOrientation="portrait"
-            android:label="@string/title_activity_picture" />
+            android:label="@string/title_activity_picture"
+            android:screenOrientation="portrait" />
         <activity
             android:name="me.lancer.airfree.activity.ImageIActivity"
-            android:screenOrientation="portrait"
-            android:label="@string/title_activity_picture_i" />
+            android:label="@string/title_activity_picture_i"
+            android:screenOrientation="portrait" />
         <activity
             android:name="me.lancer.airfree.activity.MusicActivity"
-            android:screenOrientation="portrait"
-            android:label="@string/title_activity_music" />
+            android:label="@string/title_activity_music"
+            android:screenOrientation="portrait" />
         <activity
             android:name="me.lancer.airfree.activity.ComputerActivity"
-            android:screenOrientation="portrait"
-            android:label="@string/title_activity_computer" />
+            android:label="@string/title_activity_computer"
+            android:screenOrientation="portrait" />
         <activity
             android:name="me.lancer.airfree.activity.ApplicationActivity"
-            android:screenOrientation="portrait"
-            android:label="@string/title_activity_app" />
+            android:label="@string/title_activity_app"
+            android:screenOrientation="portrait" />
         <activity
             android:name="me.lancer.airfree.activity.VideoActivity"
-            android:screenOrientation="portrait"
-            android:label="@string/title_activity_video" />
+            android:label="@string/title_activity_video"
+            android:screenOrientation="portrait" />
         <activity
             android:name="me.lancer.airfree.activity.DocumentActivity"
-            android:screenOrientation="portrait"
-            android:label="@string/title_activity_document" />
+            android:label="@string/title_activity_document"
+            android:screenOrientation="portrait" />
         <activity
             android:name="me.lancer.airfree.activity.ProblemActivity"
-            android:screenOrientation="portrait"
-            android:label="@string/title_activity_common_problem" >
-        </activity>
+            android:label="@string/title_activity_common_problem"
+            android:screenOrientation="portrait"></activity>
         <activity
             android:name="me.lancer.airfree.activity.GestureActivity"
-            android:screenOrientation="portrait"
-            android:label="@string/title_activity_common_problem" >
-        </activity>
+            android:label="@string/title_activity_common_problem"
+            android:screenOrientation="portrait"></activity>
         <activity
             android:name="me.lancer.airfree.activity.TalkActivity"
-            android:screenOrientation="portrait"
-            android:label="@string/title_activity_talk" >
-        </activity>
+            android:label="@string/title_activity_talk"
+            android:screenOrientation="portrait"></activity>
+        <activity
+            android:name="me.lancer.airfree.activity.Remote2Activity"
+            android:label="@string/title_activity_remote2"
+            android:screenOrientation="portrait"></activity>
     </application>
 
 </manifest>

@@ -69,7 +69,7 @@
                             android:layout_height="wrap_content"
                             android:paddingBottom="15dp"
                             android:paddingTop="5dp"
-                            android:text="鼠标控制" />
+                            android:text="键鼠控制" />
 
                     </LinearLayout>
 
@@ -225,7 +225,7 @@
                             android:layout_height="wrap_content"
                             android:paddingBottom="15dp"
                             android:paddingTop="5dp"
-                            android:text="远程启动" />
+                            android:text="远程控制" />
 
                     </LinearLayout>
 
@@ -271,7 +271,7 @@
                             android:layout_height="wrap_content"
                             android:paddingBottom="15dp"
                             android:paddingTop="5dp"
-                            android:text="在线聊天" />
+                            android:text="聊天共享" />
 
                     </LinearLayout>
 

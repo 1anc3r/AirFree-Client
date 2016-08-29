@@ -88,6 +88,7 @@ public class PowerActivity extends BaseActivity implements View.OnClickListener 
             iStop = true;
             setResult(RESULT_OK, null);
             finish();
+            overridePendingTransition(R.anim.slide_up_in, R.anim.slide_down_out);
         } else if (v == btnShutdown) {
             sendMessage("power", POWEREVENTF_SHUTDOWN + "");
         } else if (v == btnReset) {

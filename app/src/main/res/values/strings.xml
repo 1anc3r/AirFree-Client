@@ -120,4 +120,5 @@
         <item>打开浏览器(b/l)</item>
     </string-array>
     <string name="title_activity_talk">TalkActivity</string>
+    <string name="title_activity_remote2">Remote2Activity</string>
 </resources>

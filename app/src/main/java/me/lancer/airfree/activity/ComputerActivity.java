@@ -3,6 +3,7 @@ package me.lancer.airfree.activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Environment;
@@ -48,7 +49,7 @@ public class ComputerActivity extends BaseActivity implements View.OnClickListen
     private TextView tvPath;
     private ListView lvFile;
     private EditText etSearch;
-    private LinearLayout llBack, llSearch, llBottom, btnShare, btnOpen;
+    private LinearLayout llBack, llSearch, llBottom, btnShare, btnOpen, btnControl;
 
     private ComputerAdapter adapter;
     private List<ComputerBean> fileList = new ArrayList<>();
@@ -262,6 +263,12 @@ public class ComputerActivity extends BaseActivity implements View.OnClickListen
             }
         } else if (v == btnOpen) {
             sendMessage("remote", fileList.get(Integer.parseInt(posList.get(0))).getFilePath());
+            if (fileList.get(Integer.parseInt(posList.get(0))).getFilePath().contains(".ppt")||fileList.get(Integer.parseInt(posList.get(0))).getFilePath().contains(".mp4")){
+                Intent intent = new Intent();
+                intent.setClass(ComputerActivity.this, Remote2Activity.class);
+                startActivity(intent);
+                this.getParent().overridePendingTransition(R.anim.slide_up_in, R.anim.slide_down_out);
+            }
         }
     }
 

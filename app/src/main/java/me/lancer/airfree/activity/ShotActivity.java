@@ -96,6 +96,7 @@ public class ShotActivity extends BaseActivity implements View.OnClickListener {
             }
             setResult(RESULT_OK, null);
             finish();
+            overridePendingTransition(R.anim.slide_up_in, R.anim.slide_down_out);
         } else if (v == btnScreenShot) {
             pref = PreferenceManager.getDefaultSharedPreferences(this);
             String ip = pref.getString("ip", "");

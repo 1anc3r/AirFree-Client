@@ -5,6 +5,8 @@
       <root url="jar://$PROJECT_DIR$/app/build/intermediates/exploded-aar/com.lguipeng.bubbleview/library/1.0.0/jars/classes.jar!/" />
     </CLASSES>
     <JAVADOC />
-    <SOURCES />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.lguipeng.bubbleview/library/1.0.0/86ede8d7f8e4303e9152e84ec92bd0de06de0f38/library-1.0.0-sources.jar!/" />
+    </SOURCES>
   </library>
 </component>
