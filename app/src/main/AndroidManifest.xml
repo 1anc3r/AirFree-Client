@@ -115,10 +115,6 @@
             android:name="me.lancer.airfree.activity.TalkActivity"
             android:label="@string/title_activity_talk"
             android:screenOrientation="portrait"></activity>
-        <activity
-            android:name="me.lancer.airfree.activity.Remote2Activity"
-            android:label="@string/title_activity_remote2"
-            android:screenOrientation="portrait"></activity>
     </application>
 
 </manifest>

@@ -10,17 +10,25 @@ import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
 import android.view.GestureDetector;
+import android.view.Gravity;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
+import android.view.inputmethod.EditorInfo;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.view.View.OnClickListener;
 import android.view.View.OnLongClickListener;
 import android.widget.SeekBar;
+import android.widget.TextView;
 
 import com.iflytek.cloud.ErrorCode;
 import com.iflytek.cloud.InitListener;
@@ -54,8 +62,12 @@ public class MouseActivity extends BaseActivity implements View.OnTouchListener,
     ApplicationUtil app;
 
     private EditText etKeyboard;
-    private RelativeLayout rlTouch;
-    private Button btnBack, btnLeft, btnRight, btnRollUp, btnRollDown, btnVoice, btnVolume, btnBright;
+    private RelativeLayout rlTouch, rlKM, rlVM;
+    private LinearLayout llPPt;
+    private Button btnBack, btnOption, btnLeft, btnRight, btnRollUp, btnRollDown, btnVoice, btnVolume, btnBright,
+            btnPlay, btnPageUp , btnPageDown, btnPause, btnRewind, btnForward, btnTurnUp, btnTurnDown,
+            btnPlayPause, btnFocus;
+    private ListView lvOption;
     private SeekBar sbVolume, sbBright;
 //    private VerticalSeekBar vsbVolume, vsbBright;
     private GestureDetector mGestureDetector;
@@ -101,6 +113,8 @@ public class MouseActivity extends BaseActivity implements View.OnTouchListener,
         app = (ApplicationUtil) MouseActivity.this.getApplication();
         btnBack = (Button) findViewById(R.id.btn_back);
         btnBack.setOnClickListener(this);
+        btnOption = (Button) findViewById(R.id.btn_option);
+        btnOption.setOnClickListener(this);
         btnVoice = (Button) findViewById(R.id.btn_voice);
         btnVoice.setOnClickListener(this);
         btnRight = (Button) findViewById(R.id.btn_right);
@@ -110,19 +124,42 @@ public class MouseActivity extends BaseActivity implements View.OnTouchListener,
         btnRollUp = (Button) findViewById(R.id.btn_roll_up);
         btnRollUp.setOnClickListener(onButtonClickListener);
         btnRollUp.setLongClickable(true);
-//        btnRollUp.setOnLongClickListener(onButtonLongClickListener);
+        btnRollUp.setOnLongClickListener(onButtonLongClickListener);
         btnRollDown = (Button) findViewById(R.id.btn_roll_down);
         btnRollDown.setOnClickListener(onButtonClickListener);
         btnRollDown.setLongClickable(true);
-//        btnRollDown.setOnLongClickListener(onButtonLongClickListener);
+        btnRollDown.setOnLongClickListener(onButtonLongClickListener);
         btnVolume = (Button) findViewById(R.id.btn_volume);
         btnVolume.setOnClickListener(this);
         btnBright = (Button) findViewById(R.id.btn_bright);
         btnBright.setOnClickListener(this);
+        btnPlay = (Button) findViewById(R.id.btn_play);
+        btnPlay.setOnClickListener(this);
+        btnPause = (Button) findViewById(R.id.btn_pause);
+        btnPause.setOnClickListener(this);
+        btnPageUp = (Button) findViewById(R.id.btn_page_up);
+        btnPageUp.setOnClickListener(this);
+        btnPageDown = (Button) findViewById(R.id.btn_page_down);
+        btnPageDown.setOnClickListener(this);
+        btnTurnUp = (Button) findViewById(R.id.btn_turn_up);
+        btnTurnUp.setOnClickListener(this);
+        btnTurnDown = (Button) findViewById(R.id.btn_turn_down);
+        btnTurnDown.setOnClickListener(this);
+        btnRewind = (Button) findViewById(R.id.btn_rewind);
+        btnRewind.setOnClickListener(this);
+        btnForward = (Button) findViewById(R.id.btn_forward);
+        btnForward.setOnClickListener(this);
+        btnPlayPause = (Button) findViewById(R.id.btn_play_pause);
+        btnPlayPause.setOnClickListener(this);
+        btnFocus = (Button) findViewById(R.id.btn_focus);
+        btnFocus.setOnClickListener(this);
         mGestureDetector = new GestureDetector(this);
         rlTouch = (RelativeLayout) findViewById(R.id.rl_touch);
         rlTouch.setOnTouchListener(this);
         rlTouch.setLongClickable(true);
+        rlKM = (RelativeLayout) findViewById(R.id.rl_km);
+        llPPt = (LinearLayout) findViewById(R.id.ll_ppt);
+        rlVM = (RelativeLayout) findViewById(R.id.rl_vm);
 //        vsbVolume = (VerticalSeekBar) findViewById(R.id.vsb_volume);
 //        vsbVolume.setProgress(50);
 //        vsbVolume.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
@@ -186,12 +223,6 @@ public class MouseActivity extends BaseActivity implements View.OnTouchListener,
         @Override
         public void onClick(View arg0) {
             switch (arg0.getId()) {
-                case R.id.btn_right:                                                        // 右击
-                    sendMessage("mouse", MOUSEEVENTF_RIGHTUP + "");
-                    break;
-                case R.id.btn_left:                                                         // 左击
-                    sendMessage("mouse", MOUSEEVENTF_TAP + "");
-                    break;
                 case R.id.btn_roll_up:                                                      // 向上拖动滚动
                     if (clickButton != 0) {
                         clickButton = 0;
@@ -320,6 +351,33 @@ public class MouseActivity extends BaseActivity implements View.OnTouchListener,
             setResult(RESULT_OK, null);
             finish();
             overridePendingTransition(R.anim.slide_up_in, R.anim.slide_down_out);
+        } else if (v == btnOption){
+            LayoutInflater inflater = LayoutInflater.from(this);
+            LinearLayout layout = (LinearLayout) inflater.inflate(R.layout.option_dialog_view, null);
+            final Dialog dialog = new AlertDialog.Builder(MouseActivity.this).create();
+            lvOption = (ListView) layout.findViewById(R.id.lv_option);
+            ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_activated_1);
+            adapter.add("键鼠控制");
+            adapter.add("PPT.放映");
+            adapter.add("视频播放");
+            lvOption.setAdapter(adapter);
+            lvOption.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                @Override
+                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                    switchUI(position);
+                }
+            });
+            dialog.show();
+            Window window = dialog.getWindow();
+            window.setContentView(layout);
+            WindowManager.LayoutParams lp = window.getAttributes();
+            lp.height = 525;
+            lp.width = 390;
+            window.setGravity(Gravity.RIGHT | Gravity.TOP);
+            window.setAttributes(lp);
+            window.clearFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);
+            window.clearFlags(WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE | WindowManager.LayoutParams.FLAG_ALT_FOCUSABLE_IM);
+            window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE);
         } else if (v == btnVoice) {
             FlowerCollector.onEvent(MouseActivity.this, "iat_recognize");
             mIatResults.clear();
@@ -381,6 +439,30 @@ public class MouseActivity extends BaseActivity implements View.OnTouchListener,
             });
             dialog.show();
             dialog.getWindow().setContentView(layout);
+        } else if (v == btnLeft){
+            sendMessage("mouse", MOUSEEVENTF_TAP + "");
+        } else if (v == btnRight){
+            sendMessage("mouse", MOUSEEVENTF_RIGHTUP + "");
+        } else if (v == btnPlay){
+            sendMessage("remote", "17");
+        } else if (v == btnPause){
+            sendMessage("remote", "18");
+        } else if (v == btnPageUp){
+            sendMessage("remote", "13");
+        } else if (v == btnPageDown){
+            sendMessage("remote", "12");
+        } else if (v == btnPlayPause){
+            sendMessage("remote", "16");
+        } else if (v == btnTurnUp){
+            sendMessage("remote", "13");
+        } else if (v == btnTurnDown){
+            sendMessage("remote", "12");
+        } else if (v == btnRewind){
+            sendMessage("remote", "15");
+        } else if (v == btnForward){
+            sendMessage("remote", "14");
+        } else if (v == btnFocus){
+            sendMessage("remote", "20");
         }
     }
 
@@ -480,6 +562,25 @@ public class MouseActivity extends BaseActivity implements View.OnTouchListener,
 
     private void showTip(final String str) {
         ShowToast(str);
+    }
+
+    private void switchUI(int flag){
+        if(flag == 0){
+            rlKM.setVisibility(View.VISIBLE);
+            etKeyboard.setVisibility(View.VISIBLE);
+            llPPt.setVisibility(View.GONE);
+            rlVM.setVisibility(View.GONE);
+        } else if (flag == 1){
+            rlKM.setVisibility(View.GONE);
+            etKeyboard.setVisibility(View.GONE);
+            llPPt.setVisibility(View.VISIBLE);
+            rlVM.setVisibility(View.GONE);
+        } else if (flag == 2){
+            rlKM.setVisibility(View.GONE);
+            etKeyboard.setVisibility(View.GONE);
+            llPPt.setVisibility(View.GONE);
+            rlVM.setVisibility(View.VISIBLE);
+        }
     }
 
     public void setParam() {

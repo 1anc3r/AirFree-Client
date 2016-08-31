@@ -6,6 +6,7 @@
     android:background="@color/blue_light">
 
     <LinearLayout
+        android:orientation="horizontal"
         android:id="@+id/ll_titile"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
@@ -23,14 +24,31 @@
             android:gravity="center_vertical|left" />
 
         <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"/>
+
+        <TextView
             android:id="@+id/tv_show"
-            android:layout_width="fill_parent"
+            android:layout_width="wrap_content"
             android:layout_height="48dp"
-            android:layout_marginLeft="-24dp"
             android:gravity="center"
             android:text="键鼠控制"
             android:textColor="@color/base_color_text_white"
             android:textSize="@dimen/text_size_large" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"/>
+
+        <Button
+            android:id="@+id/btn_option"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_marginRight="8dp"
+            android:background="@drawable/ic_more_vert_white_24dp"
+            android:gravity="center_vertical|right" />
 
     </LinearLayout>
 
@@ -48,7 +66,6 @@
             android:src="@drawable/ic_main_cloud_middle" />
     </RelativeLayout>
 
-
     <RelativeLayout
         android:id="@+id/rl_button"
         android:layout_width="fill_parent"
@@ -57,70 +74,194 @@
         android:background="@color/common_bg"
         android:gravity="center">
 
-        <TextView
-            android:id="@+id/center"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:layout_centerHorizontal="true"
-            android:layout_centerVertical="true" />
+        <RelativeLayout
+            android:id="@+id/rl_km"
+            android:layout_width="match_parent"
+            android:layout_height="150dp">
 
-        <Button
-            android:id="@+id/btn_left"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:layout_centerVertical="true"
-            android:layout_toLeftOf="@+id/center"
-            android:background="@drawable/l_letter"
-            android:elevation="3dp" />
+            <TextView
+                android:id="@+id/center_1"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true" />
 
-        <Button
-            android:id="@+id/btn_right"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:layout_centerVertical="true"
-            android:layout_toRightOf="@+id/center"
-            android:background="@drawable/r_letter"
-            android:elevation="3dp" />
+            <Button
+                android:id="@+id/btn_left"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_centerVertical="true"
+                android:layout_toLeftOf="@+id/center_1"
+                android:background="@drawable/l_letter"
+                android:elevation="3dp" />
 
-        <Button
-            android:id="@+id/btn_roll_up"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:layout_above="@+id/center"
-            android:layout_centerHorizontal="true"
-            android:background="@drawable/w_letter"
-            android:elevation="3dp" />
+            <Button
+                android:id="@+id/btn_right"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_centerVertical="true"
+                android:layout_toRightOf="@+id/center_1"
+                android:background="@drawable/r_letter"
+                android:elevation="3dp" />
 
-        <Button
-            android:id="@+id/btn_roll_down"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:layout_below="@+id/center"
-            android:layout_centerHorizontal="true"
-            android:background="@drawable/m_letter"
-            android:elevation="3dp" />
+            <Button
+                android:id="@+id/btn_roll_up"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_above="@+id/center_1"
+                android:layout_centerHorizontal="true"
+                android:background="@drawable/w_letter"
+                android:elevation="3dp" />
 
-        <Button
-            android:id="@+id/btn_volume"
+            <Button
+                android:id="@+id/btn_roll_down"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_below="@+id/center_1"
+                android:layout_centerHorizontal="true"
+                android:background="@drawable/m_letter"
+                android:elevation="3dp" />
+
+            <Button
+                android:id="@+id/btn_volume"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="25dp"
+                android:background="@drawable/ic_volume_control"
+                android:scaleType="fitXY"
+                android:visibility="gone" />
+
+            <Button
+                android:id="@+id/btn_bright"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="25dp"
+                android:background="@drawable/ic_bright_control"
+                android:scaleType="fitXY"
+                android:visibility="gone" />
+
+        </RelativeLayout>
+
+        <LinearLayout
+            android:id="@+id/ll_ppt"
             android:visibility="gone"
-            android:layout_centerVertical="true"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:layout_alignParentLeft="true"
-            android:layout_marginLeft="25dp"
-            android:scaleType="fitXY"
-            android:background="@drawable/ic_volume_control" />
+            android:layout_width="match_parent"
+            android:layout_height="150dp"
+            android:gravity="center"
+            android:orientation="horizontal">
 
-        <Button
-            android:id="@+id/btn_bright"
+            <Button
+                android:id="@+id/btn_play"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_centerVertical="true"
+                android:layout_margin="10dp"
+                android:background="@drawable/ic_play"
+                android:elevation="3dp" />
+
+            <Button
+                android:id="@+id/btn_page_up"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_centerVertical="true"
+                android:layout_margin="10dp"
+                android:background="@drawable/arrow_up"
+                android:elevation="3dp" />
+
+            <Button
+                android:id="@+id/btn_page_down"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_centerVertical="true"
+                android:layout_margin="10dp"
+                android:background="@drawable/arrow_down"
+                android:elevation="3dp" />
+
+            <Button
+                android:id="@+id/btn_pause"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_centerVertical="true"
+                android:layout_margin="10dp"
+                android:background="@drawable/ic_pause"
+                android:elevation="3dp" />
+
+        </LinearLayout>
+
+        <RelativeLayout
+            android:id="@+id/rl_vm"
+            android:layout_width="match_parent"
             android:visibility="gone"
-            android:layout_centerVertical="true"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:layout_alignParentRight="true"
-            android:layout_marginRight="25dp"
-            android:scaleType="fitXY"
-            android:background="@drawable/ic_bright_control" />
+            android:layout_height="150dp">
+
+            <TextView
+                android:id="@+id/center_2"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true" />
+
+            <Button
+                android:id="@+id/btn_rewind"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_centerVertical="true"
+                android:layout_toLeftOf="@+id/center_2"
+                android:background="@drawable/arrow_left"
+                android:elevation="3dp" />
+
+            <Button
+                android:id="@+id/btn_forward"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_centerVertical="true"
+                android:layout_toRightOf="@+id/center_2"
+                android:background="@drawable/arrow_right"
+                android:elevation="3dp" />
+
+            <Button
+                android:id="@+id/btn_turn_up"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_above="@+id/center_2"
+                android:layout_centerHorizontal="true"
+                android:background="@drawable/arrow_up"
+                android:elevation="3dp" />
+
+            <Button
+                android:id="@+id/btn_turn_down"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_below="@+id/center_2"
+                android:layout_centerHorizontal="true"
+                android:background="@drawable/arrow_down"
+                android:elevation="3dp" />
+
+            <Button
+                android:id="@+id/btn_play_pause"
+                android:layout_centerVertical="true"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_alignParentLeft="true"
+                android:layout_marginLeft="25dp"
+                android:scaleType="fitXY"
+                android:background="@drawable/ic_play" />
+
+            <Button
+                android:id="@+id/btn_focus"
+                android:layout_centerVertical="true"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="25dp"
+                android:scaleType="fitXY"
+                android:background="@drawable/ic_focus" />
+
+        </RelativeLayout>
 
     </RelativeLayout>
 

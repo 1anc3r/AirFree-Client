@@ -5,8 +5,11 @@ import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
+import android.os.Handler;
+import android.os.Message;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
@@ -27,6 +30,7 @@ import java.util.regex.Pattern;
 
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.json.JSONTokener;
 
 import com.iflytek.cloud.ErrorCode;
 import com.iflytek.cloud.InitListener;
@@ -60,6 +64,30 @@ public class RemoteActivity extends BaseActivity implements View.OnClickListener
     private String mEngineType = SpeechConstant.TYPE_CLOUD;
     private HashMap<String, String> mIatResults = new LinkedHashMap<>();
     private SharedPreferences mSharedPreferences;
+    private Thread mThreadClient = null;
+    private String recvMessageClient = "";
+    private boolean iStop = false;
+
+    private Handler iHandler = new Handler() {
+
+        @Override
+        public void handleMessage(Message msg) {
+            super.handleMessage(msg);
+            if (msg.obj!=null) {
+                AlertDialog.Builder builder = new AlertDialog.Builder(RemoteActivity.this);
+                builder.setTitle("远程设备信息");
+                builder.setMessage((CharSequence) msg.obj);
+                builder.setNegativeButton("好的", new DialogInterface.OnClickListener() {
+
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                });
+                builder.create().show();
+            }
+        }
+    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -180,10 +208,9 @@ public class RemoteActivity extends BaseActivity implements View.OnClickListener
                 dialog.show();
                 dialog.getWindow().setContentView(layout);
             } else if (v == btnOpen) {
-                Intent intent = new Intent();
-                intent.setClass(RemoteActivity.this, Remote2Activity.class);
-                startActivity(intent);
-                this.getParent().overridePendingTransition(R.anim.slide_up_in, R.anim.slide_down_out);
+                sendMessage("info", "");
+                mThreadClient = new Thread(iRunnable);
+                mThreadClient.start();
             } else if (v == btnTalk) {
 //                LayoutInflater inflater = LayoutInflater.from(this);
 //                LinearLayout layout = (LinearLayout) inflater.inflate(R.layout.searchbar_dialog_view, null);
@@ -217,6 +244,41 @@ public class RemoteActivity extends BaseActivity implements View.OnClickListener
             Toast.makeText(this, "没有连接!", Toast.LENGTH_SHORT).show();
         }
     }
+
+    private Runnable iRunnable = new Runnable() {
+
+        @Override
+        public void run() {
+            if (!iStop) {
+                char[] buffer = new char[256];
+                int count = 0;
+                if (app.getmBufferedReaderClient() != null) {
+                    try {
+//                        if ((count = app.getmBufferedReaderClient().read(buffer)) > 0) {
+//                            recvMessageClient = getInfoBuff(buffer, count);
+                        recvMessageClient = app.getmBufferedReaderClient().readLine();
+                        Log.e("IP & PORT", "接收成功:" + recvMessageClient);
+                        JSONTokener jt = new JSONTokener(recvMessageClient);
+                        JSONObject jb = (JSONObject) jt.nextValue();
+                        String command = jb.getString("command");
+                        String paramet = jb.getString("parameter");
+                        if (command.contains("info")) {
+                            Message msg = iHandler.obtainMessage();
+                            msg.obj = paramet;
+                            iHandler.sendMessage(msg);
+                        }
+//                        }
+                    } catch (Exception e) {
+                        Log.e("IP & PORT", "接收异常:" + e.getMessage());
+                        recvMessageClient = "接收异常:" + e.getMessage();
+                        Message msg = new Message();
+                        msg.what = 1;
+                        iHandler.sendMessage(msg);
+                    }
+                }
+            }
+        }
+    };
 
     private InitListener mInitListener = new InitListener() {
 

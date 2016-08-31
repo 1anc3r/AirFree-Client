@@ -225,7 +225,7 @@
                             android:layout_height="wrap_content"
                             android:paddingBottom="15dp"
                             android:paddingTop="5dp"
-                            android:text="远程控制" />
+                            android:text="远程设备" />
 
                     </LinearLayout>
 
