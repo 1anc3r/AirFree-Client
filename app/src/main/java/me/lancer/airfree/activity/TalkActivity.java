@@ -15,7 +15,6 @@ import org.apache.http.conn.util.InetAddressUtils;
 import org.json.JSONObject;
 import org.json.JSONTokener;
 
-import java.io.BufferedReader;
 import java.net.InetAddress;
 import java.net.NetworkInterface;
 import java.net.SocketException;
@@ -24,7 +23,7 @@ import java.util.Enumeration;
 import java.util.List;
 
 import me.lancer.airfree.adapter.TalkAdapter;
-import me.lancer.airfree.model.TalkBean;
+import me.lancer.airfree.bean.TalkBean;
 import me.lancer.airfree.util.ApplicationUtil;
 import me.lancer.distance.R;
 

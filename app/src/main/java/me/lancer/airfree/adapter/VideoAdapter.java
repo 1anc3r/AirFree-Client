@@ -23,8 +23,8 @@ import com.nineoldandroids.animation.ObjectAnimator;
 import java.io.File;
 import java.util.List;
 
-import me.lancer.airfree.model.ImageViewBean;
-import me.lancer.airfree.model.VideoBean;
+import me.lancer.airfree.bean.ImageViewBean;
+import me.lancer.airfree.bean.VideoBean;
 import me.lancer.airfree.util.NativeImageLoader;
 import me.lancer.distance.R;
 

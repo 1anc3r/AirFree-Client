@@ -24,7 +24,7 @@ import com.nineoldandroids.animation.ObjectAnimator;
 
 import me.lancer.airfree.util.NativeImageLoader;
 import me.lancer.distance.R;
-import me.lancer.airfree.model.ImageViewBean;
+import me.lancer.airfree.bean.ImageViewBean;
 
 public class PictureChildAdapter extends BaseAdapter {
 

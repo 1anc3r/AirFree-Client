@@ -13,8 +13,8 @@ import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import me.lancer.airfree.model.ImageBean;
-import me.lancer.airfree.model.ImageViewBean;
+import me.lancer.airfree.bean.ImageBean;
+import me.lancer.airfree.bean.ImageViewBean;
 import me.lancer.airfree.util.NativeImageLoader;
 import me.lancer.distance.R;
 

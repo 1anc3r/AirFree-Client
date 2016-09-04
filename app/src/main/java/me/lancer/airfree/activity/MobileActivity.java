@@ -44,7 +44,7 @@ import android.widget.Toast;
 
 import me.lancer.distance.R;
 import me.lancer.airfree.adapter.MobileAdapter;
-import me.lancer.airfree.model.MobileBean;
+import me.lancer.airfree.bean.MobileBean;
 import me.lancer.airfree.util.ApplicationUtil;
 
 public class MobileActivity extends BaseActivity implements View.OnClickListener {

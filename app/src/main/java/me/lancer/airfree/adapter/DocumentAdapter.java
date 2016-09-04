@@ -21,7 +21,7 @@ import com.nineoldandroids.animation.ObjectAnimator;
 import java.util.List;
 
 import me.lancer.distance.R;
-import me.lancer.airfree.model.MobileBean;
+import me.lancer.airfree.bean.MobileBean;
 
 public class DocumentAdapter extends BaseAdapter {
 

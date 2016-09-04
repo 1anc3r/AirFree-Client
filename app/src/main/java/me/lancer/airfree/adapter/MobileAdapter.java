@@ -22,7 +22,7 @@ import android.widget.TextView;
 import com.nineoldandroids.animation.AnimatorSet;
 import com.nineoldandroids.animation.ObjectAnimator;
 
-import me.lancer.airfree.model.MobileBean;
+import me.lancer.airfree.bean.MobileBean;
 import me.lancer.distance.R;
 import me.lancer.airfree.util.FileTypeRefereeUtil;
 

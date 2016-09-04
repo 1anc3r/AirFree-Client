@@ -3,7 +3,6 @@ package me.lancer.airfree.activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Context;
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Environment;
@@ -22,7 +21,6 @@ import android.view.WindowManager;
 import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.ListView;
@@ -40,7 +38,7 @@ import java.util.List;
 import me.lancer.airfree.adapter.ComputerAdapter;
 import me.lancer.airfree.util.ApplicationUtil;
 import me.lancer.distance.R;
-import me.lancer.airfree.model.ComputerBean;
+import me.lancer.airfree.bean.ComputerBean;
 
 public class ComputerActivity extends BaseActivity implements View.OnClickListener {
 

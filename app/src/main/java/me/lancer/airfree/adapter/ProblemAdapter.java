@@ -11,7 +11,7 @@ import com.github.library.bubbleview.BubbleTextVew;
 
 import java.util.List;
 
-import me.lancer.airfree.model.ProblemBean;
+import me.lancer.airfree.bean.ProblemBean;
 import me.lancer.distance.R;
 
 public class ProblemAdapter extends BaseAdapter {

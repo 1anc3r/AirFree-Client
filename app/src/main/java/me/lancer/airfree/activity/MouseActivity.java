@@ -17,7 +17,6 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
-import android.view.inputmethod.EditorInfo;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -28,7 +27,6 @@ import android.widget.RelativeLayout;
 import android.view.View.OnClickListener;
 import android.view.View.OnLongClickListener;
 import android.widget.SeekBar;
-import android.widget.TextView;
 
 import com.iflytek.cloud.ErrorCode;
 import com.iflytek.cloud.InitListener;
@@ -54,7 +52,6 @@ import me.lancer.distance.R;
 import me.lancer.airfree.util.ApplicationUtil;
 import me.lancer.airfree.util.IatSettings;
 import me.lancer.airfree.util.JsonParser;
-import me.lancer.airfree.util.VerticalSeekBar;
 
 public class MouseActivity extends BaseActivity implements View.OnTouchListener,
         GestureDetector.OnGestureListener, GestureDetector.OnDoubleTapListener, OnClickListener {
@@ -223,6 +220,12 @@ public class MouseActivity extends BaseActivity implements View.OnTouchListener,
         @Override
         public void onClick(View arg0) {
             switch (arg0.getId()) {
+                case R.id.btn_left:
+                    sendMessage("mouse", MOUSEEVENTF_TAP + "");
+                    break;
+                case R.id.btn_right:
+                    sendMessage("mouse", MOUSEEVENTF_RIGHTUP + "");
+                    break;
                 case R.id.btn_roll_up:                                                      // 向上拖动滚动
                     if (clickButton != 0) {
                         clickButton = 0;

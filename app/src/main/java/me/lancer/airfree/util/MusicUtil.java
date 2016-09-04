@@ -20,7 +20,7 @@ import android.net.Uri;
 import android.os.ParcelFileDescriptor;
 import android.provider.MediaStore;
 
-import me.lancer.airfree.model.MusicBean;
+import me.lancer.airfree.bean.MusicBean;
 import me.lancer.distance.R;
 
 public class MusicUtil {

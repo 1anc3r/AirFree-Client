@@ -22,7 +22,7 @@ import com.nineoldandroids.animation.ObjectAnimator;
 import java.util.List;
 
 import me.lancer.distance.R;
-import me.lancer.airfree.model.ComputerBean;
+import me.lancer.airfree.bean.ComputerBean;
 
 public class ComputerAdapter extends BaseAdapter {
 

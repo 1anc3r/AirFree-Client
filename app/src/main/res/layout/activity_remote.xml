@@ -248,7 +248,7 @@
                             android:layout_height="wrap_content"
                             android:paddingBottom="15dp"
                             android:paddingTop="5dp"
-                            android:text="屏幕抓取" />
+                            android:text="远程桌面" />
 
                     </LinearLayout>
 

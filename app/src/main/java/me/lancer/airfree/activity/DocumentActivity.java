@@ -30,7 +30,6 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputMethodManager;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.ListView;
@@ -40,7 +39,7 @@ import android.widget.Toast;
 import me.lancer.airfree.adapter.DocumentAdapter;
 import me.lancer.airfree.util.ApplicationUtil;
 import me.lancer.distance.R;
-import me.lancer.airfree.model.MobileBean;
+import me.lancer.airfree.bean.MobileBean;
 
 public class DocumentActivity extends BaseActivity implements View.OnClickListener {
 

@@ -28,7 +28,7 @@ import android.widget.Toast;
 import me.lancer.airfree.util.ApplicationUtil;
 import me.lancer.distance.R;
 import me.lancer.airfree.adapter.VideoAdapter;
-import me.lancer.airfree.model.VideoBean;
+import me.lancer.airfree.bean.VideoBean;
 
 public class VideoActivity extends BaseActivity implements View.OnClickListener {
 

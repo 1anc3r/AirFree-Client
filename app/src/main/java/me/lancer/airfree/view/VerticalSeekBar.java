@@ -1,4 +1,4 @@
-package me.lancer.airfree.util;
+package me.lancer.airfree.view;
 
 import android.content.Context;
 import android.graphics.Canvas;

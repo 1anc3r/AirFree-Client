@@ -8,7 +8,7 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content">
 
-        <me.lancer.airfree.model.ImageViewBean
+        <me.lancer.airfree.bean.ImageViewBean
             android:id="@+id/iv_group"
             android:layout_width="fill_parent"
             android:layout_height="150dp"

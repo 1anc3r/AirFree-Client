@@ -1,4 +1,4 @@
-package me.lancer.airfree.model;
+package me.lancer.airfree.bean;
 
 import cn.bmob.v3.BmobObject;
 

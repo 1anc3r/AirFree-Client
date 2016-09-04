@@ -11,7 +11,7 @@ import android.widget.TextView;
 import java.util.List;
 
 import me.lancer.distance.R;
-import me.lancer.airfree.model.ApplicationBean;
+import me.lancer.airfree.bean.ApplicationBean;
 
 public class ApplicationAdapter extends BaseAdapter {
 

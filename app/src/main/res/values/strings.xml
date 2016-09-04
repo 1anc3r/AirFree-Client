@@ -9,6 +9,8 @@
     <string name="title_activity_remote">RemoteActivity</string>
     <string name="title_activity_seting">SetingActivity</string>
     <string name="title_activity_link">LinkActivity</string>
+    <string name="title_activity_talk">TalkActivity</string>
+    <string name="title_activity_session">SessionActivity</string>
     <string name="title_activity_mouse">MouseActivity</string>
     <string name="title_activity_power">PowerActivity</string>
     <string name="title_activity_shot">ShotActivity</string>
@@ -119,6 +121,4 @@
         <item>打开写字板(w/x)</item>
         <item>打开浏览器(b/l)</item>
     </string-array>
-    <string name="title_activity_talk">TalkActivity</string>
-    <string name="title_activity_remote2">Remote2Activity</string>
 </resources>

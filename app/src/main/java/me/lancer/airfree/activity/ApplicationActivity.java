@@ -22,7 +22,7 @@ import android.widget.ListView;
 
 import me.lancer.distance.R;
 import me.lancer.airfree.adapter.ApplicationAdapter;
-import me.lancer.airfree.model.ApplicationBean;
+import me.lancer.airfree.bean.ApplicationBean;
 
 public class ApplicationActivity extends BaseActivity implements View.OnClickListener {
 

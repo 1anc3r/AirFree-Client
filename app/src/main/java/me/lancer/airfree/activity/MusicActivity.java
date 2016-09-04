@@ -39,7 +39,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import me.lancer.airfree.adapter.MusicAdapter;
-import me.lancer.airfree.model.MusicBean;
+import me.lancer.airfree.bean.MusicBean;
 import me.lancer.airfree.util.ApplicationUtil;
 import me.lancer.distance.R;
 

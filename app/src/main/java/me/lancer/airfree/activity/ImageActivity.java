@@ -24,7 +24,7 @@ import android.widget.Toast;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.GridView;
 
-import me.lancer.airfree.model.ImageBean;
+import me.lancer.airfree.bean.ImageBean;
 import me.lancer.distance.R;
 import me.lancer.airfree.adapter.PictureGroupAdapter;
 

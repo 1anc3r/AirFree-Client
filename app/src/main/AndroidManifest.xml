@@ -106,15 +106,18 @@
         <activity
             android:name="me.lancer.airfree.activity.ProblemActivity"
             android:label="@string/title_activity_common_problem"
-            android:screenOrientation="portrait"></activity>
+            android:screenOrientation="portrait" />
         <activity
             android:name="me.lancer.airfree.activity.GestureActivity"
             android:label="@string/title_activity_common_problem"
-            android:screenOrientation="portrait"></activity>
+            android:screenOrientation="portrait" />
         <activity
             android:name="me.lancer.airfree.activity.TalkActivity"
             android:label="@string/title_activity_talk"
-            android:screenOrientation="portrait"></activity>
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="me.lancer.airfree.activity.SessionActivity"
+            android:label="@string/title_activity_session"></activity>
     </application>
 
 </manifest>

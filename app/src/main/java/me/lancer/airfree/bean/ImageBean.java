@@ -1,4 +1,4 @@
-package me.lancer.airfree.model;
+package me.lancer.airfree.bean;
 
 public class ImageBean {
 

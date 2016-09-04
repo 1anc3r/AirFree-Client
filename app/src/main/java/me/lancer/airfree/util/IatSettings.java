@@ -7,6 +7,7 @@ import android.preference.Preference.OnPreferenceChangeListener;
 import android.preference.PreferenceActivity;
 import android.view.Window;
 
+import me.lancer.airfree.view.SettingTextWatcher;
 import me.lancer.distance.R;
 
 /**

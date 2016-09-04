@@ -11,10 +11,8 @@ import android.graphics.Point;
 import android.net.Uri;
 import android.os.Handler;
 import android.os.Message;
-import android.text.Html;
 import android.text.Spannable;
 import android.text.SpannableStringBuilder;
-import android.text.Spanned;
 import android.text.style.ForegroundColorSpan;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -23,16 +21,15 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.nineoldandroids.animation.AnimatorSet;
 import com.nineoldandroids.animation.ObjectAnimator;
 
-import me.lancer.airfree.model.ImageViewBean;
+import me.lancer.airfree.bean.ImageViewBean;
 import me.lancer.airfree.util.MusicUtil;
 import me.lancer.distance.R;
-import me.lancer.airfree.model.MusicBean;
+import me.lancer.airfree.bean.MusicBean;
 
 public class MusicAdapter extends BaseAdapter {
 

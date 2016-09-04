@@ -11,7 +11,7 @@ import com.github.library.bubbleview.BubbleTextVew;
 
 import java.util.List;
 
-import me.lancer.airfree.model.TalkBean;
+import me.lancer.airfree.bean.TalkBean;
 import me.lancer.distance.R;
 
 public class TalkAdapter extends BaseAdapter {

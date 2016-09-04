@@ -1,4 +1,4 @@
-package me.lancer.airfree.util;
+package me.lancer.airfree.view;
 
 import java.util.regex.Pattern;
 import android.content.Context;

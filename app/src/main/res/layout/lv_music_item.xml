@@ -15,7 +15,7 @@
         android:gravity="left|center"
         android:orientation="horizontal">
 
-        <me.lancer.airfree.model.ImageViewBean
+        <me.lancer.airfree.bean.ImageViewBean
             android:id="@+id/iv_album"
             android:layout_width="50dp"
             android:layout_height="50dp"

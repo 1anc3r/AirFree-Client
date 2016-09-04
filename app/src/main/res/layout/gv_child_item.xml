@@ -5,7 +5,7 @@
     android:layout_height="wrap_content"
     android:descendantFocusability="blocksDescendants">
 
-    <me.lancer.airfree.model.ImageViewBean
+    <me.lancer.airfree.bean.ImageViewBean
         android:id="@+id/iv_child"
         android:layout_width="fill_parent"
         android:layout_height="100dip"

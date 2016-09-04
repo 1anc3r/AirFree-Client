@@ -22,14 +22,31 @@
             android:gravity="center_vertical|left" />
 
         <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"/>
+
+        <TextView
             android:id="@+id/tv_show"
-            android:layout_width="fill_parent"
+            android:layout_width="wrap_content"
             android:layout_height="48dp"
-            android:layout_marginLeft="-24dp"
             android:gravity="center"
-            android:text="屏幕抓取"
+            android:text="远程桌面"
             android:textColor="@color/base_color_text_white"
             android:textSize="@dimen/text_size_large" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"/>
+
+        <Button
+            android:id="@+id/btn_option"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_marginRight="8dp"
+            android:background="@drawable/ic_more_vert_white_24dp"
+            android:gravity="center_vertical|right" />
 
     </LinearLayout>
 
@@ -78,29 +95,7 @@
                 android:layout_weight="1"
                 android:gravity="center"
                 android:orientation="horizontal"
-                android:weightSum="3">
-
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:gravity="center"
-                    android:orientation="vertical"
-                    android:visibility="invisible">
-
-                    <ImageView
-                        android:layout_width="50dp"
-                        android:layout_height="50dp"
-                        android:scaleType="fitXY"
-                        android:src="@drawable/ic_power_control" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:padding="10dp"
-                        android:text="  关机  " />
-
-                </LinearLayout>
+                android:weightSum="2">
 
                 <LinearLayout
                     android:id="@+id/btn_shot"
@@ -125,24 +120,25 @@
                 </LinearLayout>
 
                 <LinearLayout
+                    android:id="@+id/btn_remote_desktop"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:gravity="center"
-                    android:orientation="vertical"
-                    android:visibility="invisible">
+                    android:visibility="gone"
+                    android:orientation="vertical">
 
                     <ImageView
                         android:layout_width="50dp"
                         android:layout_height="50dp"
                         android:scaleType="fitXY"
-                        android:src="@drawable/ic_reset_control" />
+                        android:src="@drawable/ic_screen_contorl" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:padding="10dp"
-                        android:text="  注销  " />
+                        android:text="实时桌面" />
 
                 </LinearLayout>
 
