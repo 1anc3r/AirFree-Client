@@ -50,6 +50,14 @@
         android:text="Copyright (C) 2016 1anc3r All Right"
         android:textSize="@dimen/text_size_small" />
 
+    <TextView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        android:gravity="center_horizontal"
+        android:text="语音技术由科大讯飞提供"
+        android:textSize="@dimen/text_size_small" />
+
     <LinearLayout
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"

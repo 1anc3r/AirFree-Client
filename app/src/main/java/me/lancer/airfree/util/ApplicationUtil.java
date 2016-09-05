@@ -65,13 +65,15 @@ public class ApplicationUtil extends Application {
 
     public void off(){
         try {
-            isConnecting = false;
-            mSocketClient.close();
-            mSocketClient = null;
-            mBufferedReaderClient.close();
-            mBufferedReaderClient = null;
-            mPrintWriterClient.close();
-            mPrintWriterClient = null;
+            if (mSocketClient != null) {
+                isConnecting = false;
+                mBufferedReaderClient.close();
+                mBufferedReaderClient = null;
+                mPrintWriterClient.close();
+                mPrintWriterClient = null;
+                mSocketClient.close();
+                mSocketClient = null;
+            }
         } catch (IOException e) {
             e.printStackTrace();
         }

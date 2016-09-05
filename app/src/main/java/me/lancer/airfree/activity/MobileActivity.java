@@ -296,12 +296,56 @@ public class MobileActivity extends BaseActivity implements View.OnClickListener
     }
 
     private void copyFile(String inputPath, String inputFile, String outputPath) {
+        Log.e("IP & PORT", inputPath + " to " + outputPath);
         InputStream in = null;
         OutputStream out = null;
         try {
             File input = new File(inputPath);
             if (input.isFile()) {
-                Log.e("IP & PORT", "正在复制:" + inputPath + " to " + outputPath + "/" + inputFile);
+                fileList.add(new MobileBean(outputPath + "/" + inputFile,
+                        inputFile, outputPath, new ArrayList<String>(),
+                        format.format(new Date((new File(outputPath + "/" + inputFile)).lastModified()))));
+                in = new FileInputStream(inputPath);
+                out = new FileOutputStream(outputPath + "/" + inputFile);
+                byte[] buffer = new byte[1024];
+                int read;
+                while ((read = in.read(buffer)) != -1) {
+                    out.write(buffer, 0, read);
+                }
+                in.close();
+                in = null;
+                out.flush();
+                out.close();
+                out = null;
+                Log.e("IP & PORT", "复制成功!");
+            } else if (input.isDirectory()) {
+                File output = new File(outputPath + "/" + input.getName());
+                if (!output.exists()) {
+                    output.mkdirs();
+                }
+                File[] list = input.listFiles();
+                if (list.length != 0) {
+                    for (File item : list) {
+                        copyFile(item.getPath(), item.getName(), output.getPath());
+                    }
+                }
+                Log.e("IP & PORT", "复制成功!");
+            } else {
+                Log.e("IP & PORT", "复制失败!");
+            }
+        } catch (FileNotFoundException fnfe1) {
+            Log.e("IP & PORT", "复制失败:" + fnfe1.getMessage());
+        } catch (Exception e) {
+            Log.e("IP & PORT", "复制失败:" + e.getMessage());
+        }
+    }
+
+    private void moveFile(String inputPath, String inputFile, String outputPath) {
+        InputStream in = null;
+        OutputStream out = null;
+        try {
+            File input = new File(inputPath);
+            if (input.isFile()) {
                 fileList.add(new MobileBean(outputPath + "/" + inputFile,
                         inputFile, outputPath, new ArrayList<String>(),
                         format.format(new Date((new File(outputPath + "/" + inputFile)).lastModified()))));
@@ -321,48 +365,41 @@ public class MobileActivity extends BaseActivity implements View.OnClickListener
                 out.flush();
                 out.close();
                 out = null;
-                Log.e("IP & PORT", "复制成功!");
+                new File(inputPath).delete();
+                Log.e("IP & PORT", "剪切成功!");
+            } else if (input.isDirectory()) {
+                File output = new File(outputPath + "/" + input.getName());
+                if (!output.exists()) {
+                    output.mkdirs();
+                }
+                File[] list = input.listFiles();
+                if (list.length != 0) {
+                    for (File item : list) {
+                        moveFile(item.getPath(), item.getName(), output.getPath());
+                    }
+                }
+                Log.e("IP & PORT", "剪切成功!");
             } else {
-                Log.e("IP & PORT", "复制失败!");
+                Log.e("IP & PORT", "剪切失败!");
             }
-        } catch (FileNotFoundException fnfe1) {
-            Log.e("IP & PORT", "复制失败:" + fnfe1.getMessage());
-        } catch (Exception e) {
-            Log.e("IP & PORT", "复制失败:" + e.getMessage());
-        }
-    }
-
-    private void moveFile(String inputPath, String inputFile, String outputPath) {
-        InputStream in = null;
-        OutputStream out = null;
-        try {
-            Log.e("IP & PORT", "正在剪切:" + inputPath + " to " + outputPath + "/" + inputFile);
-            fileList.add(new MobileBean(outputPath + "/" + inputFile,
-                    inputFile, outputPath, new ArrayList<String>(),
-                    format.format(new Date((new File(outputPath + "/" + inputFile)).lastModified()))));
-            File dir = new File(outputPath);
-            if (!dir.exists()) {
-                dir.mkdirs();
-            }
-            in = new FileInputStream(inputPath);
-            out = new FileOutputStream(outputPath + "/" + inputFile);
-            byte[] buffer = new byte[1024];
-            int read;
-            while ((read = in.read(buffer)) != -1) {
-                out.write(buffer, 0, read);
-            }
-            in.close();
-            in = null;
-            out.flush();
-            out.close();
-            out = null;
-            new File(inputPath).delete();
-            Log.e("IP & PORT", "剪切成功!");
         } catch (FileNotFoundException fnfe1) {
             Log.e("IP & PORT", "剪切失败:" + fnfe1.getMessage());
         } catch (Exception e) {
             Log.e("IP & PORT", "剪切失败:" + e.getMessage());
         }
+    }
+
+    private static boolean deleteDir(File dir) {
+        if (dir.isDirectory()) {
+            String[] list = dir.list();
+            for (int i=0; i<list.length; i++) {
+                boolean success = deleteDir(new File(dir, list[i]));
+                if (!success) {
+                    return false;
+                }
+            }
+        }
+        return dir.delete();
     }
 
     private void setSearchTextChanged() {
@@ -482,12 +519,16 @@ public class MobileActivity extends BaseActivity implements View.OnClickListener
             for (int i = 0; i < posList.size(); i++) {
                 String deletePath = fileList.get(Integer.parseInt(posList.get(i))).getPath();
                 File deleteFile = new File(deletePath);
-                Log.e("IP & PORT", "正在删除:" + deletePath);
-                if (deleteFile.exists() && deleteFile.isFile() && deleteFile.canWrite()) {
-                    deleteFile.delete();
-                    Log.e("IP & PORT", "删除成功!");
-                } else {
-                    Log.e("IP & PORT", "删除失败!");
+                if (deleteFile.isFile()) {
+                    Log.e("IP & PORT", "正在删除:" + deletePath);
+                    if (deleteFile.exists() && deleteFile.isFile() && deleteFile.canWrite()) {
+                        deleteFile.delete();
+                        Log.e("IP & PORT", "删除成功!");
+                    } else {
+                        Log.e("IP & PORT", "删除失败!");
+                    }
+                } else if (deleteFile.isDirectory()){
+                    deleteDir(deleteFile);
                 }
             }
             int count = 0;
