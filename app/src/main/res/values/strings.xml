@@ -121,4 +121,5 @@
         <item>打开写字板(w/x)</item>
         <item>打开浏览器(b/l)</item>
     </string-array>
+    <string name="title_activity_desktop">DesktopActivity</string>
 </resources>

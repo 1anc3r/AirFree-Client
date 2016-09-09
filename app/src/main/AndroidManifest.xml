@@ -117,7 +117,11 @@
             android:screenOrientation="portrait" />
         <activity
             android:name="me.lancer.airfree.activity.SessionActivity"
-            android:label="@string/title_activity_session"></activity>
+            android:label="@string/title_activity_session" />
+        <activity
+            android:name="me.lancer.airfree.activity.DesktopActivity"
+            android:screenOrientation="landscape"
+            android:label="@string/title_activity_desktop"></activity>
     </application>
 
 </manifest>

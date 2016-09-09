@@ -31,7 +31,7 @@ public class ShotActivity extends BaseActivity implements View.OnClickListener {
 
     private Button btnBack;
     private ImageView ivShow;
-    private LinearLayout btnScreenShot;
+    private LinearLayout btnScreenShot, btnRemoteDesktop;
 
     final int POWEREVENTF_SCREENSHOT = 0x0001;    //截屏
 
@@ -76,6 +76,8 @@ public class ShotActivity extends BaseActivity implements View.OnClickListener {
         btnBack.setOnClickListener(this);
         btnScreenShot = (LinearLayout) findViewById(R.id.btn_shot);
         btnScreenShot.setOnClickListener(this);
+        btnRemoteDesktop = (LinearLayout) findViewById(R.id.btn_remote_desktop);
+        btnRemoteDesktop.setOnClickListener(this);
         ivShow = (ImageView) findViewById(R.id.iv_show);
         ivShow.setOnClickListener(this);
         int what = intent.getIntExtra("what", 0);
@@ -113,6 +115,30 @@ public class ShotActivity extends BaseActivity implements View.OnClickListener {
             Uri mUri = Uri.parse("file://" + file.getPath());
             intent.setDataAndType(mUri, "image/*");
             startActivity(intent);
+        } else if (v == btnRemoteDesktop){
+            if (!app.connected) {
+                pref = PreferenceManager.getDefaultSharedPreferences(this);
+                String ip = pref.getString("ip", "");
+                app.startThread(ip);
+            }
+            for (int i = 0; i < 4; i++) {
+                if (app.connected) {
+                    startActivity(new Intent(this, DesktopActivity.class));
+                    i = 6;
+                }
+                try {
+                    Thread.sleep(250);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+            if (!app.connected) {
+                if (!app.reachable) {
+//                    network_alert.show();
+                } else {
+//                    alert.show();
+                }
+            }
         }
     }
 
