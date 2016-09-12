@@ -71,10 +71,6 @@ public class DesktopActivity extends BaseActivity implements View.OnClickListene
     private void init() {
         app = (ApplicationUtil) DesktopActivity.this.getApplication();
 
-        Display display = getWindowManager().getDefaultDisplay();
-        int width = display.getWidth();
-        int height = display.getHeight();
-
         vTouchPad = findViewById(R.id.ll_touch_pad);
         vTouchPad.setOnTouchListener(this);
         ivDestop = (ImageView) findViewById(R.id.iv_desktop);
@@ -133,6 +129,7 @@ public class DesktopActivity extends BaseActivity implements View.OnClickListene
         super.onDestroy();
         sendTxtMessage("Close");
         app.connected = false;
+        app.stopThread();
     }
 
     @Override

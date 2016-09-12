@@ -132,18 +132,18 @@ public class ApplicationUtil extends Application {
         this.isExplosing = isExplosing;
     }
 
-    public void startThread(String ip){
-        runnable = new mRunnable(ip);
-        Thread thread = new Thread(runnable);
-        thread.start();
-    }
-
     public void sendTxtMessage(String message){
         runnable.sendTxtMessage(message);
     }
 
     public void sendImgMessage(String message) {
         runnable.sendImgMessage(message);
+    }
+
+    public void startThread(String ip){
+        runnable = new mRunnable(ip);
+        Thread thread = new Thread(runnable);
+        thread.start();
     }
 
     public void stopThread(){
