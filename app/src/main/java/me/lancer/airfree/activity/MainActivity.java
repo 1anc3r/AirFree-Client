@@ -27,6 +27,7 @@ import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.List;
 
+import me.lancer.airfree.sms.SmsService;
 import me.lancer.airfree.util.ApplicationUtil;
 import me.lancer.distance.R;
 
@@ -47,6 +48,10 @@ public class MainActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        Intent intentsms = new Intent(this, SmsService.class);
+        startService(intentsms);
+
         app = (ApplicationUtil) MainActivity.this.getApplication();
         if (app.getmPrintWriterClient() != null) {
             sendMessage("link", getIPAddress());

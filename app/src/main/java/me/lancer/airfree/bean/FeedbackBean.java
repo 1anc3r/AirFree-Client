@@ -2,7 +2,7 @@ package me.lancer.airfree.bean;
 
 import cn.bmob.v3.BmobObject;
 
-public class Feedback extends BmobObject {
+public class FeedbackBean extends BmobObject {
 
     private String content;
 

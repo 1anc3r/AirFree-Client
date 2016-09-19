@@ -1,10 +1,8 @@
 package me.lancer.airfree.activity;
 
-import android.app.ActivityManager;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.ProgressDialog;
-import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -22,7 +20,7 @@ import android.widget.TextView;
 
 import cn.bmob.v3.Bmob;
 import cn.bmob.v3.listener.SaveListener;
-import me.lancer.airfree.bean.Feedback;
+import me.lancer.airfree.bean.FeedbackBean;
 import me.lancer.distance.R;
 
 public class SettingActivity extends BaseActivity implements View.OnClickListener {
@@ -119,7 +117,7 @@ public class SettingActivity extends BaseActivity implements View.OnClickListene
                 @Override
                 public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
                     if (actionId == EditorInfo.IME_ACTION_DONE) {
-                        Feedback item = new Feedback();
+                        FeedbackBean item = new FeedbackBean();
                         item.setContent(etContent.getText().toString());
                         item.save(SettingActivity.this, new SaveListener() {
                             @Override
@@ -143,7 +141,7 @@ public class SettingActivity extends BaseActivity implements View.OnClickListene
             btnSend.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Feedback item = new Feedback();
+                    FeedbackBean item = new FeedbackBean();
                     item.setContent(etContent.getText().toString());
                     item.save(SettingActivity.this, new SaveListener() {
                         @Override

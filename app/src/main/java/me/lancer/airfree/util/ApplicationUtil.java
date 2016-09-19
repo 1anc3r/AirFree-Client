@@ -9,6 +9,8 @@ import android.widget.Toast;
 
 import com.iflytek.cloud.SpeechUtility;
 
+import org.json.JSONObject;
+
 import java.io.BufferedReader;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
@@ -154,6 +156,23 @@ public class ApplicationUtil extends Application {
 
     public void setmHandler(Handler mHandler) {
         this.mHandler = mHandler;
+    }
+
+    public void sendMessage(String command, String parameter) {
+        if (getmPrintWriterClient() != null) {
+            try {
+                JSONObject jb = new JSONObject();
+                jb.put("command", command);
+                jb.put("parameter", parameter);
+                if (jb.toString() != null) {
+                    getmPrintWriterClient().print(jb.toString() + "\n");
+                    getmPrintWriterClient().flush();
+                    Log.e("IP & PORT", "发送成功:" + jb.toString());
+                }
+            } catch (Exception e) {
+                Log.e("IP & PORT", "发送异常:" + e.getMessage());
+            }
+        }
     }
 
     public class mRunnable implements Runnable {
