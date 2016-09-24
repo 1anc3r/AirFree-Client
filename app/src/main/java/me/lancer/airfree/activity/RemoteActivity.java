@@ -2,6 +2,7 @@ package me.lancer.airfree.activity;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
+import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -11,15 +12,11 @@ import android.os.Environment;
 import android.os.Handler;
 import android.os.Message;
 import android.util.Log;
-import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.WindowManager;
-import android.view.inputmethod.EditorInfo;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.SeekBar;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
@@ -58,6 +55,7 @@ public class RemoteActivity extends BaseActivity implements View.OnClickListener
     private SeekBar sbVolume, sbBright;
     private RecognizerDialog mIatDialog;
     private SpeechRecognizer mIat;
+    private ProgressDialog mProgressDialog;
 
     private static String TAG = RemoteActivity.class.getSimpleName();
 
@@ -74,6 +72,7 @@ public class RemoteActivity extends BaseActivity implements View.OnClickListener
         public void handleMessage(Message msg) {
             super.handleMessage(msg);
             if (msg.obj!=null) {
+                mProgressDialog.dismiss();
                 AlertDialog.Builder builder = new AlertDialog.Builder(RemoteActivity.this);
                 builder.setTitle("远程设备信息");
                 builder.setMessage((CharSequence) msg.obj);
@@ -208,6 +207,7 @@ public class RemoteActivity extends BaseActivity implements View.OnClickListener
                 dialog.show();
                 dialog.getWindow().setContentView(layout);
             } else if (v == btnOpen) {
+                mProgressDialog = ProgressDialog.show(this, null, "正在获取远程设备信息...");
                 sendMessage("info", "");
                 mThreadClient = new Thread(iRunnable);
                 mThreadClient.start();

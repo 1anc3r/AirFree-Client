@@ -5,4 +5,12 @@
         <!-- Customize your theme here. -->
     </style>
 
+    <style name="AppStart0" parent="android:style/Theme.Black.NoTitleBar.Fullscreen" type="text/css">
+        <item name= "android:windowIsTranslucent">true</item>
+    </style>
+
+    <!--<style name="AppStart1" parent="android:style/Theme.Black.NoTitleBar.Fullscreen" type="text/css">-->
+        <!--<item name="android:windowBackground">@drawable /splash_bg</item>-->
+    <!--</style>-->
+
 </resources>

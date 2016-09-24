@@ -40,6 +40,7 @@ public class ShotActivity extends BaseActivity implements View.OnClickListener {
     private String recvMessageClient = "";
     private SharedPreferences pref;
     private boolean iStop = false;
+    private boolean iShot = false;
 
     private Handler sHandler = new Handler() {
 
@@ -48,6 +49,7 @@ public class ShotActivity extends BaseActivity implements View.OnClickListener {
             super.handleMessage(msg);
             if (msg.what == 1) {
                 ShowToast("截图成功:" + msg.obj.toString());
+                iShot = true;
             }
         }
     };
@@ -110,12 +112,14 @@ public class ShotActivity extends BaseActivity implements View.OnClickListener {
             new ReadTask(ip, "59672", filename, ivShow).execute();
             sHandler.post(sRunnable);
         } else if (v == ivShow) {
-            File file = new File(filename);
-            Intent intent = new Intent(Intent.ACTION_VIEW);
-            Uri mUri = Uri.parse("file://" + file.getPath());
-            intent.setDataAndType(mUri, "image/*");
-            startActivity(intent);
-        } else if (v == btnRemoteDesktop){
+            if (iShot) {
+                File file = new File(filename);
+                Intent intent = new Intent(Intent.ACTION_VIEW);
+                Uri mUri = Uri.parse("file://" + file.getPath());
+                intent.setDataAndType(mUri, "image/*");
+                startActivity(intent);
+            }
+        } else if (v == btnRemoteDesktop) {
             if (!app.connected) {
                 pref = PreferenceManager.getDefaultSharedPreferences(this);
                 String ip = pref.getString("ip", "");

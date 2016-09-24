@@ -122,4 +122,5 @@
         <item>打开浏览器(b/l)</item>
     </string-array>
     <string name="title_activity_desktop">DesktopActivity</string>
+    <string name="title_activity_main2">Main2Activity</string>
 </resources>
