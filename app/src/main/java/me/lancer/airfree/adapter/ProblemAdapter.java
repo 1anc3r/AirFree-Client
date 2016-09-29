@@ -1,6 +1,8 @@
 package me.lancer.airfree.adapter;
 
 import android.content.Context;
+import android.text.method.LinkMovementMethod;
+import android.text.util.Linkify;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -49,7 +51,13 @@ public class ProblemAdapter extends BaseAdapter {
             convertView = mInflater.inflate(R.layout.lv_problem_item, null);
             viewHolder = new ViewHolder();
             viewHolder.btvLeft = (BubbleTextVew) convertView.findViewById(R.id.btv_left);
+            viewHolder.btvLeft.setAutoLinkMask(Linkify.ALL);
+            viewHolder.btvLeft.setMovementMethod(LinkMovementMethod.getInstance());
+            viewHolder.btvLeft.setTextIsSelectable(true);
             viewHolder.btvRight = (BubbleTextVew) convertView.findViewById(R.id.btv_right);
+            viewHolder.btvRight.setAutoLinkMask(Linkify.ALL);
+            viewHolder.btvRight.setMovementMethod(LinkMovementMethod.getInstance());
+            viewHolder.btvRight.setTextIsSelectable(true);
             viewHolder.tvLeft = (TextView) convertView.findViewById(R.id.tv_left);
             viewHolder.tvRight = (TextView) convertView.findViewById(R.id.tv_right);
 

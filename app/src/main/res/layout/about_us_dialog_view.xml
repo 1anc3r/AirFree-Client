@@ -24,6 +24,7 @@
         android:layout_margin="5dp"
         android:gravity="center_horizontal"
         android:text="Author : 1anc3r"
+        android:textIsSelectable="true"
         android:textSize="@dimen/text_size_small" />
 
     <TextView
@@ -32,6 +33,7 @@
         android:layout_margin="5dp"
         android:gravity="center_horizontal"
         android:text="Phone : 15829206974"
+        android:textIsSelectable="true"
         android:textSize="@dimen/text_size_small" />
 
     <TextView
@@ -40,6 +42,7 @@
         android:layout_margin="5dp"
         android:gravity="center_horizontal"
         android:text="Email : huangfangzhi0@gmail.com"
+        android:textIsSelectable="true"
         android:textSize="@dimen/text_size_small" />
 
     <TextView
@@ -48,6 +51,7 @@
         android:layout_margin="5dp"
         android:gravity="center_horizontal"
         android:text="Copyright (C) 2016 1anc3r All Right"
+        android:textIsSelectable="true"
         android:textSize="@dimen/text_size_small" />
 
     <TextView
@@ -56,6 +60,7 @@
         android:layout_margin="5dp"
         android:gravity="center_horizontal"
         android:text="语音技术由科大讯飞提供"
+        android:textIsSelectable="true"
         android:textSize="@dimen/text_size_small" />
 
     <LinearLayout
@@ -89,6 +94,7 @@
             android:gravity="center"
             android:text="访问我的主页"
             android:textColor="@color/blue_dark"
+            android:textIsSelectable="true"
             android:textSize="@dimen/text_size_small" />
 
     </LinearLayout>

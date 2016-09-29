@@ -27,7 +27,7 @@
             android:layout_height="48dp"
             android:layout_marginLeft="-24dp"
             android:gravity="center"
-            android:text="常见问题"
+            android:text="使用说明"
             android:textColor="@color/base_color_text_white"
             android:textSize="@dimen/text_size_large" />
 

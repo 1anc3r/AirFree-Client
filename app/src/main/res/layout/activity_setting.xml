@@ -149,7 +149,7 @@
                             android:layout_height="wrap_content"
                             android:paddingBottom="15dp"
                             android:paddingTop="5dp"
-                            android:text="常见问题" />
+                            android:text="使用说明" />
 
                     </LinearLayout>
 
