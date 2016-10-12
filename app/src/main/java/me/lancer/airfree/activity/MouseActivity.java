@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Environment;
+import android.preference.PreferenceManager;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
@@ -27,6 +28,7 @@ import android.widget.RelativeLayout;
 import android.view.View.OnClickListener;
 import android.view.View.OnLongClickListener;
 import android.widget.SeekBar;
+import android.widget.TextView;
 
 import com.iflytek.cloud.ErrorCode;
 import com.iflytek.cloud.InitListener;
@@ -58,6 +60,7 @@ public class MouseActivity extends BaseActivity implements View.OnTouchListener,
 
     ApplicationUtil app;
 
+    private TextView tvShow;
     private EditText etKeyboard;
     private RelativeLayout rlTouch, rlKM, rlVM;
     private LinearLayout llPPt;
@@ -93,6 +96,16 @@ public class MouseActivity extends BaseActivity implements View.OnTouchListener,
     private SharedPreferences mSharedPreferences;
     private boolean iStop = false;
 
+    private SharedPreferences pref;
+    private String language = "zn";
+    private String strConnectionSucceeded = "";
+    private String strNoConnection = "";
+    private String strConnectionFailed = "";
+    private String strShow = "";
+    private String strCommon = "";
+    private String strShowPPT = "";
+    private String strPlayVideo = "";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -106,8 +119,33 @@ public class MouseActivity extends BaseActivity implements View.OnTouchListener,
         super.onDestroy();
     }
 
+    public void iLanguage(){
+        pref = PreferenceManager.getDefaultSharedPreferences(this);
+        language = pref.getString(getString(R.string.language_choice ), "zn");
+        if (language.equals("zn")) {
+            strConnectionSucceeded = getResources().getString(R.string.connection_succeeded_zn);
+            strNoConnection = getResources().getString(R.string.no_connection_zn);
+            strConnectionFailed = getResources().getString(R.string.connection_failed_zn);
+            strShow = getResources().getString(R.string.keyboard_mouse_zn);
+            strCommon = getResources().getString(R.string.common_zn);
+            strShowPPT = getResources().getString(R.string.show_ppt_zn);
+            strPlayVideo = getResources().getString(R.string.play_video_zn);
+        } else if (language.equals("en")) {
+            strConnectionSucceeded = getResources().getString(R.string.connection_succeeded_en);
+            strNoConnection = getResources().getString(R.string.no_connection_en);
+            strConnectionFailed = getResources().getString(R.string.connection_failed_en);
+            strShow = getResources().getString(R.string.keyboard_mouse_en);
+            strCommon = getResources().getString(R.string.common_en);
+            strShowPPT = getResources().getString(R.string.show_ppt_en);
+            strPlayVideo = getResources().getString(R.string.play_video_en);
+        }
+    }
+
     private void init() {
+        iLanguage();
         app = (ApplicationUtil) MouseActivity.this.getApplication();
+        tvShow = (TextView) findViewById(R.id.tv_show);
+        tvShow.setText(strShow);
         btnBack = (Button) findViewById(R.id.btn_back);
         btnBack.setOnClickListener(this);
         btnOption = (Button) findViewById(R.id.btn_option);
@@ -360,9 +398,9 @@ public class MouseActivity extends BaseActivity implements View.OnTouchListener,
             final Dialog dialog = new AlertDialog.Builder(MouseActivity.this).create();
             lvOption = (ListView) layout.findViewById(R.id.lv_option);
             ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_activated_1);
-            adapter.add("键鼠控制");
-            adapter.add("PPT.放映");
-            adapter.add("视频播放");
+            adapter.add(strCommon);
+            adapter.add(strShowPPT);
+            adapter.add(strPlayVideo);
             lvOption.setAdapter(adapter);
             lvOption.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 @Override

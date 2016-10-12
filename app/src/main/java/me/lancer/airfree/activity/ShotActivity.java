@@ -14,9 +14,11 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import org.json.JSONObject;
 import org.json.JSONTokener;
+import org.w3c.dom.Text;
 
 import java.io.File;
 import java.text.SimpleDateFormat;
@@ -29,6 +31,7 @@ public class ShotActivity extends BaseActivity implements View.OnClickListener {
 
     ApplicationUtil app;
 
+    private TextView tvShow, tvScreenShot, tvRemoteDesktop;
     private Button btnBack;
     private ImageView ivShow;
     private LinearLayout btnScreenShot, btnRemoteDesktop;
@@ -38,9 +41,18 @@ public class ShotActivity extends BaseActivity implements View.OnClickListener {
     private String filename;
     //    private Thread mThreadClient = null;
     private String recvMessageClient = "";
-    private SharedPreferences pref;
     private boolean iStop = false;
     private boolean iShot = false;
+
+    private SharedPreferences pref;
+    private String language = "zn";
+    private String strConnectionSucceeded = "";
+    private String strNoConnection = "";
+    private String strConnectionFailed = "";
+    private String strShow = "";
+    private String strScreenCapture = "";
+    private String strRealTimeDesktop = "";
+    private String strScreenCaptureSucceeded = "";
 
     private Handler sHandler = new Handler() {
 
@@ -48,7 +60,7 @@ public class ShotActivity extends BaseActivity implements View.OnClickListener {
         public void handleMessage(Message msg) {
             super.handleMessage(msg);
             if (msg.what == 1) {
-                ShowToast("截图成功:" + msg.obj.toString());
+                ShowToast(strScreenCaptureSucceeded + msg.obj.toString());
                 iShot = true;
             }
         }
@@ -71,11 +83,40 @@ public class ShotActivity extends BaseActivity implements View.OnClickListener {
         super.onDestroy();
     }
 
+    public void iLanguage(){
+        pref = PreferenceManager.getDefaultSharedPreferences(this);
+        language = pref.getString(getString(R.string.language_choice ), "zn");
+        if (language.equals("zn")) {
+            strConnectionSucceeded = getResources().getString(R.string.connection_succeeded_zn);
+            strNoConnection = getResources().getString(R.string.no_connection_zn);
+            strConnectionFailed = getResources().getString(R.string.connection_failed_zn);
+            strShow = getResources().getString(R.string.desktop_zn);
+            strScreenCapture = getResources().getString(R.string.screen_capture_zn);
+            strRealTimeDesktop = getResources().getString(R.string.real_time_desktop_zn);
+            strScreenCaptureSucceeded = getResources().getString(R.string.screen_capture_succeeded_zn);
+        } else if (language.equals("en")) {
+            strConnectionSucceeded = getResources().getString(R.string.connection_succeeded_en);
+            strNoConnection = getResources().getString(R.string.no_connection_en);
+            strConnectionFailed = getResources().getString(R.string.connection_failed_en);
+            strShow = getResources().getString(R.string.power_option_en);
+            strScreenCapture = getResources().getString(R.string.screen_capture_en);
+            strRealTimeDesktop = getResources().getString(R.string.real_time_desktop_en);
+            strScreenCaptureSucceeded = getResources().getString(R.string.screen_capture_succeeded_en);
+        }
+    }
+
     private void init() {
+        iLanguage();
         app = (ApplicationUtil) ShotActivity.this.getApplication();
         Intent intent = this.getIntent();
+        tvShow = (TextView) findViewById(R.id.tv_show);
+        tvShow.setText(strShow);
         btnBack = (Button) findViewById(R.id.btn_back);
         btnBack.setOnClickListener(this);
+        tvScreenShot = (TextView) findViewById(R.id.tv_screen_capture);
+        tvScreenShot.setText(strScreenCapture);
+        tvRemoteDesktop = (TextView) findViewById(R.id.tv_real_time_desktop);
+        tvRemoteDesktop.setText(strRealTimeDesktop);
         btnScreenShot = (LinearLayout) findViewById(R.id.btn_shot);
         btnScreenShot.setOnClickListener(this);
         btnRemoteDesktop = (LinearLayout) findViewById(R.id.btn_remote_desktop);

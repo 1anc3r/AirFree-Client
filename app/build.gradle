@@ -7,8 +7,8 @@ android {
         applicationId "me.lancer.airfree"
         minSdkVersion 21
         targetSdkVersion 21
-        versionCode 7
-        versionName "2.33.33.2"
+        versionCode 8
+        versionName "2.4"
     }
     buildTypes {
         release {
@@ -18,7 +18,7 @@ android {
     }
     sourceSets {
         main {
-            jniLibs.srcDirs = ["libs"]
+            jniLibs.srcDirs = ['libs']
         }
     }
     productFlavors {
@@ -34,6 +34,10 @@ dependencies {
     compile files('libs/Sunflower.jar')
     compile files('libs/org.apache.http.legacy.jar')
     compile files('libs/Bmob_Push_V0.6beta_20150408.jar')
+    compile files('libs/BmobSDK_V3.4.5_1111.jar')
+    compile files('libs/okhttp-2.5.0.jar')
+    compile files('libs/okhttp-urlconnection-2.0.0.jar')
+    compile files('libs/okio-1.6.0.jar')
     compile('com.github.afollestad.material-dialogs:commons:0.8.5.8@aar') {
         transitive = true
     }

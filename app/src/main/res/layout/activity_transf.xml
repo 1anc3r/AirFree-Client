@@ -64,11 +64,13 @@
                             android:src="@drawable/ic_transfer_pc" />
 
                         <TextView
-                            android:layout_width="wrap_content"
+                            android:id="@+id/tv_directory"
+                            android:layout_width="fill_parent"
+                            android:gravity="center"
                             android:layout_height="wrap_content"
                             android:paddingBottom="15dp"
                             android:paddingTop="5dp"
-                            android:text="远程设备" />
+                            android:text="@string/directory_zn" />
 
                     </LinearLayout>
 
@@ -87,11 +89,13 @@
                             android:src="@drawable/ic_file_category_device" />
 
                         <TextView
-                            android:layout_width="wrap_content"
+                            android:id="@+id/tv_internal"
+                            android:layout_width="fill_parent"
+                            android:gravity="center"
                             android:layout_height="wrap_content"
                             android:paddingBottom="15dp"
                             android:paddingTop="5dp"
-                            android:text="内部存储" />
+                            android:text="@string/internal_zn" />
 
                     </LinearLayout>
 
@@ -110,11 +114,13 @@
                             android:src="@drawable/ic_file_category_sdcard" />
 
                         <TextView
-                            android:layout_width="wrap_content"
+                            android:id="@+id/tv_external"
+                            android:layout_width="fill_parent"
+                            android:gravity="center"
                             android:layout_height="wrap_content"
                             android:paddingBottom="15dp"
                             android:paddingTop="5dp"
-                            android:text="外部存储" />
+                            android:text="@string/external_zn" />
 
                     </LinearLayout>
 
@@ -142,11 +148,13 @@
                             android:src="@drawable/ic_file_category_image" />
 
                         <TextView
-                            android:layout_width="wrap_content"
+                            android:id="@+id/tv_image"
+                            android:layout_width="fill_parent"
+                            android:gravity="center"
                             android:layout_height="wrap_content"
                             android:paddingBottom="15dp"
                             android:paddingTop="5dp"
-                            android:text="  图片  " />
+                            android:text="@string/image_zn" />
 
                     </LinearLayout>
 
@@ -165,11 +173,13 @@
                             android:src="@drawable/ic_file_category_music" />
 
                         <TextView
-                            android:layout_width="wrap_content"
+                            android:id="@+id/tv_music"
+                            android:layout_width="fill_parent"
+                            android:gravity="center"
                             android:layout_height="wrap_content"
                             android:paddingBottom="15dp"
                             android:paddingTop="5dp"
-                            android:text="  音乐  " />
+                            android:text="@string/music_zn" />
 
                     </LinearLayout>
 
@@ -188,11 +198,13 @@
                             android:src="@drawable/ic_file_category_video" />
 
                         <TextView
-                            android:layout_width="wrap_content"
+                            android:id="@+id/tv_video"
+                            android:layout_width="fill_parent"
+                            android:gravity="center"
                             android:layout_height="wrap_content"
                             android:paddingBottom="15dp"
                             android:paddingTop="5dp"
-                            android:text="  视频  " />
+                            android:text="@string/video_zn" />
 
                     </LinearLayout>
 
@@ -220,11 +232,13 @@
                             android:src="@drawable/ic_file_category_doc" />
 
                         <TextView
-                            android:layout_width="wrap_content"
+                            android:id="@+id/tv_document"
+                            android:layout_width="fill_parent"
+                            android:gravity="center"
                             android:layout_height="wrap_content"
                             android:paddingBottom="15dp"
                             android:paddingTop="5dp"
-                            android:text="  文档  " />
+                            android:text="@string/document_zn" />
 
                     </LinearLayout>
 
@@ -243,11 +257,13 @@
                             android:src="@drawable/ic_main_app" />
 
                         <TextView
-                            android:layout_width="wrap_content"
+                            android:id="@+id/tv_application"
+                            android:layout_width="fill_parent"
+                            android:gravity="center"
                             android:layout_height="wrap_content"
                             android:paddingBottom="15dp"
                             android:paddingTop="5dp"
-                            android:text="  应用  " />
+                            android:text="@string/application_zn" />
 
                     </LinearLayout>
 
@@ -266,11 +282,13 @@
                             android:src="@drawable/ic_file_category_download" />
 
                         <TextView
-                            android:layout_width="wrap_content"
+                            android:id="@+id/tv_download"
+                            android:layout_width="fill_parent"
+                            android:gravity="center"
                             android:layout_height="wrap_content"
                             android:paddingBottom="15dp"
                             android:paddingTop="5dp"
-                            android:text="  下载  " />
+                            android:text="@string/download_zn" />
 
                     </LinearLayout>
 

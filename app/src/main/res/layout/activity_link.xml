@@ -45,7 +45,7 @@
                 android:layout_height="@dimen/base_action_bar_height"
                 android:background="@color/transparent"
                 android:drawablePadding="5dip"
-                android:hint="IP地址"
+                android:hint="@string/ip_address_hint_zn"
                 android:paddingLeft="10dip"
                 android:shadowDx="0.0"
                 android:shadowDy="1.0"
@@ -79,7 +79,7 @@
                 android:id="@+id/cb_remember"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="记住连接"
+                android:text="@string/remember_connection_zn"
                 android:textColor="@color/base_color_text_gray" />
         </LinearLayout>
 
@@ -100,9 +100,9 @@
                 android:background="@drawable/btn_selector"
                 android:elevation="3dp"
                 android:gravity="center"
-                android:text="输入连接"
+                android:text="@string/input_ip_address_zn"
                 android:textColor="@color/base_color_text_white"
-                android:textSize="@dimen/text_size_large" />
+                android:textSize="@dimen/text_size_small" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -121,9 +121,9 @@
                 android:background="@drawable/btn_selector"
                 android:elevation="3dp"
                 android:gravity="center"
-                android:text="扫码连接"
+                android:text="@string/scan_qr_code_zn"
                 android:textColor="@color/base_color_text_white"
-                android:textSize="@dimen/text_size_large" />
+                android:textSize="@dimen/text_size_small" />
 
         </LinearLayout>
 

@@ -3,8 +3,10 @@ package me.lancer.airfree.activity;
 import android.app.LocalActivityManager;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Parcelable;
+import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
@@ -44,11 +46,34 @@ public class MainActivity extends BaseActivity {
     private LocalActivityManager manager = null;
     private List<View> viewList = new ArrayList<>();
 
+    private SharedPreferences pref;
+    private String language = "zn";
+    private String strManager = "";
+    private String strContorler = "";
+    private String strSetting = "";
+    private String strPressAgainToExit = "";
+
+    public void iLanguage(){
+        pref = PreferenceManager.getDefaultSharedPreferences(this);
+        language = pref.getString(getString(R.string.language_choice ), "zn");
+        if (language.equals("zn")) {
+            strManager = getResources().getString(R.string.manager_zn);
+            strContorler = getResources().getString(R.string.controler_zn);
+            strSetting = getResources().getString(R.string.setting_zn);
+            strPressAgainToExit = getResources().getString(R.string.press_again_to_exit_zn);
+        } else if (language.equals("en")) {
+            strManager = getResources().getString(R.string.manager_en);
+            strContorler = getResources().getString(R.string.controler_en);
+            strSetting = getResources().getString(R.string.setting_en);
+            strPressAgainToExit = getResources().getString(R.string.press_again_to_exit_en);
+        }
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
+        iLanguage();
         Intent intentsms = new Intent(this, SmsService.class);
         startService(intentsms);
 
@@ -71,13 +96,13 @@ public class MainActivity extends BaseActivity {
         tabHost.setup(manager);
         RelativeLayout tabIndicator1 = (RelativeLayout) LayoutInflater.from(this).inflate(R.layout.tab_host_item, null);
         TextView tvTab1 = (TextView) tabIndicator1.findViewById(R.id.tv_title);
-        tvTab1.setText("文件");
+        tvTab1.setText(strManager);
         RelativeLayout tabIndicator2 = (RelativeLayout) LayoutInflater.from(this).inflate(R.layout.tab_host_item, null);
         TextView tvTab2 = (TextView) tabIndicator2.findViewById(R.id.tv_title);
-        tvTab2.setText("遥控");
+        tvTab2.setText(strContorler);
         RelativeLayout tabIndicator3 = (RelativeLayout) LayoutInflater.from(this).inflate(R.layout.tab_host_item, null);
         TextView tvTab3 = (TextView) tabIndicator3.findViewById(R.id.tv_title);
-        tvTab3.setText("设置");
+        tvTab3.setText(strSetting);
         Intent intent = new Intent(context, EmptyActivity.class);
         tabHost.addTab(tabHost.newTabSpec("A").setIndicator(tabIndicator1).setContent(intent));
         tabHost.addTab(tabHost.newTabSpec("B").setIndicator(tabIndicator2).setContent(intent));
@@ -186,7 +211,7 @@ public class MainActivity extends BaseActivity {
     public boolean onKeyDown(int keyCode, @NonNull KeyEvent event) {
         if (keyCode == KeyEvent.KEYCODE_BACK) {
             if ((System.currentTimeMillis() - exitTime) > 2000) {
-                ShowToast("再按一次退出程序");
+                ShowToast(strPressAgainToExit);
                 exitTime = System.currentTimeMillis();
             } else {
                 app.off();

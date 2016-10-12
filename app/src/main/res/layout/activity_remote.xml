@@ -65,11 +65,13 @@
                             android:src="@drawable/ic_mouse_control" />
 
                         <TextView
-                            android:layout_width="wrap_content"
+                            android:id="@+id/tv_keyboard_mouse"
+                            android:layout_width="fill_parent"
+                            android:gravity="center"
                             android:layout_height="wrap_content"
                             android:paddingBottom="15dp"
                             android:paddingTop="5dp"
-                            android:text="键鼠控制" />
+                            android:text="@string/keyboard_mouse_zn" />
 
                     </LinearLayout>
 
@@ -88,11 +90,13 @@
                             android:src="@drawable/ic_gesture_control" />
 
                         <TextView
-                            android:layout_width="wrap_content"
+                            android:id="@+id/tv_gesture"
+                            android:layout_width="fill_parent"
+                            android:gravity="center"
                             android:layout_height="wrap_content"
                             android:paddingBottom="15dp"
                             android:paddingTop="5dp"
-                            android:text="手势控制" />
+                            android:text="@string/gesture_zn" />
 
                     </LinearLayout>
 
@@ -111,11 +115,13 @@
                             android:src="@drawable/ic_voice_control" />
 
                         <TextView
-                            android:layout_width="wrap_content"
+                            android:id="@+id/tv_voice"
+                            android:layout_width="fill_parent"
+                            android:gravity="center"
                             android:layout_height="wrap_content"
                             android:paddingBottom="15dp"
                             android:paddingTop="5dp"
-                            android:text="语音控制" />
+                            android:text="@string/voice_zn" />
 
                     </LinearLayout>
 
@@ -143,11 +149,13 @@
                             android:src="@drawable/ic_volume_control" />
 
                         <TextView
-                            android:layout_width="wrap_content"
+                            android:id="@+id/tv_volume"
+                            android:layout_width="fill_parent"
+                            android:gravity="center"
                             android:layout_height="wrap_content"
                             android:paddingBottom="15dp"
                             android:paddingTop="5dp"
-                            android:text="音量调节" />
+                            android:text="@string/volume_zn" />
 
                     </LinearLayout>
 
@@ -166,11 +174,13 @@
                             android:src="@drawable/ic_power_control" />
 
                         <TextView
-                            android:layout_width="wrap_content"
+                            android:id="@+id/tv_power_option"
+                            android:layout_width="fill_parent"
+                            android:gravity="center"
                             android:layout_height="wrap_content"
                             android:paddingBottom="15dp"
                             android:paddingTop="5dp"
-                            android:text="电源选项" />
+                            android:text="@string/power_option_zn" />
 
                     </LinearLayout>
 
@@ -189,11 +199,13 @@
                             android:src="@drawable/ic_bright_control" />
 
                         <TextView
-                            android:layout_width="wrap_content"
+                            android:id="@+id/tv_brightness"
+                            android:layout_width="fill_parent"
+                            android:gravity="center"
                             android:layout_height="wrap_content"
                             android:paddingBottom="15dp"
                             android:paddingTop="5dp"
-                            android:text="亮度调节" />
+                            android:text="@string/bright_zn" />
 
                     </LinearLayout>
 
@@ -221,11 +233,13 @@
                             android:src="@drawable/ic_screen_contorl" />
 
                         <TextView
-                            android:layout_width="wrap_content"
+                            android:id="@+id/tv_remote_device_info"
+                            android:layout_width="fill_parent"
+                            android:gravity="center"
                             android:layout_height="wrap_content"
                             android:paddingBottom="15dp"
                             android:paddingTop="5dp"
-                            android:text="设备信息" />
+                            android:text="@string/info_zn" />
 
                     </LinearLayout>
 
@@ -244,11 +258,13 @@
                             android:src="@drawable/ic_shot_control" />
 
                         <TextView
-                            android:layout_width="wrap_content"
+                            android:id="@+id/tv_desktop"
+                            android:layout_width="fill_parent"
+                            android:gravity="center"
                             android:layout_height="wrap_content"
                             android:paddingBottom="15dp"
                             android:paddingTop="5dp"
-                            android:text="远程桌面" />
+                            android:text="@string/desktop_zn" />
 
                     </LinearLayout>
 
@@ -267,11 +283,13 @@
                             android:src="@drawable/ic_talk" />
 
                         <TextView
-                            android:layout_width="wrap_content"
+                            android:id="@+id/tv_chatroom"
+                            android:layout_width="fill_parent"
+                            android:gravity="center"
                             android:layout_height="wrap_content"
                             android:paddingBottom="15dp"
                             android:paddingTop="5dp"
-                            android:text="聊天共享" />
+                            android:text="@string/chatroom_zn" />
 
                     </LinearLayout>
 

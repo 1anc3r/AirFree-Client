@@ -27,7 +27,7 @@
             android:layout_height="48dp"
             android:layout_marginLeft="-24dp"
             android:gravity="center"
-            android:text="电源选项"
+            android:text="@string/power_option_zn"
             android:textColor="@color/base_color_text_white"
             android:textSize="@dimen/text_size_large" />
 
@@ -95,10 +95,11 @@
                         android:src="@drawable/ic_power_control" />
 
                     <TextView
+                        android:id="@+id/tv_shutdown"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:padding="10dp"
-                        android:text="  关机  " />
+                        android:text="@string/shutdown_zn" />
 
                 </LinearLayout>
 
@@ -117,10 +118,11 @@
                         android:src="@drawable/ic_reset_control" />
 
                     <TextView
+                        android:id="@+id/tv_restart"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:padding="10dp"
-                        android:text="  重启  " />
+                        android:text="@string/restart_zn" />
 
                 </LinearLayout>
 
@@ -139,10 +141,11 @@
                         android:src="@drawable/ic_cancell_control" />
 
                     <TextView
+                        android:id="@+id/tv_logout"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:padding="10dp"
-                        android:text="  注销  " />
+                        android:text="@string/logout_zn" />
 
                 </LinearLayout>
 

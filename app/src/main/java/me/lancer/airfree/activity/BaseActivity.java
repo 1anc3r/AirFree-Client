@@ -2,12 +2,14 @@ package me.lancer.airfree.activity;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
+import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.preference.PreferenceManager;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.Window;
@@ -19,6 +21,7 @@ import org.json.JSONObject;
 
 import me.lancer.airfree.util.ApplicationUtil;
 import me.lancer.airfree.util.FileTransUtil;
+import me.lancer.distance.R;
 
 public class BaseActivity extends Activity {
 
@@ -26,12 +29,45 @@ public class BaseActivity extends Activity {
 
     Toast mToast;
 
+    private SharedPreferences pref;
+    private String language = "zn";
+    private String strConnectionSucceeded = "";
+    private String strNoConnection = "";
+    private String strConnectionFailed = "";
+    private String strSendSucceeded = "";
+    private String strSendFailed = "";
+    private String strReceiveSucceeded = "";
+    private String strReceiveFailed = "";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         super.onCreate(savedInstanceState);
+        baseLanguage();
         app = (ApplicationUtil) this.getApplication();
+    }
+
+    public void baseLanguage(){
+        pref = PreferenceManager.getDefaultSharedPreferences(this);
+        language = pref.getString(getString(R.string.language_choice ), "zn");
+        if (language.equals("zn")) {
+            strConnectionSucceeded = getResources().getString(R.string.connection_succeeded_zn);
+            strNoConnection = getResources().getString(R.string.no_connection_zn);
+            strConnectionFailed = getResources().getString(R.string.connection_failed_zn);
+            strSendSucceeded = getResources().getString(R.string.send_succeeded_zn);
+            strSendFailed = getResources().getString(R.string.send_failed_zn);
+            strReceiveSucceeded = getResources().getString(R.string.receive_succeeded_zn);
+            strReceiveFailed = getResources().getString(R.string.receive_failed_zn);
+        } else if (language.equals("en")) {
+            strConnectionSucceeded = getResources().getString(R.string.connection_succeeded_en);
+            strNoConnection = getResources().getString(R.string.no_connection_en);
+            strConnectionFailed = getResources().getString(R.string.connection_failed_en);
+            strSendSucceeded = getResources().getString(R.string.send_succeeded_en);
+            strSendFailed = getResources().getString(R.string.send_failed_en);
+            strReceiveSucceeded = getResources().getString(R.string.receive_succeeded_en);
+            strReceiveFailed = getResources().getString(R.string.receive_failed_en);
+        }
     }
 
     public void ShowToast(final String text) {
@@ -77,11 +113,11 @@ public class BaseActivity extends Activity {
                 if (jb.toString() != null) {
                     app.getmPrintWriterClient().print(jb.toString() + "\n");
                     app.getmPrintWriterClient().flush();
-                    Log.e("IP & PORT", "发送成功:" + jb.toString());
+                    Log.e("IP & PORT", strSendSucceeded + jb.toString());
                 }
             } catch (Exception e) {
-                Log.e("IP & PORT", "发送异常:" + e.getMessage());
-                ShowToast("发送异常:" + e.getMessage());
+                Log.e("IP & PORT", strSendFailed + e.getMessage());
+                ShowToast(strSendFailed + e.getMessage());
             }
         }
     }
@@ -125,11 +161,11 @@ public class BaseActivity extends Activity {
         protected void onPostExecute(String failed) {
             mProgressDialog.dismiss();
             if (failed == null) {
-                ShowToast("发送成功:" + filename);
-                Log.e("IP & PORT", "发送成功!");
+                ShowToast(getResources().getString(R.string.send_succeeded_zn)+ filename);
+                Log.e("IP & PORT", strSendSucceeded);
             } else {
-                ShowToast("发送失败:" + filename);
-                Log.e("IP & PORT", "发送失败:" + failed);
+                ShowToast(getResources().getString(R.string.send_failed_zn) + filename);
+                Log.e("IP & PORT", strSendFailed + failed);
             }
         }
 
@@ -192,12 +228,12 @@ public class BaseActivity extends Activity {
                     Bitmap bitmap = BitmapFactory.decodeFile(filename);
                     iv.setImageBitmap(bitmap);
                 } else {
-                    ShowToast("接收成功: " + filename);
-                    Log.e("IP & PORT", "接收成功");
+                    ShowToast(strReceiveSucceeded+ filename);
+                    Log.e("IP & PORT", strReceiveSucceeded);
                 }
             } else {
-                ShowToast("接收失败: " + filename);
-                Log.e("IP & PORT", "接收失败" + failed);
+                ShowToast(strReceiveFailed + filename);
+                Log.e("IP & PORT", strReceiveFailed + failed);
             }
         }
 

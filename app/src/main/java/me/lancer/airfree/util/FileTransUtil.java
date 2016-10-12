@@ -1,6 +1,7 @@
 package me.lancer.airfree.util;
 
 import android.app.ProgressDialog;
+import android.os.AsyncTask;
 import android.os.Handler;
 import android.os.Message;
 import android.util.Log;

@@ -9,16 +9,20 @@ import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageInfo;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Environment;
 import android.os.Handler;
 import android.os.Message;
+import android.preference.PreferenceManager;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import me.lancer.distance.R;
 import me.lancer.airfree.adapter.ApplicationAdapter;
@@ -26,7 +30,9 @@ import me.lancer.airfree.bean.ApplicationBean;
 
 public class ApplicationActivity extends BaseActivity implements View.OnClickListener {
 
+    AsyncTask asyncTask;
     private Button btnBack;
+    private TextView tvShow;
     private ListView lvApp;
     private ProgressDialog mProgressDialog;
 
@@ -35,6 +41,17 @@ public class ApplicationActivity extends BaseActivity implements View.OnClickLis
     private ApplicationAdapter adapter;
     private List<ApplicationBean> appList = new ArrayList<>();
     private List<String> posList = new ArrayList<>();
+
+    private SharedPreferences pref;
+    private String language = "zn";
+    private String show = "";
+    private String applicationInfo = "";
+    private String applicationName = "";
+    private String applicationPackage = "";
+    private String uninstall = "";
+    private String ok = "";
+    private String noInternalExternalStorage = "";
+    private String loading = "";
 
     private Handler lHandler = new Handler() {
 
@@ -55,9 +72,34 @@ public class ApplicationActivity extends BaseActivity implements View.OnClickLis
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_app);
+        setContentView(R.layout.activity_application);
+        iLanguage();
         getApp();
         init();
+    }
+
+    private void iLanguage(){
+        pref = PreferenceManager.getDefaultSharedPreferences(this);
+        language = pref.getString(getString(R.string.language_choice ), "zn");
+        if (language.equals("zn")) {
+            show = getResources().getString(R.string.application_zn);
+            applicationInfo = getResources().getString(R.string.application_info_zn);
+            applicationName = getResources().getString(R.string.application_name_zn);
+            applicationPackage = getResources().getString(R.string.application_package_zn);
+            uninstall = getResources().getString(R.string.uninstall_zn);
+            ok = getResources().getString(R.string.ok_zn);
+            noInternalExternalStorage = getResources().getString(R.string.no_internal_external_storage_zn);
+            loading = getResources().getString(R.string.loading_zn);
+        } else if (language.equals("en")) {
+            show = getResources().getString(R.string.application_en);
+            applicationInfo = getResources().getString(R.string.application_info_en);
+            applicationName = getResources().getString(R.string.application_name_en);
+            applicationPackage = getResources().getString(R.string.application_package_en);
+            uninstall = getResources().getString(R.string.uninstall_en);
+            ok = getResources().getString(R.string.ok_en);
+            noInternalExternalStorage = getResources().getString(R.string.no_internal_external_storage_en);
+            loading = getResources().getString(R.string.loading_en);
+        }
     }
 
     private void init() {
@@ -67,11 +109,10 @@ public class ApplicationActivity extends BaseActivity implements View.OnClickLis
             @Override
             public void onItemClick(AdapterView<?> parent, View view, final int position, long id) {
                 AlertDialog.Builder builder = new AlertDialog.Builder(ApplicationActivity.this);
-                builder.setTitle("详细信息");
-                builder.setMessage("应用名 : " + appList.get(position).getAppName()
-                        + "\n\n" +
-                        "包名 : " + appList.get(position).getPackageName());
-                builder.setPositiveButton("卸载", new DialogInterface.OnClickListener() {
+                builder.setTitle(applicationInfo);
+                builder.setMessage(applicationName + appList.get(position).getAppName()
+                        + "\n\n" + applicationPackage + appList.get(position).getPackageName());
+                builder.setPositiveButton(uninstall, new DialogInterface.OnClickListener() {
 
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
@@ -82,7 +123,7 @@ public class ApplicationActivity extends BaseActivity implements View.OnClickLis
                         dialog.dismiss();
                     }
                 });
-                builder.setNegativeButton("好的", new DialogInterface.OnClickListener() {
+                builder.setNegativeButton(ok, new DialogInterface.OnClickListener() {
 
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
@@ -94,6 +135,8 @@ public class ApplicationActivity extends BaseActivity implements View.OnClickLis
         });
         btnBack = (Button) findViewById(R.id.btn_back);
         btnBack.setOnClickListener(this);
+        tvShow = (TextView) findViewById(R.id.tv_show);
+        tvShow.setText(show);
     }
 
     @Override
@@ -106,10 +149,10 @@ public class ApplicationActivity extends BaseActivity implements View.OnClickLis
 
     private void getApp() {
         if (!Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED)) {
-            ShowToast("暂无外部存储");
+            ShowToast(noInternalExternalStorage);
             return;
         }
-        mProgressDialog = ProgressDialog.show(this, null, "正在加载...");
+        mProgressDialog = ProgressDialog.show(this, null, loading);
         new Thread(new Runnable() {
 
             @Override

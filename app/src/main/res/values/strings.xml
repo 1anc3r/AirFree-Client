@@ -32,6 +32,9 @@
     <string name="title_activity_welcome">WelcomeActivity</string>
     <string name="title_activity_list">ListActivity</string>
     <string name="title_activity_voice">VoiceActivity</string>
+    <string name="title_activity_desktop">DesktopActivity</string>
+    <string name="title_activity_main2">Main2Activity</string>
+
     <string name="pref_key_iat_show">iat_show</string>
     <string name="text_begin">请开始说话…</string>
     <string name="pref_title_iat_show">显示听写界面</string>
@@ -108,19 +111,217 @@
         <item>打开写字板</item>
         <item>打开浏览器</item>
     </string-array>
-    <string-array name="gesture_entries">
-        <item>打开命令提示符(c)</item>
-        <item>打开任务管理器(t)</item>
-        <item>打开资源管理器(e/z)</item>
-        <item>打开设备管理器(s)</item>
-        <item>打开磁盘管理器(d)</item>
-        <item>打开注册表编辑器(r)</item>
-        <item>打开计算器(j)</item>
-        <item>打开记事本(n)</item>
-        <item>打开画图板(h/p)</item>
-        <item>打开写字板(w/x)</item>
-        <item>打开浏览器(b/l)</item>
+    <string-array name="language">
+        <item>中文</item>
+        <item>English</item>
     </string-array>
-    <string name="title_activity_desktop">DesktopActivity</string>
-    <string name="title_activity_main2">Main2Activity</string>
+    <string-array name="gesture_entries_en">
+        <item>cmd(c)</item>
+        <item>Task Manager(t)</item>
+        <item>Explorer(e/z)</item>
+        <item>Device Manager(s)</item>
+        <item>Disk Manager(d)</item>
+        <item>Registry Editor(r)</item>
+        <item>Calculator(j)</item>
+        <item>Notepad(n)</item>
+        <item>Paint(h/p)</item>
+        <item>Write(w/x)</item>
+        <item>Browser(b/l)</item>
+    </string-array>
+    <string-array name="gesture_entries_zn">
+        <item>命令提示符(c)</item>
+        <item>任务管理器(t)</item>
+        <item>资源管理器(e/z)</item>
+        <item>设备管理器(s)</item>
+        <item>磁盘管理器(d)</item>
+        <item>注册表管理器(r)</item>
+        <item>计算器(j)</item>
+        <item>记事本(n)</item>
+        <item>画图本(h/p)</item>
+        <item>写字本(w/x)</item>
+        <item>浏览器(b/l)</item>
+    </string-array>
+
+    <string name="language_choice">language_choice</string>
+
+    <string name="send_failed_en">Send Failed : </string>
+    <string name="send_succeeded_en">Send Succeeded : </string>
+    <string name="receive_succeeded_en">Receive Succeede : </string>
+    <string name="receive_failed_en">Receive Failed : </string>
+    <string name="no_connection_en">No Connection !</string>
+    <string name="connection_failed_en">Connection Failed !</string>
+    <string name="connection_succeeded_en">Connection Succeeded !</string>
+    <string name="ip_cant_be_empty_en">IP Address can not be empty !</string>
+    <string name="ip_address_hint_en">IP Address</string>
+    <string name="remember_connection_en">Remember Connection</string>
+    <string name="input_ip_address_en">Input IP Address</string>
+    <string name="scan_qr_code_en">Scan QR Code</string>
+    <string name="manager_en">Manager</string>
+    <string name="controler_en">Controler</string>
+    <string name="setting_en">Setting</string>
+    <string name="directory_en">Directory</string>
+    <string name="internal_en">Internal Storage</string>
+    <string name="external_en">External Storage</string>
+    <string name="image_en">Image</string>
+    <string name="music_en">Music</string>
+    <string name="video_en">Video</string>
+    <string name="document_en">Document</string>
+    <string name="application_en">Application</string>
+    <string name="download_en">Download</string>
+    <string name="keyboard_mouse_en">Keyboard/Mouse</string>
+    <string name="gesture_en">Gesture</string>
+    <string name="voice_en">Voice</string>
+    <string name="volume_en">Volume</string>
+    <string name="bright_en">Brightness</string>
+    <string name="power_option_en">Power Option</string>
+    <string name="info_en">Info</string>
+    <string name="desktop_en">Desktop</string>
+    <string name="chatroom_en">Chatroom</string>
+    <string name="language_en">Language</string>
+    <string name="guide_en">Guide</string>
+    <string name="about_en">About</string>
+    <string name="feedback_en">Feedback</string>
+    <string name="exit_en">Exit</string>
+    <string name="open_en">Open</string>
+    <string name="delete_en">Delete</string>
+    <string name="copy_en">Copy</string>
+    <string name="cut_en">Cut</string>
+    <string name="paste_en">Paste</string>
+    <string name="cancel_en">Cancel</string>
+    <string name="upload_en">Upload</string>
+    <string name="all_en">All</string>
+    <string name="loading_en">Loading...</string>
+    <string name="application_info_en">Application Info</string>
+    <string name="application_name_en">Name : </string>
+    <string name="application_package_en">Package : </string>
+    <string name="uninstall_en">Uninstall</string>
+    <string name="ok_en">OK</string>
+    <string name="no_internal_external_storage_en">No Internal/External Storage</string>
+    <string name="cmd_en">cmd</string>
+    <string name="task_manager_en">Task Manager</string>
+    <string name="explorer_en">Explorer</string>
+    <string name="device_manager_en">Device Manager</string>
+    <string name="disk_manager_en">Disk Manager</string>
+    <string name="registry_editor_en">Registry Editor</string>
+    <string name="calculator_en">Calculator</string>
+    <string name="notepad_en">Notepad</string>
+    <string name="paint_en">Paint</string>
+    <string name="write_en">Write</string>
+    <string name="browser_en">Browser</string>
+    <string name="press_again_to_exit_en">Press again to exit</string>
+    <string name="common_en">Common</string>
+    <string name="show_ppt_en">Show PPT</string>
+    <string name="play_video_en">Play Video</string>
+    <string name="shutdown_en">Shutdown</string>
+    <string name="restart_en">Restart</string>
+    <string name="logout_en">Logout</string>
+    <string name="shutdown_succeeded_en">Shutdown Succeeded !</string>
+    <string name="restart_succeeded_en">Restart Succeeded !</string>
+    <string name="logout_succeeded_en">Logout Succeeded !</string>
+    <string name="remote_device_info_en">Remote Device Info</string>
+    <string name="latest_version_en">The current version is the latest version !</string>
+    <string name="feedback_succeeded_en">Feedback Succeeded. Thank for your support !</string>
+    <string name="feedback_failed_en">Feedback Failed. Please check your network and try again !</string>
+    <string name="screen_capture_en">Screen Capture</string>
+    <string name="real_time_desktop_en">Real-time Desktop</string>
+    <string name="screen_capture_succeeded_en">Screen Capture Succeeded :</string>
+    <string name="join_to_chatroom_en">:Join to chatroom !</string>
+    <string name="exit_to_chatroom_en">:Exit to chatroom !</string>
+    <string name="msg_cant_be_empty_en">Message can not be empty !</string>
+    <string name="mobile_speech_technology_en">Mobile Speech Technology is provided by iflytek</string>
+    <string name="visit_my_homepage_en">Visit my homepage</string>
+    <string name="gesture_guide_en">Gesture Guide</string>
+    <string name="send_en">Send</string>
+    <string name="please_input_feedback_en">Please input Feedback</string>
+
+    <string name="send_failed_zn">发送失败 : </string>
+    <string name="send_succeeded_zn">发送成功 : </string>
+    <string name="receive_succeeded_zn">接收成功 : </string>
+    <string name="receive_failed_zn">接收失败 : </string>
+    <string name="no_connection_zn">没有连接 !</string>
+    <string name="connection_failed_zn">连接失败 !</string>
+    <string name="connection_succeeded_zn">连接成功 !</string>
+    <string name="ip_cant_be_empty_zn">IP地址为空不能 !</string>
+    <string name="ip_address_hint_zn">请输入IP地址</string>
+    <string name="remember_connection_zn">记住连接</string>
+    <string name="input_ip_address_zn">输入连接</string>
+    <string name="scan_qr_code_zn">扫码连接</string>
+    <string name="manager_zn">文件</string>
+    <string name="controler_zn">遥控</string>
+    <string name="setting_zn">设置</string>
+    <string name="directory_zn">远程设备目录</string>
+    <string name="internal_zn">内部存储</string>
+    <string name="external_zn">外部存储</string>
+    <string name="image_zn">图片</string>
+    <string name="music_zn">音乐</string>
+    <string name="video_zn">视频</string>
+    <string name="document_zn">文档</string>
+    <string name="application_zn">应用</string>
+    <string name="download_zn">下载</string>
+    <string name="keyboard_mouse_zn">键鼠控制</string>
+    <string name="gesture_zn">手势控制</string>
+    <string name="voice_zn">语音控制</string>
+    <string name="volume_zn">音量调节</string>
+    <string name="bright_zn">亮度调节</string>
+    <string name="power_option_zn">电源选项</string>
+    <string name="info_zn">远程设备信息</string>
+    <string name="desktop_zn">远程桌面</string>
+    <string name="chatroom_zn">聊天共享</string>
+    <string name="language_zn">语言</string>
+    <string name="guide_zn">使用说明</string>
+    <string name="about_zn">关于作者</string>
+    <string name="feedback_zn">意见反馈</string>
+    <string name="exit_zn">退出应用</string>
+    <string name="open_zn">打开</string>
+    <string name="delete_zn">删除</string>
+    <string name="copy_zn">复制</string>
+    <string name="cut_zn">剪切</string>
+    <string name="paste_zn">粘贴</string>
+    <string name="cancel_zn">取消</string>
+    <string name="upload_zn">上传</string>
+    <string name="all_zn">全选</string>
+    <string name="loading_zn">正在加载...</string>
+    <string name="application_info_zn">应用信息</string>
+    <string name="application_name_zn">应用名 : </string>
+    <string name="application_package_zn">包名 : </string>
+    <string name="uninstall_zn">卸载</string>
+    <string name="ok_zn">确定</string>
+    <string name="no_internal_external_storage_zn">未找到内/外部存储</string>
+    <string name="cmd_zn">命令提示符</string>
+    <string name="task_manager_zn">任务管理器</string>
+    <string name="explorer_zn">资源管理器</string>
+    <string name="device_manager_zn">设备管理器</string>
+    <string name="disk_manager_zn">磁盘管理器</string>
+    <string name="registry_editor_zn">注册表管理器</string>
+    <string name="calculator_zn">计算器</string>
+    <string name="notepad_zn">记事本</string>
+    <string name="paint_zn">画图本</string>
+    <string name="write_zn">写字本</string>
+    <string name="browser_zn">浏览器</string>
+    <string name="press_again_to_exit_zn">再按一次退出应用</string>
+    <string name="common_zn">键鼠控制</string>
+    <string name="show_ppt_zn">放映PPT</string>
+    <string name="play_video_zn">播放视频</string>
+    <string name="shutdown_zn">关机</string>
+    <string name="restart_zn">重启</string>
+    <string name="logout_zn">注销</string>
+    <string name="shutdown_succeeded_zn">关机成功 !</string>
+    <string name="restart_succeeded_zn">重启成功 !</string>
+    <string name="logout_succeeded_zn">注销成功 !</string>
+    <string name="remote_device_info_zn">远程设备信息</string>
+    <string name="latest_version_zn">当前版本已是最新版本 !</string>
+    <string name="feedback_succeeded_zn">意见反馈成功。感谢您的支持 !</string>
+    <string name="feedback_failed_zn">意见反馈失败。 请检查您的网络后重试 !</string>
+    <string name="screen_capture_zn">屏幕抓取</string>
+    <string name="real_time_desktop_zn">实时桌面</string>
+    <string name="screen_capture_succeeded_zn">屏幕抓取成功 :</string>
+    <string name="join_to_chatroom_zn">:加入了聊天室 !</string>
+    <string name="exit_to_chatroom_zn">:退出了聊天室 !</string>
+    <string name="msg_cant_be_empty_zn">消息不能为空 !</string>
+    <string name="mobile_speech_technology_zn">语音技术由科大讯飞提供</string>
+    <string name="visit_my_homepage_zn">访问我的主页</string>
+    <string name="gesture_guide_zn">手势说明</string>
+    <string name="send_zn">发送</string>
+    <string name="please_input_feedback_zn">请输入意见反馈</string>
+
 </resources>

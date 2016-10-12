@@ -39,9 +39,19 @@ public class LinkActivity extends BaseActivity {
     private String txtIP, txtPORT = "59671";
     private Thread mThreadClient = null;
     private Socket mSocketClient = null;
-    private SharedPreferences pref;
     static BufferedReader mBufferedReaderClient = null;
     static PrintWriter mPrintWriterClient = null;
+
+    private SharedPreferences pref;
+    private String language = "zn";
+    private String strConnectionSucceeded = "";
+    private String strNoConnection = "";
+    private String strConnectionFailed = "";
+    private String strIPCantBeEmpty = "";
+    private String strIPAddressHint = "";
+    private String strRememberConnection = "";
+    private String strInputIPAddress = "";
+    private String strScanQRCode = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,7 +61,32 @@ public class LinkActivity extends BaseActivity {
         init();
     }
 
+    public void iLanguage(){
+        pref = PreferenceManager.getDefaultSharedPreferences(this);
+        language = pref.getString(getString(R.string.language_choice ), "zn");
+        if (language.equals("zn")) {
+            strConnectionSucceeded = getResources().getString(R.string.connection_succeeded_zn);
+            strNoConnection = getResources().getString(R.string.no_connection_zn);
+            strConnectionFailed = getResources().getString(R.string.connection_failed_zn);
+            strIPCantBeEmpty = getResources().getString(R.string.ip_cant_be_empty_zn);
+            strIPAddressHint = getResources().getString(R.string.ip_address_hint_zn);
+            strRememberConnection = getResources().getString(R.string.remember_connection_zn);
+            strInputIPAddress = getResources().getString(R.string.input_ip_address_zn);
+            strScanQRCode = getResources().getString(R.string.scan_qr_code_zn);
+        } else if (language.equals("en")) {
+            strConnectionSucceeded = getResources().getString(R.string.connection_succeeded_en);
+            strNoConnection = getResources().getString(R.string.no_connection_en);
+            strConnectionFailed = getResources().getString(R.string.connection_failed_en);
+            strIPCantBeEmpty = getResources().getString(R.string.ip_cant_be_empty_en);
+            strIPAddressHint = getResources().getString(R.string.ip_address_hint_en);
+            strRememberConnection = getResources().getString(R.string.remember_connection_en);
+            strInputIPAddress = getResources().getString(R.string.input_ip_address_en);
+            strScanQRCode = getResources().getString(R.string.scan_qr_code_en);
+        }
+    }
+
     private void init() {
+        iLanguage();
         app = (ApplicationUtil) LinkActivity.this.getApplication();
         SystemBarTintManager tintManager = new SystemBarTintManager(this);
         tintManager.setStatusBarTintEnabled(true);
@@ -69,12 +104,15 @@ public class LinkActivity extends BaseActivity {
                 .penaltyDeath()
                 .build());
         etIP = (EditText) findViewById(R.id.et_ip);
+        etIP.setHint(strIPAddressHint);
         cbRemember = (CheckBox) findViewById(R.id.cb_remember);
+        cbRemember.setText(strRememberConnection);
         btnLink = (Button) findViewById(R.id.btn_link);
+        btnLink.setText(strInputIPAddress);
         btnLink.setOnClickListener(onLinkClickListener);
         btnScan = (Button) findViewById(R.id.btn_scan);
+        btnScan.setText(strScanQRCode);
         btnScan.setOnClickListener(onScanClickListener);
-        pref = PreferenceManager.getDefaultSharedPreferences(this);
         boolean isRemember = pref.getBoolean(getString(R.string.is_remember), false);
         if (isRemember) {
             String ip = pref.getString(getString(R.string.is_ip), "");
@@ -112,11 +150,11 @@ public class LinkActivity extends BaseActivity {
                     startActivity(intent);
                     finish();
                 } else if (i == 0) {
-                    ShowToast("没有连接!");
-                    Log.e("IP & PORT", "没有连接!");
+                        ShowToast(strNoConnection);
+                        Log.e("IP & PORT", strNoConnection);
                 } else if (i == -1) {
-                    ShowToast("连接失败!");
-                    Log.e("IP & PORT", "连接失败!");
+                        ShowToast(strConnectionFailed);
+                        Log.e("IP & PORT", strConnectionFailed);
                 }
             } else {
                 Log.e("IP & PORT", app.getmSocketClient().toString());
@@ -142,8 +180,8 @@ public class LinkActivity extends BaseActivity {
         public void run() {
             String txtIP = etIP.getText().toString();
             if ((txtIP.length() <= 0) || (txtPORT.length() <= 0)) {
-                Log.e("IP & PORT", " IP & PORT 不能为空!");
-                ShowToast("IP & PORT 不能为空!");
+                    Log.e("IP & PORT", strIPCantBeEmpty);
+                    ShowToast(strIPCantBeEmpty);
                 return;
             }
             String strIP = txtIP;
@@ -155,19 +193,19 @@ public class LinkActivity extends BaseActivity {
                         new InputStreamReader(mSocketClient.getInputStream()));
                 mPrintWriterClient = new PrintWriter(
                         mSocketClient.getOutputStream(), true);
-                ShowToast("连接成功!");
-                Log.e("IP & PORT", " 连接成功!");
+                    ShowToast(strConnectionSucceeded);
+                    Log.e("IP & PORT", strConnectionSucceeded);
                 if (mSocketClient != null) {
                     Intent intent = new Intent();
                     intent.setClass(LinkActivity.this, MainActivity.class);
                     startActivity(intent);
                 } else {
-                    ShowToast("没有连接!");
-                    Log.e("IP & PORT", " 没有连接!");
+                        ShowToast(strNoConnection);
+                        Log.e("IP & PORT", strNoConnection);
                 }
             } catch (Exception e) {
-                ShowToast("连接失败!" + e.getMessage());
-                Log.e("IP & PORT", " 连接失败!" + e.getMessage());
+                    ShowToast(strConnectionFailed + e.getMessage());
+                    Log.e("IP & PORT", strConnectionFailed + e.getMessage() + e.getMessage());
                 return;
             }
         }

@@ -46,10 +46,12 @@ import me.lancer.distance.R;
 public class MusicActivity extends BaseActivity implements View.OnClickListener {
 
     ApplicationUtil app;
+    private TextView tvShow;
     private ListView lvMusic;
     private EditText etSearch;
     private ProgressDialog mProgressDialog;
     private LinearLayout llBack, llSearch, llBottom, btnDelete, btnCopy, btnMove, btnShare, btnAll;
+    private TextView tvDelete, tvCopy, tvMove, tvShare, tvAll;
 
     private final static int SCAN_OK = 1;
 
@@ -60,8 +62,23 @@ public class MusicActivity extends BaseActivity implements View.OnClickListener 
     private List<String> searchList = new ArrayList<>();
     private String searchStr = new String();
     private Handler handler = new Handler();
-    private SharedPreferences pref;
     private Boolean isAll = false;
+
+    private SharedPreferences pref;
+    private String language = "zn";
+    private String strConnectionSucceeded = "";
+    private String strNoConnection = "";
+    private String strConnectionFailed = "";
+    private String strShow = "";
+    private String strNoInternalExternalStorage = "";
+    private String strLoading = "";
+    private String strDelete = "";
+    private String strCopy = "";
+    private String strCut = "";
+    private String strUpload = "";
+    private String strAll = "";
+    private String strPaste = "";
+    private String strCancel = "";
 
     private Handler mHandler = new Handler() {
 
@@ -100,12 +117,49 @@ public class MusicActivity extends BaseActivity implements View.OnClickListener 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_music);
+        iLanguage();
         getMusics();
         init();
     }
 
+    public void iLanguage(){
+        pref = PreferenceManager.getDefaultSharedPreferences(this);
+        language = pref.getString(getString(R.string.language_choice ), "zn");
+        if (language.equals("zn")) {
+            strConnectionSucceeded = getResources().getString(R.string.connection_succeeded_zn);
+            strNoConnection = getResources().getString(R.string.no_connection_zn);
+            strConnectionFailed = getResources().getString(R.string.connection_failed_zn);
+            strShow = getResources().getString(R.string.music_zn);
+            strNoInternalExternalStorage = getResources().getString(R.string.no_internal_external_storage_zn);
+            strLoading = getResources().getString(R.string.loading_zn);
+            strDelete = getResources().getString(R.string.delete_zn);
+            strCopy = getResources().getString(R.string.copy_zn);
+            strCut = getResources().getString(R.string.cut_zn);
+            strUpload = getResources().getString(R.string.upload_zn);
+            strAll = getResources().getString(R.string.all_zn);
+            strPaste = getResources().getString(R.string.paste_zn);
+            strCancel = getResources().getString(R.string.cancel_zn);
+        } else if (language.equals("en")) {
+            strConnectionSucceeded = getResources().getString(R.string.connection_succeeded_en);
+            strNoConnection = getResources().getString(R.string.no_connection_en);
+            strConnectionFailed = getResources().getString(R.string.connection_failed_en);
+            strShow = getResources().getString(R.string.music_en);
+            strNoInternalExternalStorage = getResources().getString(R.string.no_internal_external_storage_en);
+            strLoading = getResources().getString(R.string.loading_en);
+            strDelete = getResources().getString(R.string.delete_en);
+            strCopy = getResources().getString(R.string.copy_en);
+            strCut = getResources().getString(R.string.cut_en);
+            strUpload = getResources().getString(R.string.upload_en);
+            strAll = getResources().getString(R.string.all_en);
+            strPaste = getResources().getString(R.string.paste_en);
+            strCancel = getResources().getString(R.string.cancel_en);
+        }
+    }
+
     private void init() {
         app = (ApplicationUtil) MusicActivity.this.getApplication();
+        tvShow = (TextView) findViewById(R.id.tv_show);
+        tvShow.setText(strShow);
         llBack = (LinearLayout) findViewById(R.id.ll_back);
         llBack.setOnClickListener(this);
         llSearch = (LinearLayout) findViewById(R.id.ll_search);
@@ -114,6 +168,16 @@ public class MusicActivity extends BaseActivity implements View.OnClickListener 
         adapter = new MusicAdapter(MusicActivity.this, musicList, posList, searchList, posHandler);
         lvMusic.setAdapter(adapter);
         llBottom = (LinearLayout) findViewById(R.id.ll_bottom);
+        tvDelete = (TextView) findViewById(R.id.tv_delete);
+        tvDelete.setText(strDelete);
+        tvCopy = (TextView) findViewById(R.id.tv_copy);
+        tvCopy.setText(strCopy);
+        tvMove = (TextView) findViewById(R.id.tv_cut);
+        tvMove.setText(strCut);
+        tvShare = (TextView) findViewById(R.id.tv_upload);
+        tvShare.setText(strUpload);
+        tvAll = (TextView) findViewById(R.id.tv_all);
+        tvAll.setText(strAll);
         btnDelete = (LinearLayout) findViewById(R.id.btn_del);
         btnDelete.setOnClickListener(this);
         btnCopy = (LinearLayout) findViewById(R.id.btn_copy);
@@ -207,17 +271,17 @@ public class MusicActivity extends BaseActivity implements View.OnClickListener 
                     new SendTask(ip, "59672", filename).execute();
                 }
             } else {
-                Toast.makeText(this, "没有连接!", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, strNoConnection, Toast.LENGTH_SHORT).show();
             }
         }
     }
 
     private void getMusics() {
         if (!Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED)) {
-            ShowToast("暂无外部存储");
+            ShowToast(strNoInternalExternalStorage);
             return;
         }
-        mProgressDialog = ProgressDialog.show(this, null, "正在加载...");
+        mProgressDialog = ProgressDialog.show(this, null, strLoading);
         new Thread(new Runnable() {
 
             @Override

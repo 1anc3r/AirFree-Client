@@ -1,9 +1,11 @@
 package me.lancer.airfree.util;
 
 import android.app.Application;
+import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Handler;
+import android.preference.PreferenceManager;
 import android.util.Log;
 import android.widget.Toast;
 
@@ -39,15 +41,42 @@ public class ApplicationUtil extends Application {
     private BufferedReader mBufferedReaderClient = null;
     private PrintWriter mPrintWriterClient = null;
 
+    private SharedPreferences pref;
+    private String language = "zn";
+    private String strConnectionSucceeded = "";
+    private String strNoConnection = "";
+    private String strConnectionFailed = "";
+    private String strSendSucceeded = "";
+    private String strSendFailed = "";
+
     @Override
     public void onCreate() {
         super.onCreate();
         SpeechUtility.createUtility(ApplicationUtil.this, "appid=" + getString(R.string.app_id));
+        iLanguage();
         isExplosing = false;
         isConnecting = false;
         mSocketClient = null;
         mBufferedReaderClient = null;
         mPrintWriterClient = null;
+    }
+
+    public void iLanguage(){
+        pref = PreferenceManager.getDefaultSharedPreferences(this);
+        language = pref.getString(getString(R.string.language_choice ), "zn");
+        if (language.equals("zn")) {
+            strConnectionSucceeded = getResources().getString(R.string.connection_succeeded_zn);
+            strNoConnection = getResources().getString(R.string.no_connection_zn);
+            strConnectionFailed = getResources().getString(R.string.connection_failed_zn);
+            strSendSucceeded = getResources().getString(R.string.send_succeeded_zn);
+            strSendFailed = getResources().getString(R.string.send_failed_zn);
+        } else if (language.equals("en")) {
+            strConnectionSucceeded = getResources().getString(R.string.connection_succeeded_en);
+            strNoConnection = getResources().getString(R.string.no_connection_en);
+            strConnectionFailed = getResources().getString(R.string.connection_failed_en);
+            strSendSucceeded = getResources().getString(R.string.send_succeeded_en);
+            strSendFailed = getResources().getString(R.string.send_failed_en);
+        }
     }
 
     public int init(String ip, String port){
@@ -61,19 +90,19 @@ public class ApplicationUtil extends Application {
             mPrintWriterClient = new PrintWriter(
                     mSocketClient.getOutputStream(), true);
 
-            Log.e("IP & PORT", " 连接成功!");
-            Toast.makeText(this, "连接成功!", Toast.LENGTH_SHORT).show();
+            Log.e("IP & PORT", strConnectionSucceeded);
+            Toast.makeText(this, strConnectionSucceeded, Toast.LENGTH_SHORT).show();
 
             if (mSocketClient != null) {
                 return 1;
             } else {
-                Log.e("IP & PORT", " 没有连接!");
-                Toast.makeText(this, "没有连接!", Toast.LENGTH_SHORT).show();
+                Log.e("IP & PORT", strNoConnection);
+                Toast.makeText(this, strNoConnection, Toast.LENGTH_SHORT).show();
                 return 0;
             }
         } catch (Exception e) {
-            Log.e("IP & PORT", " 连接失败!");
-            Toast.makeText(this, "连接失败!", Toast.LENGTH_SHORT).show();
+            Log.e("IP & PORT", strConnectionFailed);
+            Toast.makeText(this, strConnectionFailed, Toast.LENGTH_SHORT).show();
             return -1;
         }
     }
@@ -167,10 +196,10 @@ public class ApplicationUtil extends Application {
                 if (jb.toString() != null) {
                     getmPrintWriterClient().print(jb.toString() + "\n");
                     getmPrintWriterClient().flush();
-                    Log.e("IP & PORT", "发送成功:" + jb.toString());
+                    Log.e("IP & PORT", strSendSucceeded + jb.toString());
                 }
             } catch (Exception e) {
-                Log.e("IP & PORT", "发送异常:" + e.getMessage());
+                Log.e("IP & PORT", strSendFailed + e.getMessage());
             }
         }
     }

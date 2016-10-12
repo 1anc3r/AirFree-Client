@@ -40,11 +40,11 @@ import me.lancer.airfree.util.ApplicationUtil;
 import me.lancer.distance.R;
 import me.lancer.airfree.bean.ComputerBean;
 
-public class ComputerActivity extends BaseActivity implements View.OnClickListener {
+public class DirectoryActivity extends BaseActivity implements View.OnClickListener {
 
     ApplicationUtil app;
 
-    private TextView tvPath;
+    private TextView tvPath, tvShow, tvOpen, tvDownload;
     private ListView lvFile;
     private EditText etSearch;
     private LinearLayout llBack, llSearch, llBottom, btnShare, btnOpen, btnControl;
@@ -61,9 +61,17 @@ public class ComputerActivity extends BaseActivity implements View.OnClickListen
     private String temppath = "";
     private Thread mThreadClient = null;
     private String recvMessageClient = "";
-    private SharedPreferences pref;
     private boolean iStop = false;
     private int allPos;
+
+    private SharedPreferences pref;
+    private String language = "zn";
+    private String strConnectionSucceeded = "";
+    private String strNoConnection = "";
+    private String strConnectionFailed = "";
+    private String strShow = "";
+    private String strOpen = "";
+    private String strDownload = "";
 
     private Handler cHandler = new Handler() {
 
@@ -120,7 +128,7 @@ public class ComputerActivity extends BaseActivity implements View.OnClickListen
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_computer);
+        setContentView(R.layout.activity_directory);
         init();
     }
 
@@ -134,15 +142,43 @@ public class ComputerActivity extends BaseActivity implements View.OnClickListen
         super.onDestroy();
     }
 
+    public void iLanguage(){
+        pref = PreferenceManager.getDefaultSharedPreferences(this);
+        language = pref.getString(getString(R.string.language_choice ), "zn");
+        if (language.equals("zn")) {
+            strConnectionSucceeded = getResources().getString(R.string.connection_succeeded_zn);
+            strNoConnection = getResources().getString(R.string.no_connection_zn);
+            strConnectionFailed = getResources().getString(R.string.connection_failed_zn);
+            strShow = getResources().getString(R.string.directory_zn);
+            strOpen = getResources().getString(R.string.open_zn);
+            strDownload = getResources().getString(R.string.download_zn);
+        } else if (language.equals("en")) {
+            strConnectionSucceeded = getResources().getString(R.string.connection_succeeded_en);
+            strNoConnection = getResources().getString(R.string.no_connection_en);
+            strConnectionFailed = getResources().getString(R.string.connection_failed_en);
+            strShow = getResources().getString(R.string.directory_en);
+            strOpen = getResources().getString(R.string.open_en);
+            strDownload = getResources().getString(R.string.download_en);
+        }
+    }
+
     private void init() {
-        app = (ApplicationUtil) ComputerActivity.this.getApplication();
+        iLanguage();
+        app = (ApplicationUtil) DirectoryActivity.this.getApplication();
+        tvShow = (TextView) findViewById(R.id.tv_show);
+        tvShow.setText(strShow);
+        tvOpen = (TextView) findViewById(R.id.tv_open);
+        tvOpen.setText(strOpen);
+        tvDownload = (TextView) findViewById(R.id.tv_download);
+        tvDownload.setText(strDownload);
         llBack = (LinearLayout) findViewById(R.id.ll_back);
         llBack.setOnClickListener(this);
         llSearch = (LinearLayout) findViewById(R.id.ll_search);
         llSearch.setOnClickListener(this);
         tvPath = (TextView) findViewById(R.id.tv_path);
+        tvPath.setText("this PC");
         lvFile = (ListView) findViewById(R.id.lv_file);
-        adapter = new ComputerAdapter(ComputerActivity.this, fileList, posList, searchList, posHandler);
+        adapter = new ComputerAdapter(DirectoryActivity.this, fileList, posList, searchList, posHandler);
         lvFile.setAdapter(adapter);
         lvFile.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
@@ -214,7 +250,7 @@ public class ComputerActivity extends BaseActivity implements View.OnClickListen
             inputManager.toggleSoftInput(0, InputMethodManager.HIDE_NOT_ALWAYS);
             LayoutInflater inflater = LayoutInflater.from(this);
             LinearLayout layout = (LinearLayout) inflater.inflate(R.layout.searchbar_dialog_view, null);
-            final Dialog dialog = new AlertDialog.Builder(ComputerActivity.this).create();
+            final Dialog dialog = new AlertDialog.Builder(DirectoryActivity.this).create();
             etSearch = (EditText) layout.findViewById(R.id.et_search);
             setSearchTextChanged();
             etSearch.setText(searchStr);
@@ -257,7 +293,7 @@ public class ComputerActivity extends BaseActivity implements View.OnClickListen
                     new ReadTask(ip, "59672", filename).execute();
                 }
             } else {
-                Toast.makeText(this, "没有连接!", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, strNoConnection, Toast.LENGTH_SHORT).show();
             }
         } else if (v == btnOpen) {
             sendMessage("remote", fileList.get(Integer.parseInt(posList.get(0))).getFilePath());

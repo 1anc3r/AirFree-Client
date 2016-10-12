@@ -31,7 +31,7 @@
             android:layout_width="wrap_content"
             android:layout_height="48dp"
             android:gravity="center"
-            android:text="远程桌面"
+            android:text="@string/desktop_zn"
             android:textColor="@color/base_color_text_white"
             android:textSize="@dimen/text_size_large" />
 
@@ -112,10 +112,12 @@
                         android:src="@drawable/ic_shot_control" />
 
                     <TextView
-                        android:layout_width="wrap_content"
+                        android:id="@+id/tv_screen_capture"
+                        android:layout_width="fill_parent"
+                        android:gravity="center"
                         android:layout_height="wrap_content"
                         android:padding="10dp"
-                        android:text=" 屏幕抓取" />
+                        android:text="@string/screen_capture_zn" />
 
                 </LinearLayout>
 
@@ -134,10 +136,12 @@
                         android:src="@drawable/ic_screen_contorl" />
 
                     <TextView
-                        android:layout_width="wrap_content"
+                        android:id="@+id/tv_real_time_desktop"
+                        android:layout_width="fill_parent"
+                        android:gravity="center"
                         android:layout_height="wrap_content"
                         android:padding="10dp"
-                        android:text="实时桌面" />
+                        android:text="@string/real_time_desktop_zn" />
 
                 </LinearLayout>
 

@@ -59,7 +59,7 @@
         android:layout_height="wrap_content"
         android:layout_margin="5dp"
         android:gravity="center_horizontal"
-        android:text="语音技术由科大讯飞提供"
+        android:text="@string/mobile_speech_technology_zn"
         android:textIsSelectable="true"
         android:textSize="@dimen/text_size_small" />
 
@@ -92,7 +92,7 @@
             android:layout_marginTop="5dp"
             android:autoLink="all"
             android:gravity="center"
-            android:text="访问我的主页"
+            android:text="@string/visit_my_homepage_zn"
             android:textColor="@color/blue_dark"
             android:textIsSelectable="true"
             android:textSize="@dimen/text_size_small" />

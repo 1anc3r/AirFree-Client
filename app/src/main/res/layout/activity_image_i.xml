@@ -25,7 +25,7 @@
             android:layout_height="48dp"
             android:layout_marginLeft="-24dp"
             android:gravity="center"
-            android:text="  图片  "
+            android:text="@string/image_zn"
             android:textColor="@color/base_color_text_white"
             android:textSize="@dimen/text_size_large" />
 
@@ -83,9 +83,10 @@
                 android:layout_height="1dp" />
 
             <TextView
+                android:id="@+id/tv_delete"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="删除"
+                android:text="@string/delete_zn"
                 android:textColor="@color/base_color_text_white"
                 android:textSize="@dimen/text_size_small" />
 
@@ -115,9 +116,10 @@
                 android:layout_height="1dp" />
 
             <TextView
+                android:id="@+id/tv_copy"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="复制"
+                android:text="@string/copy_zn"
                 android:textColor="@color/base_color_text_white"
                 android:textSize="@dimen/text_size_small" />
 
@@ -147,9 +149,10 @@
                 android:layout_height="1dp" />
 
             <TextView
+                android:id="@+id/tv_cut"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="剪切"
+                android:text="@string/cut_zn"
                 android:textColor="@color/base_color_text_white"
                 android:textSize="@dimen/text_size_small" />
 
@@ -179,9 +182,10 @@
                 android:layout_height="1dp" />
 
             <TextView
+                android:id="@+id/tv_upload"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="上传"
+                android:text="@string/upload_zn"
                 android:textColor="@color/base_color_text_white"
                 android:textSize="@dimen/text_size_small" />
 
@@ -211,9 +215,10 @@
                 android:layout_height="1dp" />
 
             <TextView
+                android:id="@+id/tv_all"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="全选"
+                android:text="@string/all_zn"
                 android:textColor="@color/base_color_text_white"
                 android:textSize="@dimen/text_size_small" />
 

@@ -1,5 +1,6 @@
 package me.lancer.airfree.activity;
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
 
@@ -11,6 +12,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.graphics.Bitmap;
+import android.widget.TextView;
 
 import me.lancer.airfree.util.ApplicationUtil;
 import me.lancer.airfree.util.EnumMessageInfo;

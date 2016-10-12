@@ -127,9 +127,10 @@
                 android:layout_height="1dp" />
 
             <TextView
+                android:id="@+id/tv_delete"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="删除"
+                android:text="@string/delete_zn"
                 android:textColor="@color/base_color_text_white"
                 android:textSize="@dimen/text_size_small" />
 
@@ -159,9 +160,10 @@
                 android:layout_height="1dp" />
 
             <TextView
+                android:id="@+id/tv_copy"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="复制"
+                android:text="@string/copy_zn"
                 android:textColor="@color/base_color_text_white"
                 android:textSize="@dimen/text_size_small" />
 
@@ -191,9 +193,10 @@
                 android:layout_height="1dp" />
 
             <TextView
+                android:id="@+id/tv_cut"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="剪切"
+                android:text="@string/cut_zn"
                 android:textColor="@color/base_color_text_white"
                 android:textSize="@dimen/text_size_small" />
 
@@ -223,9 +226,10 @@
                 android:layout_height="1dp" />
 
             <TextView
+                android:id="@+id/tv_upload"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="上传"
+                android:text="@string/upload_zn"
                 android:textColor="@color/base_color_text_white"
                 android:textSize="@dimen/text_size_small" />
 
@@ -255,9 +259,10 @@
                 android:layout_height="1dp" />
 
             <TextView
+                android:id="@+id/tv_all"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="全选"
+                android:text="@string/all_zn"
                 android:textColor="@color/base_color_text_white"
                 android:textSize="@dimen/text_size_small" />
 
@@ -294,7 +299,7 @@
             android:background="@drawable/btn_true_selector"
             android:elevation="9dp"
             android:gravity="center"
-            android:text="粘贴"
+            android:text="@string/paste_zn"
             android:textColor="@color/base_color_text_white"
             android:textSize="@dimen/text_size_large" />
 
@@ -307,7 +312,7 @@
             android:background="@drawable/btn_false_selector"
             android:elevation="9dp"
             android:gravity="center"
-            android:text="取消"
+            android:text="@string/cancel_zn"
             android:textColor="@color/base_color_text_white"
             android:textSize="@dimen/text_size_large" />
 

@@ -1,17 +1,21 @@
 package me.lancer.airfree.activity;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import org.json.JSONObject;
 import org.json.JSONTokener;
+import org.w3c.dom.Text;
 
 import me.lancer.airfree.util.ApplicationUtil;
 import me.lancer.distance.R;
@@ -20,6 +24,7 @@ public class PowerActivity extends BaseActivity implements View.OnClickListener 
 
     ApplicationUtil app;
 
+    private TextView tvShow, tvShutdown, tvRestart, tvLogout;
     private Button btnBack;
     private LinearLayout btnShutdown, btnReset, btnCancell;
 
@@ -31,6 +36,21 @@ public class PowerActivity extends BaseActivity implements View.OnClickListener 
     private String recvMessageClient = "";
     private boolean iStop = false;
 
+    private SharedPreferences pref;
+    private String language = "zn";
+    private String strConnectionSucceeded = "";
+    private String strNoConnection = "";
+    private String strConnectionFailed = "";
+    private String strShow = "";
+    private String strShutdown = "";
+    private String strRestart = "";
+    private String strLogout = "";
+    private String strShutdownSucceeded = "";
+    private String strRestartSucceeded = "";
+    private String strLogoutSucceeded = "";
+    private String strReceiveSucceeded = "";
+    private String strReceiveFailed = "";
+
     private Handler pHandler = new Handler() {
 
         @Override
@@ -38,11 +58,11 @@ public class PowerActivity extends BaseActivity implements View.OnClickListener 
             super.handleMessage(msg);
             if (msg.what == 1) {
                 if (recvMessageClient.contains("1")) {
-                    ShowToast("关机成功!");
+                    ShowToast(strShutdownSucceeded);
                 } else if (recvMessageClient.contains("2")) {
-                    ShowToast("重启成功!");
+                    ShowToast(strRestartSucceeded);
                 } else if (recvMessageClient.contains("3")) {
-                    ShowToast("注销成功!");
+                    ShowToast(strLogoutSucceeded);
                 }
             }
         }
@@ -61,11 +81,52 @@ public class PowerActivity extends BaseActivity implements View.OnClickListener 
         super.onDestroy();
     }
 
+    public void iLanguage(){
+        pref = PreferenceManager.getDefaultSharedPreferences(this);
+        language = pref.getString(getString(R.string.language_choice ), "zn");
+        if (language.equals("zn")) {
+            strConnectionSucceeded = getResources().getString(R.string.connection_succeeded_zn);
+            strNoConnection = getResources().getString(R.string.no_connection_zn);
+            strConnectionFailed = getResources().getString(R.string.connection_failed_zn);
+            strShow = getResources().getString(R.string.power_option_zn);
+            strShutdown = getResources().getString(R.string.shutdown_zn);
+            strRestart = getResources().getString(R.string.restart_zn);
+            strLogout = getResources().getString(R.string.logout_zn);
+            strShutdownSucceeded = getResources().getString(R.string.shutdown_succeeded_zn);
+            strRestartSucceeded = getResources().getString(R.string.restart_zn);
+            strLogoutSucceeded = getResources().getString(R.string.logout_zn);
+            strReceiveSucceeded = getResources().getString(R.string.receive_succeeded_zn);
+            strReceiveFailed = getResources().getString(R.string.receive_failed_zn);
+        } else if (language.equals("en")) {
+            strConnectionSucceeded = getResources().getString(R.string.connection_succeeded_en);
+            strNoConnection = getResources().getString(R.string.no_connection_en);
+            strConnectionFailed = getResources().getString(R.string.connection_failed_en);
+            strShow = getResources().getString(R.string.power_option_en);
+            strShutdown = getResources().getString(R.string.shutdown_en);
+            strRestart = getResources().getString(R.string.restart_en);
+            strLogout = getResources().getString(R.string.logout_en);
+            strShutdownSucceeded = getResources().getString(R.string.shutdown_succeeded_en);
+            strRestartSucceeded = getResources().getString(R.string.restart_en);
+            strLogoutSucceeded = getResources().getString(R.string.logout_en);
+            strReceiveSucceeded = getResources().getString(R.string.receive_succeeded_en);
+            strReceiveFailed = getResources().getString(R.string.receive_failed_en);
+        }
+    }
+
     private void init() {
+        iLanguage();
         app = (ApplicationUtil) this.getApplication();
         Intent intent = this.getIntent();
+        tvShow = (TextView) findViewById(R.id.tv_show);
+        tvShow.setText(strShow);
         btnBack = (Button) findViewById(R.id.btn_back);
         btnBack.setOnClickListener(this);
+        tvShutdown = (TextView) findViewById(R.id.tv_shutdown);
+        tvShutdown.setText(strShutdown);
+        tvRestart = (TextView) findViewById(R.id.tv_restart);
+        tvRestart.setText(strRestart);
+        tvLogout = (TextView) findViewById(R.id.tv_logout);
+        tvLogout.setText(strLogout);
         btnShutdown = (LinearLayout) findViewById(R.id.btn_shutdown);
         btnShutdown.setOnClickListener(this);
         btnReset = (LinearLayout) findViewById(R.id.btn_reset);
@@ -123,7 +184,7 @@ public class PowerActivity extends BaseActivity implements View.OnClickListener 
 //                        if ((count = app.getmBufferedReaderClient().read(buffer)) > 0) {
 //                            recvMessageClient = getInfoBuff(buffer, count);
                         recvMessageClient = app.getmBufferedReaderClient().readLine();
-                        Log.e("IP & PORT", "接收成功:" + recvMessageClient);
+                        Log.e("IP & PORT", strReceiveSucceeded + recvMessageClient);
                         JSONTokener jt = new JSONTokener(recvMessageClient);
                         JSONObject jb = (JSONObject) jt.nextValue();
                         String command = jb.getString("command");
@@ -135,8 +196,8 @@ public class PowerActivity extends BaseActivity implements View.OnClickListener 
                         }
 //                        }
                     } catch (Exception e) {
-                        Log.e("IP & PORT", "接收异常:" + e.getMessage());
-                        recvMessageClient = "接收异常:" + e.getMessage();
+                        Log.e("IP & PORT", strReceiveFailed + e.getMessage());
+                        recvMessageClient = strReceiveFailed + e.getMessage();
                         Message msg = new Message();
                         msg.what = 1;
                         pHandler.sendMessage(msg);

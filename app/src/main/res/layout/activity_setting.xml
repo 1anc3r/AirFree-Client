@@ -66,7 +66,8 @@
                             android:src="@drawable/ic_transfer_pc" />
 
                         <TextView
-                            android:layout_width="wrap_content"
+                            android:layout_width="fill_parent"
+                            android:gravity="center"
                             android:layout_height="wrap_content"
                             android:paddingBottom="15dp"
                             android:paddingTop="5dp"
@@ -75,7 +76,7 @@
                     </LinearLayout>
 
                     <LinearLayout
-                        android:id="@+id/btn_version_update"
+                        android:id="@+id/btn_language"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
@@ -86,14 +87,16 @@
                             android:layout_width="50dp"
                             android:layout_height="50dp"
                             android:scaleType="fitXY"
-                            android:src="@drawable/ic_version_update" />
+                            android:src="@drawable/ic_language" />
 
                         <TextView
-                            android:layout_width="wrap_content"
+                            android:id="@+id/tv_language"
+                            android:layout_width="fill_parent"
+                            android:gravity="center"
                             android:layout_height="wrap_content"
                             android:paddingBottom="15dp"
                             android:paddingTop="5dp"
-                            android:text="版本更新" />
+                            android:text="@string/language_zn" />
 
                     </LinearLayout>
 
@@ -113,7 +116,8 @@
                             android:src="@drawable/ic_file_category_sdcard" />
 
                         <TextView
-                            android:layout_width="wrap_content"
+                            android:layout_width="fill_parent"
+                            android:gravity="center"
                             android:layout_height="wrap_content"
                             android:paddingBottom="15dp"
                             android:paddingTop="5dp"
@@ -145,11 +149,13 @@
                             android:src="@drawable/ic_common_problem" />
 
                         <TextView
-                            android:layout_width="wrap_content"
+                            android:id="@+id/tv_guide"
+                            android:layout_width="fill_parent"
+                            android:gravity="center"
                             android:layout_height="wrap_content"
                             android:paddingBottom="15dp"
                             android:paddingTop="5dp"
-                            android:text="使用说明" />
+                            android:text="@string/guide_zn" />
 
                     </LinearLayout>
 
@@ -175,11 +181,13 @@
                             app:civ_border_width="1dp" />
 
                         <TextView
-                            android:layout_width="wrap_content"
+                            android:id="@+id/tv_about"
+                            android:layout_width="fill_parent"
+                            android:gravity="center"
                             android:layout_height="wrap_content"
                             android:paddingBottom="15dp"
                             android:paddingTop="5dp"
-                            android:text="关于作者" />
+                            android:text="@string/about_zn" />
 
                     </LinearLayout>
 
@@ -198,11 +206,13 @@
                             android:src="@drawable/ic_feedback" />
 
                         <TextView
-                            android:layout_width="wrap_content"
+                            android:id="@+id/tv_feedback"
+                            android:layout_width="fill_parent"
+                            android:gravity="center"
                             android:layout_height="wrap_content"
                             android:paddingBottom="15dp"
                             android:paddingTop="5dp"
-                            android:text="意见反馈" />
+                            android:text="@string/feedback_zn" />
 
                     </LinearLayout>
 
@@ -231,7 +241,8 @@
                             android:src="@drawable/ic_file_category_doc" />
 
                         <TextView
-                            android:layout_width="wrap_content"
+                            android:layout_width="fill_parent"
+                            android:gravity="center"
                             android:layout_height="wrap_content"
                             android:paddingBottom="15dp"
                             android:paddingTop="5dp"
@@ -254,11 +265,13 @@
                             android:src="@drawable/ic_power_control" />
 
                         <TextView
-                            android:layout_width="wrap_content"
+                            android:id="@+id/tv_exit"
+                            android:layout_width="fill_parent"
+                            android:gravity="center"
                             android:layout_height="wrap_content"
                             android:paddingBottom="15dp"
                             android:paddingTop="5dp"
-                            android:text="结束应用" />
+                            android:text="@string/exit_zn" />
 
                     </LinearLayout>
 
@@ -278,7 +291,8 @@
                             android:src="@drawable/ic_file_category_download" />
 
                         <TextView
-                            android:layout_width="wrap_content"
+                            android:layout_width="fill_parent"
+                            android:gravity="center"
                             android:layout_height="wrap_content"
                             android:paddingBottom="15dp"
                             android:paddingTop="5dp"

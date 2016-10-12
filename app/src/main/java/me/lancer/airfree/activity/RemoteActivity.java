@@ -11,12 +11,14 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.os.Handler;
 import android.os.Message;
+import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.SeekBar;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
@@ -51,6 +53,7 @@ public class RemoteActivity extends BaseActivity implements View.OnClickListener
     ApplicationUtil app;
 
     LinearLayout btnMouse, btnPower, btnShot, btnVoice, btnVolume, btnBright, btnGesture, btnOpen, btnTalk;
+    TextView tvMouse, tvPower, tvShot, tvVoice, tvVolume, tvBright, tvGesture, tvOpen, tvTalk;
     private EditText etSearch;
     private SeekBar sbVolume, sbBright;
     private RecognizerDialog mIatDialog;
@@ -66,6 +69,23 @@ public class RemoteActivity extends BaseActivity implements View.OnClickListener
     private String recvMessageClient = "";
     private boolean iStop = false;
 
+    private SharedPreferences pref;
+    private String language = "zn";
+    private String strConnectionSucceeded = "";
+    private String strNoConnection = "";
+    private String strConnectionFailed = "";
+    private String strKeyboardMouse = "";
+    private String strGesture = "";
+    private String strVoice = "";
+    private String strVolume = "";
+    private String strPowerOption = "";
+    private String strBrightness = "";
+    private String strRemoteDeviceInfo = "";
+    private String strDesktop = "";
+    private String strChatroom = "";
+    private String strOK = "";
+    private String strLoading = "";
+
     private Handler iHandler = new Handler() {
 
         @Override
@@ -74,9 +94,9 @@ public class RemoteActivity extends BaseActivity implements View.OnClickListener
             if (msg.obj!=null) {
                 mProgressDialog.dismiss();
                 AlertDialog.Builder builder = new AlertDialog.Builder(RemoteActivity.this);
-                builder.setTitle("远程设备信息");
+                builder.setTitle(strRemoteDeviceInfo);
                 builder.setMessage((CharSequence) msg.obj);
-                builder.setNegativeButton("好的", new DialogInterface.OnClickListener() {
+                builder.setNegativeButton(strOK, new DialogInterface.OnClickListener() {
 
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
@@ -95,8 +115,63 @@ public class RemoteActivity extends BaseActivity implements View.OnClickListener
         init();
     }
 
+    public void iLanguage(){
+        pref = PreferenceManager.getDefaultSharedPreferences(this);
+        language = pref.getString(getString(R.string.language_choice ), "zn");
+        if (language.equals("zn")) {
+            strConnectionSucceeded = getResources().getString(R.string.connection_succeeded_zn);
+            strNoConnection = getResources().getString(R.string.no_connection_zn);
+            strConnectionFailed = getResources().getString(R.string.connection_failed_zn);
+            strKeyboardMouse = getResources().getString(R.string.keyboard_mouse_zn);
+            strGesture = getResources().getString(R.string.gesture_zn);
+            strVoice = getResources().getString(R.string.voice_zn);
+            strVolume = getResources().getString(R.string.volume_zn);
+            strPowerOption = getResources().getString(R.string.power_option_zn);
+            strBrightness = getResources().getString(R.string.bright_zn);
+            strRemoteDeviceInfo = getResources().getString(R.string.remote_device_info_zn);
+            strDesktop = getResources().getString(R.string.desktop_zn);
+            strChatroom = getResources().getString(R.string.chatroom_zn);
+            strOK = getResources().getString(R.string.ok_zn);
+            strLoading = getResources().getString(R.string.loading_zn);
+        } else if (language.equals("en")) {
+            strConnectionSucceeded = getResources().getString(R.string.connection_succeeded_en);
+            strNoConnection = getResources().getString(R.string.no_connection_en);
+            strConnectionFailed = getResources().getString(R.string.connection_failed_en);
+            strKeyboardMouse = getResources().getString(R.string.keyboard_mouse_en);
+            strGesture = getResources().getString(R.string.gesture_en);
+            strVoice = getResources().getString(R.string.voice_en);
+            strVolume = getResources().getString(R.string.volume_en);
+            strPowerOption = getResources().getString(R.string.power_option_en);
+            strBrightness = getResources().getString(R.string.bright_en);
+            strRemoteDeviceInfo = getResources().getString(R.string.remote_device_info_en);
+            strDesktop = getResources().getString(R.string.desktop_en);
+            strChatroom = getResources().getString(R.string.chatroom_en);
+            strOK = getResources().getString(R.string.ok_en);
+            strLoading = getResources().getString(R.string.loading_en);
+        }
+    }
+
     private void init() {
+        iLanguage();
         app = (ApplicationUtil) RemoteActivity.this.getApplication();
+        tvMouse = (TextView) findViewById(R.id.tv_keyboard_mouse);
+        tvMouse.setText(strKeyboardMouse);
+        tvGesture = (TextView) findViewById(R.id.tv_gesture);
+        tvGesture.setText(strGesture);
+        tvVoice = (TextView) findViewById(R.id.tv_voice);
+        tvVoice.setText(strVoice);
+        tvVolume = (TextView) findViewById(R.id.tv_volume);
+        tvVolume.setText(strVolume);
+        tvPower = (TextView) findViewById(R.id.tv_power_option);
+        tvPower.setText(strPowerOption);
+        tvBright = (TextView) findViewById(R.id.tv_brightness);
+        tvBright.setText(strBrightness);
+        tvOpen = (TextView) findViewById(R.id.tv_remote_device_info);
+        tvOpen.setText(strRemoteDeviceInfo);
+        tvShot = (TextView) findViewById(R.id.tv_desktop);
+        tvShot.setText(strDesktop);
+        tvTalk = (TextView) findViewById(R.id.tv_chatroom);
+        tvTalk.setText(strChatroom);
         btnPower = (LinearLayout) findViewById(R.id.btn_power);
         btnPower.setOnClickListener(this);
         btnShot = (LinearLayout) findViewById(R.id.btn_shot);
@@ -207,7 +282,7 @@ public class RemoteActivity extends BaseActivity implements View.OnClickListener
                 dialog.show();
                 dialog.getWindow().setContentView(layout);
             } else if (v == btnOpen) {
-                mProgressDialog = ProgressDialog.show(this, null, "正在获取远程设备信息...");
+                mProgressDialog = ProgressDialog.show(this, null, strLoading);
                 sendMessage("info", "");
                 mThreadClient = new Thread(iRunnable);
                 mThreadClient.start();
@@ -241,7 +316,7 @@ public class RemoteActivity extends BaseActivity implements View.OnClickListener
                 this.getParent().overridePendingTransition(R.anim.slide_up_in, R.anim.slide_down_out);
             }
         } else {
-            Toast.makeText(this, "没有连接!", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, strNoConnection, Toast.LENGTH_SHORT).show();
         }
     }
 

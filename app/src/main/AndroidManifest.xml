@@ -114,7 +114,7 @@
             android:label="@string/title_activity_music"
             android:screenOrientation="portrait" />
         <activity
-            android:name="me.lancer.airfree.activity.ComputerActivity"
+            android:name="me.lancer.airfree.activity.DirectoryActivity"
             android:label="@string/title_activity_computer"
             android:screenOrientation="portrait" />
         <activity
@@ -130,7 +130,7 @@
             android:label="@string/title_activity_document"
             android:screenOrientation="portrait" />
         <activity
-            android:name="me.lancer.airfree.activity.ProblemActivity"
+            android:name="me.lancer.airfree.activity.GuideActivity"
             android:label="@string/title_activity_common_problem"
             android:screenOrientation="portrait" />
         <activity

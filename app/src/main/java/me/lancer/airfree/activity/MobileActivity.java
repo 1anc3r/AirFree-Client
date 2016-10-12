@@ -55,6 +55,7 @@ public class MobileActivity extends BaseActivity implements View.OnClickListener
     private EditText etSearch;
     private Button btnPaste, btnCancell;
     private LinearLayout llBack, llSearch, llBottom, btnDelete, btnCopy, btnMove, btnShare, btnAll;
+    private TextView tvDelete, tvCopy, tvMove, tvShare, tvAll;
 
     private final static int SCAN_OK = 1;
 
@@ -70,8 +71,25 @@ public class MobileActivity extends BaseActivity implements View.OnClickListener
     private String parentpath;
     private File parentfile;
     private SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-    private SharedPreferences pref;
     private Boolean isAll = false;
+
+    private SharedPreferences pref;
+    private String language = "zn";
+    private String strConnectionSucceeded = "";
+    private String strNoConnection = "";
+    private String strConnectionFailed = "";
+    private String strDownload = "";
+    private String strInternal = "";
+    private String strExternal = "";
+    private String strNoInternalExternalStorage = "";
+    private String strLoading = "";
+    private String strDelete = "";
+    private String strCopy = "";
+    private String strCut = "";
+    private String strUpload = "";
+    private String strAll = "";
+    private String strPaste = "";
+    private String strCancel = "";
 
     private Handler lHandler = new Handler() {
 
@@ -119,7 +137,46 @@ public class MobileActivity extends BaseActivity implements View.OnClickListener
         init();
     }
 
+    public void iLanguage(){
+        pref = PreferenceManager.getDefaultSharedPreferences(this);
+        language = pref.getString(getString(R.string.language_choice ), "zn");
+        if (language.equals("zn")) {
+            strConnectionSucceeded = getResources().getString(R.string.connection_succeeded_zn);
+            strNoConnection = getResources().getString(R.string.no_connection_zn);
+            strConnectionFailed = getResources().getString(R.string.connection_failed_zn);
+            strDownload = getResources().getString(R.string.download_zn);
+            strInternal = getResources().getString(R.string.internal_zn);
+            strExternal = getResources().getString(R.string.external_zn);
+            strNoInternalExternalStorage = getResources().getString(R.string.no_internal_external_storage_zn);
+            strLoading = getResources().getString(R.string.loading_zn);
+            strDelete = getResources().getString(R.string.delete_zn);
+            strCopy = getResources().getString(R.string.copy_zn);
+            strCut = getResources().getString(R.string.cut_zn);
+            strUpload = getResources().getString(R.string.upload_zn);
+            strAll = getResources().getString(R.string.all_zn);
+            strPaste = getResources().getString(R.string.paste_zn);
+            strCancel = getResources().getString(R.string.cancel_zn);
+        } else if (language.equals("en")) {
+            strConnectionSucceeded = getResources().getString(R.string.connection_succeeded_en);
+            strNoConnection = getResources().getString(R.string.no_connection_en);
+            strConnectionFailed = getResources().getString(R.string.connection_failed_en);
+            strDownload = getResources().getString(R.string.download_en);
+            strInternal = getResources().getString(R.string.internal_en);
+            strExternal = getResources().getString(R.string.external_en);
+            strNoInternalExternalStorage = getResources().getString(R.string.no_internal_external_storage_en);
+            strLoading = getResources().getString(R.string.loading_en);
+            strDelete = getResources().getString(R.string.delete_en);
+            strCopy = getResources().getString(R.string.copy_en);
+            strCut = getResources().getString(R.string.cut_en);
+            strUpload = getResources().getString(R.string.upload_en);
+            strAll = getResources().getString(R.string.all_en);
+            strPaste = getResources().getString(R.string.paste_en);
+            strCancel = getResources().getString(R.string.cancel_en);
+        }
+    }
+
     private void init() {
+        iLanguage();
         app = (ApplicationUtil) MobileActivity.this.getApplication();
         tvShow = (TextView) findViewById(R.id.tv_show);
         Intent i = getIntent();
@@ -128,13 +185,13 @@ public class MobileActivity extends BaseActivity implements View.OnClickListener
         srcList = b.getStringArrayList("source");
         if (method.equals("download")) {
             parentpath = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS).getAbsolutePath();
-            tvShow.setText("下载");
+            tvShow.setText(strDownload);
         } else if (method.equals("out")) {
             parentpath = "/mnt/ext_sdcard/";
-            tvShow.setText("外部存储");
+            tvShow.setText(strExternal);
         } else {
             parentpath = Environment.getExternalStorageDirectory().getAbsolutePath();
-            tvShow.setText("内部存储");
+            tvShow.setText(strInternal);
         }
         llBack = (LinearLayout) findViewById(R.id.ll_back);
         llBack.setOnClickListener(this);
@@ -167,6 +224,16 @@ public class MobileActivity extends BaseActivity implements View.OnClickListener
             llBottom = (LinearLayout) findViewById(R.id.ll_paste);
             llBottom.setVisibility(View.VISIBLE);
         }
+        tvDelete = (TextView) findViewById(R.id.tv_delete);
+        tvDelete.setText(strDelete);
+        tvCopy = (TextView) findViewById(R.id.tv_copy);
+        tvCopy.setText(strCopy);
+        tvMove = (TextView) findViewById(R.id.tv_cut);
+        tvMove.setText(strCut);
+        tvShare = (TextView) findViewById(R.id.tv_upload);
+        tvShare.setText(strUpload);
+        tvAll = (TextView) findViewById(R.id.tv_all);
+        tvAll.setText(strAll);
         btnDelete = (LinearLayout) findViewById(R.id.btn_del);
         btnDelete.setOnClickListener(this);
         btnCopy = (LinearLayout) findViewById(R.id.btn_copy);
@@ -178,8 +245,10 @@ public class MobileActivity extends BaseActivity implements View.OnClickListener
         btnAll = (LinearLayout) findViewById(R.id.btn_all);
         btnAll.setOnClickListener(this);
         btnPaste = (Button) findViewById(R.id.btn_paste);
+        btnPaste.setText(strPaste);
         btnPaste.setOnClickListener(this);
         btnCancell = (Button) findViewById(R.id.btn_cancell);
+        btnCancell.setText(strCancel);
         btnCancell.setOnClickListener(this);
     }
 
@@ -281,7 +350,7 @@ public class MobileActivity extends BaseActivity implements View.OnClickListener
                     new SendTask(ip, "59672", filename).execute();
                 }
             } else {
-                Toast.makeText(this, "没有连接!", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, strNoConnection, Toast.LENGTH_SHORT).show();
             }
         }
     }

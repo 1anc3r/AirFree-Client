@@ -35,7 +35,7 @@
             android:id="@+id/tv_show"
             android:layout_width="wrap_content"
             android:layout_height="48dp"
-            android:text="远程设备"
+            android:text="@string/directory_zn"
             android:gravity="center"
             android:textColor="@color/base_color_text_white"
             android:textSize="@dimen/text_size_large" />
@@ -128,9 +128,10 @@
                 android:layout_height="1dp" />
 
             <TextView
+                android:id="@+id/tv_open"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="打开"
+                android:text="@string/open_zn"
                 android:textColor="@color/base_color_text_white"
                 android:textSize="@dimen/text_size_small" />
 
@@ -160,9 +161,10 @@
                 android:layout_height="1dp" />
 
             <TextView
+                android:id="@+id/tv_download"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="下载"
+                android:text="@string/download_zn"
                 android:textColor="@color/base_color_text_white"
                 android:textSize="@dimen/text_size_small" />
 

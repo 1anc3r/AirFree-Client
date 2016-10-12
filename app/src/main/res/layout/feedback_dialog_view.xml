@@ -35,7 +35,7 @@
                 android:background="@color/transparent"
                 android:drawablePadding="10dip"
                 android:gravity="left|top"
-                android:hint="请输入意见反馈"
+                android:hint="@string/please_input_feedback_zn"
                 android:inputType="textMultiLine"
                 android:minLines="10"
                 android:paddingLeft="5dip"
@@ -57,7 +57,7 @@
             android:background="@drawable/btn_selector"
             android:elevation="3dp"
             android:gravity="center"
-            android:text="发送"
+            android:text="@string/send_zn"
             android:textColor="@color/base_color_text_white"
             android:textSize="@dimen/text_size_large" />
 

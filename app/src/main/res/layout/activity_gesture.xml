@@ -28,7 +28,7 @@
             android:layout_height="48dp"
             android:layout_marginLeft="-24dp"
             android:gravity="center"
-            android:text="手势控制"
+            android:text="@string/gesture_zn"
             android:textColor="@color/base_color_text_white"
             android:textSize="@dimen/text_size_large" />
 
@@ -80,11 +80,12 @@
                 android:src="@drawable/ic_common_problem" />
 
             <TextView
+                android:id="@+id/tv_gesture_guide"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:paddingBottom="15dp"
                 android:paddingTop="5dp"
-                android:text="手势说明" />
+                android:text="@string/gesture_guide_zn" />
 
         </LinearLayout>
 
