@@ -32,7 +32,11 @@ AirFree是一款通过Android手机轻松访问、控制电脑的远程协助应
 
 ## 应用界面:
 
-<iframe width="720" height="480" src="http://o7gy5l0ax.bkt.clouddn.com/AirFree%E6%BC%94%E7%A4%BA%E8%A7%86%E9%A2%91.mp4" allowfullscreen=""></iframe>
+<video id="video" controls="" preload="none" poster="http://media.w3.org/2010/05/sintel/poster.png">
+      <source id="mp4" src="http://o7gy5l0ax.bkt.clouddn.com/AirFree%E6%BC%94%E7%A4%BA%E8%A7%86%E9%A2%91.mp4" type="video/mp4">
+      <p>Your user agent does not support the HTML5 Video element.</p>
+</video>
+
 <img src="http://o7gy5l0ax.bkt.clouddn.com/Screenshot_2016-07-21-16-26-32.png" width = "288" height = "512" alt="" /><img src="http://o7gy5l0ax.bkt.clouddn.com/Screenshot_2016-07-24-19-43-27.png" width = "288" height = "512" alt=""/><img src="http://o7gy5l0ax.bkt.clouddn.com/Screenshot_2016-07-21-16-26-51.png" width = "288" height = "512" alt=""/>
 <img src="http://o7gy5l0ax.bkt.clouddn.com/Screenshot_2016-07-24-19-32-42.png" width = "288" height = "512" alt=""/><img src="http://o7gy5l0ax.bkt.clouddn.com/Screenshot_2016-07-24-19-32-35.png" width = "288" height = "512" alt=""/><img src="http://o7gy5l0ax.bkt.clouddn.com/Screenshot_2016-07-24-19-32-51.png" width = "288" height = "512" alt=""/>
 <img src="http://o7gy5l0ax.bkt.clouddn.com/Screenshot_2016-07-24-19-33-53.png" width = "288" height = "512" alt=""/><img src="http://o7gy5l0ax.bkt.clouddn.com/Screenshot_2016-07-24-19-34-02.png" width = "288" height = "512" alt=""/><img src="http://o7gy5l0ax.bkt.clouddn.com/Screenshot_2016-07-24-19-34-08.png" width = "288" height = "512" alt=""/>
