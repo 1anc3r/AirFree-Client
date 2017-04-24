@@ -10,7 +10,7 @@ AirFree是一款通过Android手机轻松访问、控制电脑的远程协助应
 * Github: [![](https://img.shields.io/badge/github-1anc3r-yellowgreen.svg)](https://github.com/1anc3r)
 * 我的博客: [![](https://img.shields.io/badge/blog-1anc3r-green.svg)](http://www.1anc3r.me/)
 * 实验室主页: [![](https://img.shields.io/badge/wiki-xiyoumobile-brightgreen.svg)](http://www.xiyoumobile.com/)
-* AirFree远程协助(Android)下载链接:: [AirFree-Client.apk](http://o7gy5l0ax.bkt.clouddn.com/AirFree-Client.apk)
+* AirFree远程协助(Android)下载链接:: [AirFree-Client.apk](http://sj.qq.com/myapp/detail.htm?apkName=me.lancer.airfree&apkCode=8)
 * AirFree远程协助(Desktop)下载链接: [AirFree-Server.exe](http://pan.baidu.com/s/1skI7QFF)
 
 ## 使用方法:
