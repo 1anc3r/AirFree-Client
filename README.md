@@ -7,8 +7,10 @@ AirFree远程协助(Desktop)在[这里](https://github.com/1anc3r/AirFree-Server
 AirFree是一款通过Android手机轻松访问、控制电脑的远程协助应用，能够为用户提供 Android 和 Windows 之间远程资源共享和设备控制功能，你不仅可以远程管理电脑中的资源，实现无线双向传输，还可以让 Android 手机摇身一变成为无线遥控器远程控制电脑。 
 
 ## 相关链接:
-* Github: [https://github.com/1anc3r](https://github.com/1anc3r)
-* 我的博客: [1anc3r.me](http://www.1anc3r.me/)
+* Github: [![](https://img.shields.io/badge/github-1anc3r-yellowgreen.svg)](https://github.com/1anc3r)
+* 我的博客: [![](https://img.shields.io/badge/blog-1anc3r-green.svg)](http://www.1anc3r.me/)
+* 实验室主页: [![](https://img.shields.io/badge/wiki-xiyoumobile-brightgreen.svg)](http://www.xiyoumobile.com/)
+
 * AirFree远程协助(Android)下载链接:: [AirFree-Client.apk](http://o7gy5l0ax.bkt.clouddn.com/AirFree-Client.apk)
 * AirFree远程协助(Desktop)下载链接: [AirFree-Server.exe](http://pan.baidu.com/s/1skI7QFF)
 
