@@ -52,5 +52,5 @@ AirFree是一款通过Android手机轻松访问、控制电脑的远程协助应
 ### 作者
 <img src="http://o7gy5l0ax.bkt.clouddn.com/ic_lancer.jpg" width = "100" height = "100" alt=""/>
 
-我是1anc3r, 西安邮电大学计算机学院软件工程应届生, 正在努力学习Android开发。
+我是1anc3r, 西安邮电大学计算机学院软件工程2018应届毕业生, 正在努力学习Android开发。联系我: huangfangzhi0@foxmail.com。
 
