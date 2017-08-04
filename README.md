@@ -41,6 +41,9 @@ AirFree是一款通过Android手机轻松访问、控制电脑的远程协助应
 <img src="http://o7gy5l0ax.bkt.clouddn.com/Screenshot_2016-07-24-19-36-12.png" width = "288" height = "512" alt=""/><img src="http://o7gy5l0ax.bkt.clouddn.com/Screenshot_2016-07-24-19-36-25.png" width = "288" height = "512" alt=""/><img src="http://o7gy5l0ax.bkt.clouddn.com/Screenshot_2016-07-24-19-35-53.png" width = "288" height = "512" alt=""/>
 <img src="http://o7gy5l0ax.bkt.clouddn.com/Screenshot_2016-07-24-20-07-16.png" width = "288" height = "512" alt=""/><img src="http://o7gy5l0ax.bkt.clouddn.com/Screenshot_2016-07-24-19-39-04.png" width = "288" height = "512" alt=""/><img src="http://o7gy5l0ax.bkt.clouddn.com/Screenshot_2016-07-24-19-38-58.png" width = "288" height = "512" alt=""/>
 
+## 技术要点
+项目中文件管理功能通过 ContentProvider 获取/处理本机资源。远程控制功能以 Socket 作为传输手段，以 Json 作为传输格式，以 AsyncTask、IntentService 完成远程控制/ 传输操作。通过此项目熟悉了 Android 四大组件的工作过程，掌握了基于 Socket 的网络编程， 掌握了Android的多线程编程，培养了使用第三方SDK的能力。 
+
 ## 关于
 ### 组织
 <img src="http://o7gy5l0ax.bkt.clouddn.com/ic_xiyoumobile.png" width = "100" height = "100" alt=""/>
